@@ -87,3 +87,9 @@ end
 When /^I enter "(.*)" into "(.*)"$/ do |value, field|
     fill_in(field, :with => value)
 end
+
+Given /^A user with name "(.*?)" and UID "(.*?)" and auth provider "(.*?)"$/ do |username, uid, provider|
+  provider.downcase!
+  provider = 'google_oauth2' if provider.eql?('google')
+  @user = FactoryBot.create :user, :name => username, :uid => uid, :provider => provider
+end
