@@ -2,9 +2,12 @@
 
 
 <%= form_tag process_enter_new_measurements_path, :method => 'post' do %>
-  <%= text_field_tag 'weight', '', :size => 1, :autocomplete => 'off' %>
-  <%= text_field_tag 'body_fat', '', :size => 1, :autocomplete => 'off' %>
-  <%= text_field_tag 'height', '', :size => 1, :autocomplete => 'off' %>
+  <%= label_tag 'Weight:' %>
+  <%= text_field_tag 'weight', '', :size => 3, :autocomplete => 'off' %>
+  <%= label_tag 'Body fat:' %>
+  <%= text_field_tag 'body_fat', '', :size => 3, :autocomplete => 'off' %>
+  <%= label_tag 'Height:' %>
+  <%= text_field_tag 'height', '', :size => 3, :autocomplete => 'off' %>
   <%= submit_tag 'Enter' %>
 <% end %>
 
