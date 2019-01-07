@@ -1,6 +1,9 @@
 # Girl Scout Cookies Exercise Tracker
 
-**Application available at https://exercise-track-app.herokuapp.com/**
+**Production URL: https://exercise-track-app.herokuapp.com/**
+
+
+**Development URL: https://steer-exercise-app.herokuapp.com/**
 
 *Team Members:*
 * Constantina Hug
