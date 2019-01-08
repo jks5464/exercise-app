@@ -6,21 +6,18 @@
     <%= csrf_meta_tags %>
   </head>
   <body>
-    <!--<%= link_to 'Home Page', '/' %>-->
+    <div class="login">
     <% if current_user %>
         Signed in as <strong><%= current_user.name %></strong>!
         <%= link_to "Sign out", signout_path, id: "sign_out" %>
       <% else %>
         <%= link_to "Sign in with Google", "/auth/google_oauth2", id: "sign_in" %>
     <% end %>
+    </div>
     
     <div class="container">
-<<<<<<< HEAD
       <div id="header" class="span-24">
-       <!-- <h>Girl Scout Cookies Exercise Tracker</h>-->
-=======
         <h>Girl Scout Cookies Exercise Tracker</h>
->>>>>>> 7d4c20ed095cf58b53e019f943db6dcea9509bd3
       </div>
       <div class="span-24">
         <%= link_to 'Home Page', '/' %>

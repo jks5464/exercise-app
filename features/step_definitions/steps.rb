@@ -84,6 +84,14 @@ When /^(?:|I )press "([^\"]*)"(?: within "([^\"]*)")?$/ do |button, selector|
   end
 end
 
+When /^(?:|I )click the link "([^\"]*)"(?: within "([^\"]*)")?$/ do |link, selector|
+  with_scope(selector) do
+    click_link(link)
+  end
+end
+
+
+
 When /^I enter "(.*)" into "(.*)"$/ do |value, field|
     fill_in(field, :with => value)
 end
