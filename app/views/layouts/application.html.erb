@@ -6,6 +6,7 @@
     <%= csrf_meta_tags %>
   </head>
   <body>
+    <%= link_to 'Home Page', '/' %>
     <% if current_user %>
         Signed in as <strong><%= current_user.name %></strong>!
         <%= link_to "Sign out", signout_path, id: "sign_out" %>
@@ -13,9 +14,8 @@
         <%= link_to "Sign in with Google", "/auth/google_oauth2", id: "sign_in" %>
     <% end %>
     
-    <%= button_to "Home Page", { :action => "show", :controller=>"home" }, :method => :get %>
     <div class="container">
-      <div id="header" class="span-24">
+     %= button_to "Home Page", { :action => "show", :controller=>"home" }, :method => :get %>
         <h>Girl Scout Cookies Exercise Tracker</h>
       </div>
       <div class="span-24">
