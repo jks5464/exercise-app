@@ -7,7 +7,7 @@ Feature: enter a new measurement
 Scenario: I click on enter new measurements
 
   Given I am on the my measurements page
-  And I press "Enter New Measurements"
+  When I press "Enter New Measurements"
   Then I should be on the enter measurements page
   
 Scenario: I enter in new measurements

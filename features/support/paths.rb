@@ -24,6 +24,20 @@ module NavigationHelpers
       
     when /the enter measurements page/
       '/enter_my_measurements'
+      
+    when /the dashboard page/
+      '/dashboard'
+      
+    when /the my goals page/
+      '/my_goals'
+      
+    when /the my client page/
+      '/my_clients'
+      
+    when /the my workout page/
+      '/my_workouts'
+      
+
 
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:

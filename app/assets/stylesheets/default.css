@@ -2,8 +2,11 @@
 body {
 	font-family: Helvetica, Arial, Geneva, sans-serif;
 	padding: 2em;
-    border: 8px solid teal;
+    border: 10px solid #ff6f69;
+    color: #034f84
+    
 }
+
 
 span.word {
 	text-transform: uppercase;
@@ -11,10 +14,14 @@ span.word {
 	color: #0432ff;
 	font-weight: bold;
 	font-size: larger;
-	padding-left: 2em;
+	padding-left: 1em;
 }
 
 form {
 	/* border: 1px solid grey; */
-	margin: 4px;
+	margin: 65px;
+  margin-top: 1em;
 }
+
+
+

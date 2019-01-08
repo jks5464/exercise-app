@@ -47,5 +47,10 @@ group :test do
   gem 'cucumber-rails', :require => false
   gem 'rspec-rails'
   gem 'webmock'
+  gem 'simplecov', :require => false
+end
+
+group :development, :test do
+  gem 'factory_bot_rails'
 end
 
