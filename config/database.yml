@@ -1,17 +1,24 @@
 default: &default
-  adapter: postgresql
-  encoding: unicode
-  # For details on connection pooling, see rails configuration guide
-  # http://guides.rubyonrails.org/configuring.html#database-pooling
-  pool: 5
-  url: <%= ENV['DATABASE_URL'] %>
+ adapter: sqlite3
+ pool: 5
+ timeout: 5000
+ 
 
 development:
-  <<: *default
-  database: db_dev
-  
-testing:
-  database: db_test
+ <<: *default
+ database: db/dev
+# Warning: The database defined as "test" will be erased and
+# re-generated from your development database when you run "rake".
+# Do not set this db to the same as development or production.
+
+test: &test
+ <<: *default
+ database: db/test
 
 production:
-  database: db
+  adapter: postgresql
+  database: db/production
+  url: <%= ENV['DATABASE_URL'] %>
+ 
+cucumber:
+ <<: *test
