@@ -31,6 +31,8 @@ gem "omniauth-google-oauth2", "~> 0.2.1"
 # gem 'capistrano-rails', group: :development
 gem 'sprockets', '~> 3.7.2'
 
+gem 'pg', '~> 0.20'
+  
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
@@ -51,5 +53,5 @@ group :test do
 end
 
 group :production do
-  gem 'pg', '~> 0.20'
+  
 end
