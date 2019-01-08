@@ -91,5 +91,18 @@ end
 Given /^A user with name "(.*?)" and UID "(.*?)" and auth provider "(.*?)"$/ do |username, uid, provider|
   provider.downcase!
   provider = 'google_oauth2' if provider.eql?('google')
-  @user = FactoryBot.create :user, :name => username, :uid => uid, :provider => provider
+  @user = FactoryBot.build(:user, :name => username, :uid => uid, :provider => provider)
+end
+
+When /^I login using "(.*?)" as the user$/ do |provider|
+  logon(provider, @user.name, @user.uid)
+end
+ 
+def logon(provider, username='Inigo Montoya', oauth_uid='123')
+  provider.downcase!
+  provider = 'google_oauth2' if provider.eql?('google')
+  OmniAuth.config.add_mock(provider.to_sym, {:uid => oauth_uid, :provider => provider, :info => {:name => username}, :credentials => {:token => "random_token", :expires_at => 0}})
+ 
+  visit '/'
+  click_link 'Sign in with Google'
 end
