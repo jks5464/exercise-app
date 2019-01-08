@@ -2,6 +2,18 @@ require 'rails_helper'
 
 RSpec.describe Test, :type => :model do
   
+=begin
+  it "tests database connection" do
+    params = { 
+        :adapter  => "sqlite3",
+        :database => "db/test"
+    }
+    ActiveRecord::Base.should_receive(:establish_connection).with(params)
+    ActiveRecord::Base.should_receive(:clear_active_connections!)
+
+  end
+=end
+  
   subject {
     described_class.new(title: "Anything", description: "Lorem ipsum",
     start_date: DateTime.now, end_date: DateTime.now + 1.week)
