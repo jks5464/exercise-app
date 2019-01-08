@@ -9,6 +9,48 @@ module WithinHelpers
 end
 World(WithinHelpers)
 
+When /^I start a new game with word "(.*)"$/ do |word|
+  stub_request(:post, "http://watchout4snakes.com/wo4snakes/Random/RandomWord").
+    to_return(:status => 200, :headers => {}, :body => word)
+  visit '/new'
+  click_button "New Game"
+end
+
+When /^I guess "(.*)"(?: again)?$/ do |letter|
+  letter.downcase!
+  fill_in("guess", :with => letter)
+  click_button("Guess!")
+end
+
+When /^I make the following guesses:(.*)$/ do |guesses|
+  guesses = guesses.gsub(' ', '').split(',')
+  guesses.each do |letter|
+    fill_in("guess", :with => letter)
+    click_button("Guess!")
+  end
+end
+
+Then /^the word should read "(.*)"$/ do |word|
+  page.should have_content(word)
+end
+
+Then /^the wrong guesses should include:(.*)$/ do |guesses|
+  guesses = guesses.gsub(' ', '').split(',')
+  guesses.each do |guess|
+    with_scope("span.guesses") do
+      page.should have_content(guess)
+    end
+  end
+end
+
+When /^I guess "(.*)" (.*) times in a row$/ do |letter, num|
+  letter.downcase!
+  num.to_i.times do
+    fill_in("guess", :with => letter)
+    click_button("Guess!")
+  end
+end
+
 When /^I try to go to the URL "(.*)"$/ do |url|
   visit url
 end
@@ -42,6 +84,33 @@ When /^(?:|I )press "([^\"]*)"(?: within "([^\"]*)")?$/ do |button, selector|
   end
 end
 
+When /^(?:|I )click the link "([^\"]*)"(?: within "([^\"]*)")?$/ do |link, selector|
+  with_scope(selector) do
+    click_link(link)
+  end
+end
+
+
+
 When /^I enter "(.*)" into "(.*)"$/ do |value, field|
     fill_in(field, :with => value)
+end
+
+Given /^A user with name "(.*?)" and UID "(.*?)" and auth provider "(.*?)"$/ do |username, uid, provider|
+  provider.downcase!
+  provider = 'google_oauth2' if provider.eql?('google')
+  @user = FactoryBot.build(:user, :name => username, :uid => uid, :provider => provider)
+end
+
+When /^I login using "(.*?)" as the user$/ do |provider|
+  logon(provider, @user.name, @user.uid)
+end
+ 
+def logon(provider, username='Inigo Montoya', oauth_uid='123')
+  provider.downcase!
+  provider = 'google_oauth2' if provider.eql?('google')
+  OmniAuth.config.add_mock(provider.to_sym, {:uid => oauth_uid, :provider => provider, :info => {:name => username}, :credentials => {:token => "random_token", :expires_at => 0}})
+ 
+  visit '/'
+  click_link 'Sign in with Google'
 end
