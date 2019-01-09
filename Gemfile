@@ -21,7 +21,6 @@ gem 'jquery-rails'
 
 gem "omniauth-google-oauth2", "~> 0.2.1"
 
-gem 'pg', '~> 0.20'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
@@ -52,5 +51,5 @@ group :test do
 end
 
 group :production do
-  
+  gem 'pg', '~> 0.20'
 end
