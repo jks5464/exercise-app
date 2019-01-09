@@ -11,19 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190108041416) do
+ActiveRecord::Schema.define(version: 20190109031405) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "exercises", force: :cascade do |t|
+    t.string   "name"
+    t.string   "category"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "link", force: :cascade do |t|
-    t.string "url",  limit: 255, null: false
-    t.string "name", limit: 255, null: false
   end
 
   create_table "measurements", force: :cascade do |t|
@@ -35,13 +32,7 @@ ActiveRecord::Schema.define(version: 20190108041416) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "tests", force: :cascade do |t|
-    t.datetime "start_date"
-    t.datetime "end_date"
-    t.string   "title"
-    t.text     "description"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+  create_table "test_dbs", force: :cascade do |t|
   end
 
   create_table "users", force: :cascade do |t|
@@ -52,6 +43,12 @@ ActiveRecord::Schema.define(version: 20190108041416) do
     t.datetime "oauth_expires_at"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
+  end
+
+  create_table "workouts", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end
