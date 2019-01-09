@@ -1,25 +1,20 @@
 <p>
-  Create exercise:<br />
+  Create Exercise:<br />
   <%= form_tag process_create_exercise_path, :method => :post do %>
     <%= label_tag 'Name:' %>
     <%= text_field_tag 'name', '', :maxlength => 140, :autocomplete => 'off' %><br />
-    <b>Category:</b><br />
+    Category:<br />
     <%= radio_button_tag(:category, "Cardio") %>
     <%= label_tag(:cardio, "Cardio") %>
     <%= radio_button_tag(:category, "Strength") %>
     <%= label_tag(:strength, "Strength") %><br />
+    Everything below this is optional:<br />
+    <%= label_tag 'Description:' %>
+    <%= text_field_tag 'description', '', :maxlength => 140, :autocomplete => 'off' %><br />
+    <%= label_tag 'Muscle Group:' %>
+    <%= text_field_tag 'muscle group', '', :maxlength => 140, :autocomplete => 'off' %><br />
     <%= submit_tag 'Enter' %>
   <% end %>
 </p>
-
-<!-- Name box --!>
-
-<!-- Category buttons --!>
-
-
-<!-- Optional --!>
-<!-- Description --!>
-<!-- Muscle Group --!>
-<!-- Picture --!>
 
 <%= render :template => 'homepage/template' %>

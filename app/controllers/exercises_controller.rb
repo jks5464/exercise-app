@@ -37,37 +37,43 @@ class ExercisesController < ApplicationController
     puts("Inserting new exercise to database...")
     name = params[:name]
     category = params[:category]
+    description = params[:description]
     
-    @tmp = Exercise.create(name: name, category: category)
-    
-    if valid_exercises?(@tmp) then
-      Exercise.create(uid: session[:user_id], name: name, category: category)
+    if valid_exercises?([name, category, description]) then
+      Exercise.create(uid: session[:user_id], name: name, category: category, description: description)
+    else
+      flash[:error] = "Invalid exercise input"
     end
     
     redirect_to create_workout_path
   end
   
   def valid_exercises?(exercises)
-    exercise_name = exercises[0]
+
+    exercises.each_with_index do |value, index|
     
-    # Returns false if name is an integer 
-    if (exercise_name.is_a?(Integer) == true)
-      return false
-      
-    # Returns false if name is blank
-    elsif exercise_name == ""
-      return false
-    
-    # Returns true if the name only includes letters, spaces, and hyphens
-    elsif /\A[a-z\-\ ]+/i.match(exercise_name)
-      return true
-      
-    # Returns false if the exercise already exists
-    elsif Exercise.where(name: exercise_name)
-      return false
-      
-    else
-      return false
+      # This all checks logic for the name
+      if index == 0
+        # Returns false if name is an integer 
+        if (value.is_a?(Integer) == true)
+          return false
+          
+        # Returns false if name is blank
+        elsif value == ""
+          return false
+        
+        # Returns false if the exercise already exists
+        elsif Exercise.exists?(name: value)
+          return false
+          
+        # Returns true if the name only includes letters, spaces, and hyphens
+        elsif /\A[a-z\-\ ]+/i.match(value)
+          return true
+          
+        else
+          return false
+        end
+      end
     end
   end
 end

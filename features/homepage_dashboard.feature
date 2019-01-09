@@ -30,11 +30,11 @@ Scenario: I click on My Workouts
   Then I should be on the my workouts page
 
  
-Scenario: I click on My Clients
+# Scenario: I click on My Clients
 
-  Given I am on the dashboard page
-  And I press "My Clients"
-  Then I should be on the my client page
+#   Given I am on the dashboard page
+#   And I press "My Clients"
+#   Then I should be on the my client page
 
  
 

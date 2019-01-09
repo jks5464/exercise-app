@@ -18,8 +18,8 @@ class Database
     @workouts.push([name])
   end
   
-  def process_create_exercise(name, category)
-    @exercises.push([name, category])
+  def process_create_exercise(name, category, description)
+    @exercises.push([name, category, description])
   end
 
 end
