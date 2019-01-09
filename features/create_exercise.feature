@@ -14,7 +14,7 @@ Scenario: I enter a new exercise
   
   Given I am on the create exercise page
   When I enter "Sit ups" into "name"
-  And I click on "Cardio"
+  And I choose "Cardio"
   And I press "Enter"
   Then I should be on the create workout page
   

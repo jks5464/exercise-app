@@ -5,7 +5,7 @@ require_relative '../spec_helper'
 
 describe 'MeasurementsController'  do
     describe 'valid_measurements?' do
-        before(:each) { @mc = MeasurementsController.new }
+       before(:each) { @mc = MeasurementsController.new }
         
         it 'should be defined' do
             expect {@mc.valid_measurements?([1, 2, 3])}.not_to raise_error
