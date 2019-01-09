@@ -52,6 +52,7 @@ group :test do
   gem 'rspec-rails'
   gem 'webmock'
   gem 'simplecov', :require => false
+  gem 'database_cleaner'
 end
 
 group :production do
