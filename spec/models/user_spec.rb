@@ -1,4 +1,4 @@
-require 'rails_helper'
+require_relative '../spec_helper'
 
 describe "Login Tests" do
     it "A new user creates a new user row" do
