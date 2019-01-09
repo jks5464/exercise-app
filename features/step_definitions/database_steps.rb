@@ -2,6 +2,7 @@ require 'uri'
 require 'cgi'
 require File.expand_path(File.join(File.dirname(__FILE__), "..", "support", "paths"))
 
+=begin
 module WithinHelpers
   def with_scope(locator)
     locator ? within(locator) { yield } : yield
@@ -114,3 +115,4 @@ end
 Then /^#{capture_model} should have (\d+) (\w+)$/ do |name, size, association|
   expect(model!(name).send(association).size).to eq(size.to_i)
 end
+=end
