@@ -3,6 +3,19 @@
   <span class="workout"><%= @db.measurements %></span>
 </p>
 
+<%= form_tag create_workout_path, :method => :get do %>
+  <%= submit_tag 'Create New Workout' %>
+<% end %>
+<!-- Planned Workouts section --!>
+
+
+<!-- Saved Workouts section --!>
+
+
+<!-- Instructor Workouts section --!>
+
+
+<!-- Create Workout button section --!>
 
 
 <%= render :template => 'homepage/template' %>

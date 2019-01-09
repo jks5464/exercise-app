@@ -114,3 +114,4 @@ def logon(provider, username='Inigo Montoya', oauth_uid='123')
   visit '/'
   click_link 'Sign in with Google'
 end
+

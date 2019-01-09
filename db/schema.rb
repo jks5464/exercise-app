@@ -11,7 +11,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190108041416) do
+ActiveRecord::Schema.define(version: 20190109085134) do
+
+  create_table "exercise_sets", force: :cascade do |t|
+    t.integer  "rep_count"
+    t.integer  "rep_value"
+    t.string   "rep_unit"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "exercises", force: :cascade do |t|
+    t.string   "name"
+    t.string   "category"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string   "uid"
+  end
 
   create_table "measurements", force: :cascade do |t|
     t.string   "uid"
@@ -22,6 +38,11 @@ ActiveRecord::Schema.define(version: 20190108041416) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "tasks", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+    
   create_table "test_dbs", force: :cascade do |t|
     t.datetime "start_date"
     t.datetime "end_date"
@@ -39,6 +60,22 @@ ActiveRecord::Schema.define(version: 20190108041416) do
     t.datetime "oauth_expires_at"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
+  end
+
+  create_table "workout_exercise_relationships", force: :cascade do |t|
+    t.string   "workout_id"
+    t.string   "exercise_id"
+    t.integer  "sets"
+    t.integer  "reps"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  create_table "workouts", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string   "uid"
   end
 
 end
