@@ -24,6 +24,8 @@ gem "omniauth-google-oauth2", "~> 0.2.1"
 
 gem 'pg', '~> 0.20.0'
 
+gem 'rails_refactor'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

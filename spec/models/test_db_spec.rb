@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Test, :type => :model do
+RSpec.describe TestDB, :type => :model do
   
 =begin
   it "tests database connection" do
