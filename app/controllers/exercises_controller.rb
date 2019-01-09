@@ -29,6 +29,10 @@ class ExercisesController < ApplicationController
     puts("Go back to the homepage")
   end
   
+  def create_exercise
+    puts("Displaying create exercise page")
+  end
+  
   def process_create_exercise
     puts("Inserting new exercise to database...")
     name = params[:name]

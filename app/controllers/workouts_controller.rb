@@ -24,15 +24,19 @@ class WorkoutsController < ApplicationController
   def new
   end
   
+  def homepage
+    puts("Go back to the homepage")
+  end
+  
   def my_workouts
     puts("Displaying my workouts page")
     puts("User has uid: #{session[:user_id]}")
     @workouts = Workout.where(uid: session[:user_id])
     @workouts = [] if (@workouts.nil?)
   end
-
-  def homepage
-    puts("Go back to the homepage")
+  
+  def create_workout
+    puts("Displaying create workout page")
   end
   
   def process_create_workout

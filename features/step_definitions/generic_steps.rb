@@ -115,7 +115,3 @@ def logon(provider, username='Inigo Montoya', oauth_uid='123')
   click_link 'Sign in with Google'
 end
 
-
-When("I click on the {string} radio button") do |string|
-  pending # Write code here that turns the phrase above into concrete actions
-end
