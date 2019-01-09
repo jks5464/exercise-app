@@ -96,7 +96,7 @@ describe 'GoalsController'  do
         before(:each) { @gc = GoalsController.new }
         
         it 'should return true for valid dates' do
-            expect(@gc.valid_date?("03/12/2019")).to eq(true)
+            expect(@gc.valid_date?("2019-03-12")).to eq(true)
         end
         
         it 'should return false for invalid values' do

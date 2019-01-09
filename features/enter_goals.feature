@@ -20,12 +20,13 @@ Scenario: I enter a valid goal
   And I enter "Bench Press" into "exercise"
   And I enter "50" into "value"
   And I enter "lbs" into "unit"
-  And I enter "03/12/2019" into "date"
+  And I enter "2019-03-12" into "date"
   And I press "Enter"
   Then I should see "Big by Spring Break" within "div.goals"
   And I should see "Timeline" within "div.goals"
   And I should see "Progress" within "div.goals"
   And I should be on the my goals page
+  
  
 @omniauth_test
 Scenario: I enter an invalid goal
@@ -37,5 +38,5 @@ Scenario: I enter an invalid goal
   And I enter "lbs" into "unit"
   And I enter "03/12/2019" into "date"
   And I press "Enter"
-  Then I should see "Invalid goal" within "div.flash_error"
+  Then I should see "Invalid goal" within "div#flash_error"
   And I should be on the enter goal page

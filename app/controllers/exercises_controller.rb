@@ -40,7 +40,7 @@ class ExercisesController < ApplicationController
     description = params[:description]
     
     if valid_exercises?([name, category, description]) then
-      Exercise.create(uid: session[:user_id], name: name, category: category, description: description)
+      Exercise.create(user_id: session[:user_id], name: name, category: category, description: description)
     else
       flash[:error] = "Invalid exercise input"
     end

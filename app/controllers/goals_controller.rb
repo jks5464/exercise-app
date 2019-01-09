@@ -25,7 +25,7 @@ class GoalsController < AuthenticationController
     return (value[/[0-9]+/] == value)
   end
   
-  def valid_date?(date, format="%m/%d/%Y")
+  def valid_date?(date, format="%Y-%m-%d")
     Date.strptime(date, format) rescue return (false)
     return (true)
   end
@@ -43,7 +43,7 @@ class GoalsController < AuthenticationController
   def create_goal(user_id, exercise, unit, name, description, value, date)
     exercise_id = Exercise.where(name: exercise)
     unit_id = Unit.where(name: unit)
-    Goal.create(user_id: user_id, exercise_id: exercise_id, unit_id: unit_id, name: name, description: description, value: value, date: date)
+    Goal.create(user_id: user_id, exercise_id: exercise_id, unit_id: unit_id, name: name, description: description, value: value, created_at: date)
   end
   
   def new
@@ -55,6 +55,7 @@ class GoalsController < AuthenticationController
 
   def my_goals
     puts("displaying my goals")
+    @goals = current_user.goal
   end
   
   def homepage
@@ -67,7 +68,7 @@ class GoalsController < AuthenticationController
   
   def enter_goal_create
     puts("entering new goal into database")
-    user_id = session[:uid]
+    user_id = session[:user_id]
     exercise = params[:exercise]
     unit = params[:unit]
     name = params[:name]
@@ -77,10 +78,10 @@ class GoalsController < AuthenticationController
     
     if valid_goal?(user_id, exercise, unit, name, description, value, date) then
       create_goal(user_id, exercise, unit, name, description, value, date)
+      redirect_to my_goals_path
     else
-      flash[:error] = "Invalid measurements"
+      flash[:error] = "Invalid goal"
+      redirect_to enter_goal_path
     end
-    
-    redirect_to my_goals_path
   end
 end
