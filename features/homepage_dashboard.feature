@@ -27,7 +27,7 @@ Scenario: I click on My Workouts
 
   Given I am on the dashboard page
   And I press "My Workouts"
-  Then I should be on the my workout page
+  Then I should be on the my workouts page
 
  
 Scenario: I click on My Clients

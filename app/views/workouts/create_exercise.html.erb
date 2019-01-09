@@ -1,15 +1,15 @@
 <p>
-  Create exercise:
-  <span class="exercise"><%= @db.measurements %></span>
+  Create exercise:<br />
+  <%= form_tag process_create_exercise_path, :method => :post do %>
+    <%= label_tag 'Name:' %>
+    <%= text_field_tag 'name', '', :autocomplete => 'off' %><br />
+    <b>Category:</b><br />
+    <%= radio_button :category, 1, checked: true %>Cardio<br />
+    <%= radio_button :category, 1, checked: true %>Strength<br />
+    <%= radio_button :category, 1, checked: true %>Other<br />
+    <%= submit_tag 'Enter' %>
+  <% end %>
 </p>
-
-
-
-<%= form_tag create_workout_path, :method => :post do %>
-  <%= label_tag 'Name:' %>
-  <%= text_field_tag 'name', '', :size => 3, :autocomplete => 'off' %>
-  <%= submit_tag 'Enter' %>
-<% end %>
 
 <!-- Name box --!>
 

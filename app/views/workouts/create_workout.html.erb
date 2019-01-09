@@ -1,10 +1,13 @@
 <p>
   Create Workout:
-  <span class="workout"><%= @db.measurements %></span>
 </p>
 
 <%= form_tag create_exercise_path, :method => :get do %>
-  <%= submit_tag 'Create Exercise' %>
+  <%= submit_tag 'Create New Exercise' %>
+<% end %>
+
+<%= form_tag process_create_workout_path, :method => :post do %>
+  <%= submit_tag 'Finish Creating New Workout' %>
 <% end %>
 
 <!-- Search box section --!>

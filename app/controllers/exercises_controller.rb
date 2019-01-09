@@ -1,4 +1,4 @@
-class WorkoutsController < ApplicationController
+class ExercisesController < ApplicationController
 
   before_action :get_db_from_session
   after_action  :store_db_in_session
@@ -24,24 +24,19 @@ class WorkoutsController < ApplicationController
   def new
   end
   
-  def my_workouts
-    puts("Displaying my workouts page")
-    puts("User has uid: #{session[:user_id]}")
-    @workouts = Workout.where(uid: session[:user_id])
-    @workouts = [] if (@workouts.nil?)
-  end
 
   def homepage
     puts("Go back to the homepage")
   end
   
-  def process_create_workout
-    puts("Inserting new workout to database...")
+  def process_create_exercise
+    puts("Inserting new exercise to database...")
     name = params[:name]
+    category = params[:category]
     
-    Workout.create(uid: session[:user_id], name: name)
+    Exercise.create(uid: session[:user_id], name: name, category: category)
   
-    redirect_to my_workouts_path
+    redirect_to create_workout_path
   end
   
 end
