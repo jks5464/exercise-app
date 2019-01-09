@@ -1,5 +1,6 @@
 require 'action_controller'
 require_relative '../app/controllers/application_controller'
+require_relative '../app/controllers/authentication_controller'
 require_relative '../app/controllers/measurements_controller'
 
 describe 'MeasurementsController'  do
