@@ -15,6 +15,14 @@
     <% end %>
     </div>
     
+    <div>
+      <div id="flash_error">
+        <% if flash[:error] %>
+          <%= flash[:error] %>
+        <% end %>
+      </div>
+    </div>
+    
     <div class="container">
       <div id="header" class="span-24">
         <h>Girl Scout Cookies Exercise Tracker</h>
