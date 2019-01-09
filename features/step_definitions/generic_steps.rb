@@ -90,6 +90,12 @@ When /^(?:|I )press "([^\"]*)"(?: within "([^\"]*)")?$/ do |button, selector|
   end
 end
 
+When /^(?:|I )choose "([^\"]*)"(?: within "([^\"]*)")?$/ do |button, selector|
+  with_scope(selector) do
+    choose("category_#{button}", visible: false)
+  end
+end
+
 When /^(?:|I )click the link "([^\"]*)"(?: within "([^\"]*)")?$/ do |link, selector|
   with_scope(selector) do
     click_link(link)
@@ -120,3 +126,4 @@ def logon(provider, username='Inigo Montoya', oauth_uid='123')
   visit '/'
   click_link 'Sign in with Google'
 end
+

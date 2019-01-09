@@ -1,0 +1,21 @@
+<p>
+  Create Workout:
+</p>
+
+<%= form_tag create_exercise_path, :method => :get do %>
+  <%= submit_tag 'Create New Exercise' %>
+<% end %>
+
+<%= form_tag process_create_workout_path, :method => :post do %>
+  <%= submit_tag 'Finish Creating New Workout' %>
+<% end %>
+
+<!-- Search box section --!>
+
+
+<!-- My Workout List section --!>
+
+
+<!-- Create Exercise button section --!>
+
+<%= render :template => 'homepage/template' %>

@@ -29,7 +29,7 @@ Scenario: I click on My Workouts
 
   Given I login and am on the dashboard page
   And I press "My Workouts"
-  Then I should be on the my workout page
+  Then I should be on the my workouts page
 
 @omniauth_test
 Scenario: I click on My Clients

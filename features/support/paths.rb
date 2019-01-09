@@ -34,9 +34,14 @@ module NavigationHelpers
     when /the my client page/
       '/my_clients'
       
-    when /the my workout page/
+    when /the my workouts page/
       '/my_workouts'
       
+    when /the create workout page/
+      '/create_workout'
+      
+    when /the create exercise page/
+      '/create_exercise'
     when /the splash screen page/
       '/splash_screen'
       

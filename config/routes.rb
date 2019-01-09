@@ -22,8 +22,13 @@ Rails.application.routes.draw do
   get  'dashboard' => 'homepage#dashboard', :as => 'dashboard'
   get 'my_goals' => 'goals#my_goals', :as => 'my_goals'
   get 'my_clients' => 'clients#my_clients', :as => 'my_clients'
-  get 'my_workouts' => 'workouts#my_workouts', :as => 'my_workouts'
   
+  get 'my_workouts' => 'workouts#my_workouts', :as => 'my_workouts'
+  get 'create_workout' => 'workouts#create_workout', :as => 'create_workout'
+  post 'process_create_workout' => 'workouts#process_create_workout', :as => 'process_create_workout'
+  
+  get 'create_exercise' => 'workouts#create_exercise', :as => 'create_exercise'
+  post 'process_create_exercise' => 'exercises#process_create_exercise', :as => 'process_create_exercise'
   get 'enter_goal' => 'goals#enter_goal', :as => 'enter_goal'
   post 'enter_goal' => 'goals#enter_goal_create', :as => 'enter_goal_create'
   
