@@ -2,11 +2,12 @@
   Create exercise:<br />
   <%= form_tag process_create_exercise_path, :method => :post do %>
     <%= label_tag 'Name:' %>
-    <%= text_field_tag 'name', '', :autocomplete => 'off' %><br />
+    <%= text_field_tag 'name', '', :maxlength => 140, :autocomplete => 'off' %><br />
     <b>Category:</b><br />
-    <%= radio_button :category, 1, checked: true %>Cardio<br />
-    <%= radio_button :category, 1, checked: true %>Strength<br />
-    <%= radio_button :category, 1, checked: true %>Other<br />
+    <%= radio_button_tag(:category, "Cardio") %>
+    <%= label_tag(:cardio, "Cardio") %>
+    <%= radio_button_tag(:category, "Strength") %>
+    <%= label_tag(:strength, "Strength") %><br />
     <%= submit_tag 'Enter' %>
   <% end %>
 </p>

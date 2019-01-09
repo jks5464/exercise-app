@@ -3,7 +3,7 @@
 
 <%= form_tag process_enter_new_measurements_path, :method => 'post' do %>
   <%= label_tag 'Weight:' %>
-  <%= text_field_tag 'weight', '', :size => 3, :autocomplete => 'off' %>
+  <%= text_field_tag 'weight', '', :maxlength => 4, :size => 3, :autocomplete => 'off' %>
   <%= label_tag 'Body fat:' %>
   <%= text_field_tag 'body_fat', '', :size => 3, :autocomplete => 'off' %>
   <%= label_tag 'Height:' %>
