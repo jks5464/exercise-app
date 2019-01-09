@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe TestDB, :type => :model do
+RSpec.describe TestDB do
   
 =begin
   it "tests database connection" do
@@ -14,10 +14,12 @@ RSpec.describe TestDB, :type => :model do
   end
 =end
   
-  subject {
+  ActiveRecord::Base.connection.create_table :test_dbs do |subject|
+    subject {
     described_class.new(title: "Anything", description: "Lorem ipsum",
     start_date: DateTime.now, end_date: DateTime.now + 1.week)
   }
+  end
 
   it "is valid with valid attributes" do
     expect(subject).to be_valid
@@ -42,6 +44,10 @@ RSpec.describe TestDB, :type => :model do
     subject.end_date = nil
     expect(subject).to_not be_valid
   end
+  
+=begin
+  ActiveRecord::Base.connection.drop_table :test_dbs
+=end
   
 end
 
