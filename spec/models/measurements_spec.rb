@@ -1,6 +1,11 @@
-require 'action_controller'
-require_relative '../../app/controllers/application_controller'
-require_relative '../../app/controllers/measurements_controller'
+# require 'action_controller'
+# require_relative '../app/controllers/application_controller'
+# require_relative '../app/controllers/authentication_controller'
+# require_relative '../app/controllers/measurements_controller'
+# require_relative '../../app/controllers/application_controller'
+# require_relative '../../app/controllers/measurements_controller'
+
+require '../spec_helper'
 
 describe 'MeasurementsController'  do
     describe 'valid_measurements?' do
