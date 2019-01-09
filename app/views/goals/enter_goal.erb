@@ -1,0 +1,17 @@
+<h2>Add Goal</h2>
+
+<div class="enter_goal">
+<%= form_tag enter_goal_create_path, :method => 'post' do %>
+  <%= label_tag 'Name:' %>
+  <%= text_field_tag 'name', '', :size => 3, :autocomplete => 'off' %>
+  <%= label_tag 'Description:' %>
+  <%= text_field_tag 'description', '', :size => 3, :autocomplete => 'off' %>
+  <%= text_field_tag 'exercise', '', :size => 3, :autocomplete => 'off' %>
+  <%= text_field_tag 'value', '', :size => 3, :autocomplete => 'off' %>
+  <%= text_field_tag 'unit', '', :size => 3, :autocomplete => 'off' %>
+  <%= date_field_tag 'date', '', :size => 3, :autocomplete => 'off' %>
+  <%= submit_tag 'Enter' %>
+<% end %>
+</div>
+
+<%= render :template => 'homepage/template' %>

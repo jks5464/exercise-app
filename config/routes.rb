@@ -24,6 +24,9 @@ Rails.application.routes.draw do
   get 'my_clients' => 'clients#my_clients', :as => 'my_clients'
   get 'my_workouts' => 'workouts#my_workouts', :as => 'my_workouts'
   
+  get 'enter_goal' => 'goals#enter_goal', :as => 'enter_goal'
+  post 'enter_goal' => 'goals#enter_goal_create', :as => 'enter_goal_create'
+  
   
  # root 'homepage#dashboard'
  root 'splash#splash_screen'

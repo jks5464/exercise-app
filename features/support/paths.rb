@@ -40,6 +40,9 @@ module NavigationHelpers
     when /the splash screen page/
       '/splash_screen'
       
+    when /the enter goal page/
+      '/enter_goal'
+      
 
 
     # Add more mappings here.
