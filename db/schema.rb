@@ -23,9 +23,6 @@ ActiveRecord::Schema.define(version: 20190108041416) do
   end
 
   create_table "test_dbs", force: :cascade do |t|
-  end
-
-  create_table "tests", force: :cascade do |t|
     t.datetime "start_date"
     t.datetime "end_date"
     t.string   "title"

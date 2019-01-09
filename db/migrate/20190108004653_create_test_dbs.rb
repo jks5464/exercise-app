@@ -1,4 +1,4 @@
-class CreateTestDBs < ActiveRecord::Migration
+class CreateTestDbs < ActiveRecord::Migration
   def change
     create_table :test_dbs do |t|
       t.datetime :start_date
