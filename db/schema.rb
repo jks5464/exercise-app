@@ -13,19 +13,6 @@
 
 ActiveRecord::Schema.define(version: 20190108041416) do
 
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
-
-  create_table "exercises", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "link", force: :cascade do |t|
-    t.string "url",  limit: 255, null: false
-    t.string "name", limit: 255, null: false
-  end
-
   create_table "measurements", force: :cascade do |t|
     t.string   "uid"
     t.string   "height"
