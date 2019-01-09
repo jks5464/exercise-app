@@ -11,14 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190109031405) do
+ActiveRecord::Schema.define(version: 20190108041416) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "exercises", force: :cascade do |t|
+  create_table "clients", force: :cascade do |t|
     t.string   "name"
-    t.string   "category"
+    t.string   "weight"
+    t.string   "body_fat"
+    t.string   "height"
+    t.string   "date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -32,9 +35,6 @@ ActiveRecord::Schema.define(version: 20190109031405) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "test_dbs", force: :cascade do |t|
-  end
-
   create_table "users", force: :cascade do |t|
     t.string   "provider"
     t.string   "uid"
@@ -43,12 +43,6 @@ ActiveRecord::Schema.define(version: 20190109031405) do
     t.datetime "oauth_expires_at"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
-  end
-
-  create_table "workouts", force: :cascade do |t|
-    t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
 end
