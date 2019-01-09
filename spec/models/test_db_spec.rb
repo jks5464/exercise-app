@@ -14,12 +14,16 @@ RSpec.describe TestDB do
   end
 =end
   
+=begin
   ActiveRecord::Base.connection.create_table :test_dbs do |subject|
+=end
     subject {
     described_class.new(title: "Anything", description: "Lorem ipsum",
     start_date: DateTime.now, end_date: DateTime.now + 1.week)
   }
+=begin
   end
+=end
 
   it "is valid with valid attributes" do
     expect(subject).to be_valid
