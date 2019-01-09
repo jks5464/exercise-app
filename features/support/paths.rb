@@ -37,6 +37,9 @@ module NavigationHelpers
     when /the my workout page/
       '/my_workouts'
       
+    when /the splash screen page/
+      '/splash_screen'
+      
 
 
     # Add more mappings here.
