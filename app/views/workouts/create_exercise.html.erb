@@ -1,7 +1,15 @@
 <p>
   Create exercise:
-  <span class="workout"><%= @db.measurements %></span>
+  <span class="exercise"><%= @db.measurements %></span>
 </p>
+
+
+
+<%= form_tag create_workout_path, :method => :post do %>
+  <%= label_tag 'Name:' %>
+  <%= text_field_tag 'name', '', :size => 3, :autocomplete => 'off' %>
+  <%= submit_tag 'Enter' %>
+<% end %>
 
 <!-- Name box --!>
 

@@ -3,6 +3,10 @@
   <span class="workout"><%= @db.measurements %></span>
 </p>
 
+<%= form_tag create_exercise_path, :method => :get do %>
+  <%= submit_tag 'Create Exercise' %>
+<% end %>
+
 <!-- Search box section --!>
 
 
