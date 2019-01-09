@@ -8,6 +8,20 @@ describe 'GoalsController'  do
         end
     end
     
+    describe 'valid_user_id?' do
+        before(:each) { @gc = GoalsController.new }
+        
+        it 'should return true for valid user_ids' do
+            allow(User).to receive(:where).and_return([FactoryBot.build(:user)])
+            expect(@gc.valid_user_id?("1")).to eq(true)
+        end
+        
+        it 'should return false for invalid user_ids' do
+            allow(User).to receive(:where).and_return(nil)
+            expect(@gc.valid_user_id?("100")).to eq(false)
+        end
+    end
+    
     describe 'valid_name?' do
         before(:each) { @gc = GoalsController.new }
         
@@ -24,13 +38,27 @@ describe 'GoalsController'  do
         before(:each) { @gc = GoalsController.new }
         
         it 'should return true when the exercise is found in the database' do
-            Exercise.stub(:where).and_return([mock_model(Exercise, id: 1)])
-            expect(@gc.valid_value?("Bench Press")).to eq(true)
+            allow(Exercise).to receive(:where).and_return([FactoryBot.build(:exercise)])
+            expect(@gc.valid_exercise?("Bench Press")).to eq(true)
         end
         
         it 'should return false when the exercise is not found in the database' do
-            Exercise.stub(:where).and_raise(StandardError)
+            allow(Exercise).to receive(:where).and_return(nil)
             expect(@gc.valid_exercise?("")).to eq(false)
+        end
+    end
+    
+    describe 'valid_unit?' do
+        before(:each) { @gc = GoalsController.new }
+        
+        it 'should return true when the unit is found in the database' do
+            allow(Unit).to receive(:where).and_return([FactoryBot.build(:unit)])
+            expect(@gc.valid_unit?("lbs")).to eq(true)
+        end
+        
+        it 'should return false when the unit is not found in the database' do
+            allow(Unit).to receive(:where).and_return(nil)
+            expect(@gc.valid_unit?("billy")).to eq(false)
         end
     end
     
@@ -58,6 +86,21 @@ describe 'GoalsController'  do
         end
         
         it 'should return false for invalid values' do
+            expect(@gc.valid_value?("")).to eq(false)
+            expect(@gc.valid_value?("-")).to eq(false)
+            expect(@gc.valid_value?("abce*")).to eq(false)
+        end
+    end
+    
+    describe 'valid_date?' do
+        before(:each) { @gc = GoalsController.new }
+        
+        it 'should return true for valid dates' do
+            expect(@gc.valid_date?("03/12/2019")).to eq(true)
+        end
+        
+        it 'should return false for invalid values' do
+            expect(@gc.valid_value?("Hello")).to eq(false)
             expect(@gc.valid_value?("")).to eq(false)
             expect(@gc.valid_value?("-")).to eq(false)
             expect(@gc.valid_value?("abce*")).to eq(false)

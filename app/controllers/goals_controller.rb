@@ -2,8 +2,7 @@ class GoalsController < AuthenticationController
   public
   
   def valid_user_id?(user_id)
-    User.where(id: user_id) rescue return (false)
-    return (true)
+    !User.where(id: user_id).nil?
   end
   
   def valid_name?(name)
@@ -11,13 +10,11 @@ class GoalsController < AuthenticationController
   end
   
   def valid_exercise?(exercise)
-      Exercise.where(name: exercise) rescue return (false)
-      return (true)
+    !Exercise.where(name: exercise).nil?
   end
   
   def valid_unit?(unit)
-    Unit.where(name: unit) rescue return (false)
-    return true
+    !Unit.where(name: unit).nil?
   end
     
   def valid_description?(description)
