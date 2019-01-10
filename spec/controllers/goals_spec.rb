@@ -17,7 +17,7 @@ describe 'GoalsController'  do
         end
         
         it 'should return false for invalid user_ids' do
-            allow(User).to receive(:where).and_return(nil)
+            allow(User).to receive(:where).and_return(User.none)
             expect(@gc.valid_user_id?("100")).to eq(false)
         end
     end
@@ -43,7 +43,7 @@ describe 'GoalsController'  do
         end
         
         it 'should return false when the exercise is not found in the database' do
-            allow(Exercise).to receive(:where).and_return(nil)
+            allow(Exercise).to receive(:where).and_return(Exercise.none)
             expect(@gc.valid_exercise?("")).to eq(false)
         end
     end
@@ -57,7 +57,7 @@ describe 'GoalsController'  do
         end
         
         it 'should return false when the unit is not found in the database' do
-            allow(Unit).to receive(:where).and_return(nil)
+            allow(Unit).to receive(:where).and_return(Unit.none)
             expect(@gc.valid_unit?("billy")).to eq(false)
         end
     end

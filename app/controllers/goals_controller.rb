@@ -2,7 +2,7 @@ class GoalsController < AuthenticationController
   public
   
   def valid_user_id?(user_id)
-    !User.where(id: user_id).nil?
+    !User.where(id: user_id).empty?
   end
   
   def valid_name?(name)
@@ -10,11 +10,11 @@ class GoalsController < AuthenticationController
   end
   
   def valid_exercise?(exercise)
-    !Exercise.where(name: exercise).nil?
+    !Exercise.where(name: exercise).empty?
   end
   
   def valid_unit?(unit)
-    !Unit.where(name: unit).nil?
+    !Unit.where(name: unit).empty?
   end
     
   def valid_description?(description)
@@ -41,8 +41,8 @@ class GoalsController < AuthenticationController
   end
   
   def create_goal(user_id, exercise, unit, name, description, value, date)
-    exercise_id = Exercise.where(name: exercise)
-    unit_id = Unit.where(name: unit)
+    exercise_id = Exercise.where(name: exercise).first.id
+    unit_id = Unit.where(name: unit).first.id
     Goal.create(user_id: user_id, exercise_id: exercise_id, unit_id: unit_id, name: name, description: description, value: value, created_at: date)
   end
   

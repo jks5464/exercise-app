@@ -110,10 +110,26 @@ When /^I enter "(.*)" into "(.*)"$/ do |value, field|
     fill_in(field, :with => value)
 end
 
+When /^I enter exercise name into "(.*)"$/ do |field|
+    fill_in(field, :with => @exercise.name)
+end
+
+When /^I enter unit name into "(.*)"$/ do |field|
+    fill_in(field, :with => @unit.name)
+end
+
 Given /^A user with name "(.*?)" and UID "(.*?)" and auth provider "(.*?)"$/ do |username, uid, provider|
   provider.downcase!
   provider = 'google_oauth2' if provider.eql?('google')
   @user = FactoryBot.build(:user, :name => username, :uid => uid, :provider => provider)
+end
+
+Given /^There exists a valid exercise with name "(.*?)"$/ do |name|
+  @exercise = FactoryBot.create(:exercise, :name => name)
+end
+
+Given /^There exists a valid unit with name "(.*?)"$/ do |name|
+  @unit = FactoryBot.create(:unit, :name => name)
 end
 
 When /^I login using "(.*?)" as the user$/ do |provider|

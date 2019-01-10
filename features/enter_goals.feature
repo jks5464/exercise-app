@@ -14,18 +14,21 @@ Scenario: I select the add goal button from the my goal page
   
 @omniauth_test
 Scenario: I enter a valid goal
-  Given I login and am on the enter goal page 
+  Given I login and am on the enter goal page
+  And There exists a valid exercise with name "Bench Press"
+  And There exists a valid unit with name "lbs"
   And I enter "Big by Spring Break" into "name"
   And I enter "This goal means alot to me. You can do it!" into "description"
-  And I enter "Bench Press" into "exercise"
+  And I enter exercise name into "exercise"
   And I enter "50" into "value"
-  And I enter "lbs" into "unit"
+  And I enter unit name into "unit"
   And I enter "2019-03-12" into "date"
   And I press "Enter"
-  Then I should see "Big by Spring Break" within "div.goals"
+  Then I should be on the my goals page
+  And I should see "Big by Spring Break" within "div.goals"
   And I should see "Timeline" within "div.goals"
   And I should see "Progress" within "div.goals"
-  And I should be on the my goals page
+  
   
  
 @omniauth_test
