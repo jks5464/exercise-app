@@ -1,6 +1,5 @@
 FactoryBot.define do
-  factory :workout do
-    user_id { "MyString" }
+  factory :unit do
     name { "MyString" }
   end
 end

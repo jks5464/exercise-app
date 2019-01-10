@@ -29,6 +29,9 @@ Rails.application.routes.draw do
   
   get 'create_exercise' => 'workouts#create_exercise', :as => 'create_exercise'
   post 'process_create_exercise' => 'exercises#process_create_exercise', :as => 'process_create_exercise'
+  get 'enter_goal' => 'goals#enter_goal', :as => 'enter_goal'
+  post 'enter_goal' => 'goals#enter_goal_create', :as => 'enter_goal_create'
+  
   
  # root 'homepage#dashboard'
  root 'splash#splash_screen'

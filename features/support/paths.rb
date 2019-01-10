@@ -46,6 +46,11 @@ module NavigationHelpers
     when /the create exercise page/
       '/create_exercise'
 
+      
+    when /the enter goal page/
+      '/enter_goal'
+
+
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
     #
