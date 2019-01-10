@@ -154,10 +154,6 @@ GEM
     omniauth-oauth2 (1.3.1)
       oauth2 (~> 1.0)
       omniauth (~> 1.2)
-<<<<<<< Updated upstream
-    pg (0.21.0)
-=======
->>>>>>> Stashed changes
     public_suffix (3.0.3)
     rack (1.6.11)
     rack-test (0.6.3)
