@@ -1,23 +1,4 @@
-class MeasurementsController < ApplicationController
-
-  before_action :get_db_from_session
-  after_action  :store_db_in_session
-  
-  private
-  
-  def get_db_from_session
-
-    @db = Database.new()
-
-    if !session[:db].blank?
-      @db = YAML.load(session[:db])
-    end
-  end
-
-  def store_db_in_session
-
-    session[:db] = @db.to_yaml
-  end
+class MeasurementsController < AuthenticationController
   
   public
   
@@ -48,8 +29,8 @@ class MeasurementsController < ApplicationController
 
   def my_measurements
     puts("Displaying my measurements page")
-    puts("User has uid: #{session[:user_id]}")
-    @measurements = Measurement.where(uid: session[:user_id])
+    puts("User has id: #{session[:user_id]}")
+    @measurements = Measurement.where(user_id: session[:user_id])
     @measurements = [] if (@measurements.nil?)
   end
   
@@ -64,7 +45,7 @@ class MeasurementsController < ApplicationController
     height = params[:height]
     
     if valid_measurements?([weight, body_fat, height]) then
-      Measurement.create(uid: session[:user_id], height: height, weight: weight, body_fat: body_fat)  
+      Measurement.create(user_id: session[:user_id], height: height, weight: weight, body_fat: body_fat)  
     else
       flash[:error] = "Invalid measurements"
     end
