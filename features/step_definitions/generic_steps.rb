@@ -59,6 +59,12 @@ Given /^(?:|I )am on (.+)$/ do |page_name|
   visit path_to(page_name)
 end
 
+Given /^(?:|I )login and am on (.+)$/ do |page_name|
+  @user = FactoryBot.build(:user)
+  logon(@user.provider, @user.name, @user.uid)
+  visit path_to(page_name)
+end
+
 Then /^(?:|I )should be on (.+)$/ do |page_name|
   current_path = URI.parse(current_url).path
   if current_path.respond_to? :should
