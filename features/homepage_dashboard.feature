@@ -31,12 +31,12 @@ Scenario: I click on My Workouts
   And I press "My Workouts"
   Then I should be on the my workouts page
 
-@omniauth_test
-Scenario: I click on My Clients
+# @omniauth_test
+# Scenario: I click on My Clients
 
-  Given I login and am on the dashboard page
-  And I press "My Clients"
-  Then I should be on the my client page
+#   Given I login and am on the dashboard page
+#   And I press "My Clients"
+#   Then I should be on the my client page
 
  
 
