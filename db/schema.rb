@@ -13,6 +13,16 @@
 
 ActiveRecord::Schema.define(version: 20190109172522) do
 
+  create_table "clients", force: :cascade do |t|
+    t.string   "name"
+    t.string   "weight"
+    t.string   "body_fat"
+    t.string   "height"
+    t.string   "date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "exercise_sets", force: :cascade do |t|
     t.integer  "rep_count"
     t.integer  "rep_value"
