@@ -1,6 +1,8 @@
 source 'https://rubygems.org'
 
-
+# for graph
+gem "chartkick"
+gem 'groupdate'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.9'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
@@ -55,7 +57,7 @@ group :test do
   gem 'simplecov', :require => false
 end
 
-group :production do
-  gem 'pg', '~> 0.20'
-end
+# group :production do
+#   gem 'pg', '~> 0.20'
+# end
 
