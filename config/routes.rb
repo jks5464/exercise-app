@@ -9,14 +9,16 @@ Rails.application.routes.draw do
   get 'auth/:provider/callback', to: 'sessions#create'
   get 'auth/failure', to: redirect('/')
   get 'signout', to: 'sessions#destroy', as: 'signout'
+  
 
   resources :sessions, only: [:create, :destroy]
   resource :home, only: [:show]
-
+  get 'splash_screen' => 'splash#splash_screen', :as => 'splash_screen'
   get  'my_measurements' => 'measurements#my_measurements', :as => 'my_measurements'
   get  'enter_my_measurements' => 'measurements#enter_my_measurements', :as => 'enter_my_measurements'
   post  'process_enter_new_measurements' => 'measurements#process_enter_new_measurements', :as => 'process_enter_new_measurements'
  
+  
   get  'dashboard' => 'homepage#dashboard', :as => 'dashboard'
   get 'my_goals' => 'goals#my_goals', :as => 'my_goals'
   get 'my_clients' => 'clients#my_clients', :as => 'my_clients'
@@ -28,8 +30,8 @@ Rails.application.routes.draw do
   get 'create_exercise' => 'workouts#create_exercise', :as => 'create_exercise'
   post 'process_create_exercise' => 'exercises#process_create_exercise', :as => 'process_create_exercise'
   
-  root 'homepage#dashboard'
-
+ # root 'homepage#dashboard'
+ root 'splash#splash_screen'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

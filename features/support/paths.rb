@@ -42,6 +42,9 @@ module NavigationHelpers
       
     when /the create exercise page/
       '/create_exercise'
+    when /the splash screen page/
+      '/splash_screen'
+      
 
 
     # Add more mappings here.

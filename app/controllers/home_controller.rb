@@ -1,4 +1,5 @@
-class HomeController < ApplicationController
+class HomeController < AuthenticationController
+
   def show
   end
 end
