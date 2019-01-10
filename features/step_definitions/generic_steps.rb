@@ -59,7 +59,15 @@ Given /^(?:|I )am on (.+)$/ do |page_name|
   visit path_to(page_name)
 end
 
+Given /^(?:|I )login and am on (.+)$/ do |page_name|
+  @user = FactoryBot.build(:user)
+  logon(@user.provider, @user.name, @user.uid)
+  visit path_to(page_name)
+end
+
 Then /^(?:|I )should be on (.+)$/ do |page_name|
+  puts("current_path: #{URI.parse(current_url).path}")
+  puts("should_path: #{path_to(page_name)}")
   current_path = URI.parse(current_url).path
   if current_path.respond_to? :should
     current_path.should == path_to(page_name)
@@ -74,6 +82,16 @@ Then /^(?:|I )should see "([^\"]*)"(?: within "([^\"]*)")?$/ do |text, selector|
       page.should have_content(text)
     else
       assert page.has_content?(text)
+    end
+  end
+end
+
+Then /^(?:|I )should see exercise name(?: within "([^\"]*)")?$/ do |selector|
+  with_scope(selector) do
+    if page.respond_to? :should
+      page.should have_content(@exercise.name)
+    else
+      assert page.has_content?(@exercise.name)
     end
   end
 end
@@ -102,10 +120,26 @@ When /^I enter "(.*)" into "(.*)"$/ do |value, field|
     fill_in(field, :with => value)
 end
 
+When /^I enter exercise name into "(.*)"$/ do |field|
+    fill_in(field, :with => @exercise.name)
+end
+
+When /^I enter unit name into "(.*)"$/ do |field|
+    fill_in(field, :with => @unit.name)
+end
+
 Given /^A user with name "(.*?)" and UID "(.*?)" and auth provider "(.*?)"$/ do |username, uid, provider|
   provider.downcase!
   provider = 'google_oauth2' if provider.eql?('google')
   @user = FactoryBot.build(:user, :name => username, :uid => uid, :provider => provider)
+end
+
+Given /^There exists a valid exercise with name "(.*?)"$/ do |name|
+  @exercise = FactoryBot.create(:exercise, :name => name)
+end
+
+Given /^There exists a valid unit with name "(.*?)"$/ do |name|
+  @unit = FactoryBot.create(:unit, :name => name)
 end
 
 When /^I login using "(.*?)" as the user$/ do |provider|
