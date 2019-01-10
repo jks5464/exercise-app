@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 class WorkoutsController < ApplicationController
 
   before_action :get_db_from_session
@@ -19,6 +20,10 @@ class WorkoutsController < ApplicationController
     session[:db] = @db.to_yaml
   end
   
+=======
+class WorkoutsController < AuthenticationController
+  
+>>>>>>> 1c965423878c7737d1c5c5b80f1ab16e58a87be5
   public
   
   def new

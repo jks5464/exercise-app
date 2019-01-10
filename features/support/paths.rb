@@ -37,6 +37,9 @@ module NavigationHelpers
     when /the my workouts page/
       '/my_workouts'
       
+    when /the splash screen page/
+      '/splash_screen'
+      
     when /the create workout page/
       '/create_workout'
       
