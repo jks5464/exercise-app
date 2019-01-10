@@ -13,6 +13,15 @@
 
 ActiveRecord::Schema.define(version: 20190108041416) do
 
+  create_table "clients", force: :cascade do |t|
+    t.string   "name"
+    t.string   "weight"
+    t.string   "body_fat"
+    t.string   "height"
+    t.string   "date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "measurements", force: :cascade do |t|
     t.string   "uid"
@@ -22,7 +31,6 @@ ActiveRecord::Schema.define(version: 20190108041416) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
-
 
   create_table "test_dbs", force: :cascade do |t|
     t.datetime "start_date"
