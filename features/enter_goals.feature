@@ -25,9 +25,10 @@ Scenario: I enter a valid goal
   And I enter "2019-03-12" into "date"
   And I press "Enter"
   Then I should be on the my goals page
-  And I should see "Big by Spring Break" within "div.goals"
   And I should see "Timeline" within "div.goals"
   And I should see "Progress" within "div.goals"
+  And I should see "Big by Spring Break" within "tr#last_row"
+  And I should see exercise name within "tr#last_row"
   
   
  

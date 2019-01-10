@@ -6,15 +6,19 @@
 <% else %>
     <table>
         <tr>
-            <th>Goal Name</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Exercise</th>
             <th>Timeline</th>
             <th>Progress</th>
         </tr>
         <% @goals.each_with_index do |g, i| %>
             <tr <%= 'id=last_row' if i == (@goals.size - 1) %> >
                 <td><%= g.name %></td>
-                <td><%= g.name %></td>
-                <td><%= g.name %></td>
+                <td><%= g.description %></td>
+                <td><%= g.exercise.name %></td>
+                <td></td>
+                <td></td>
             </tr>
         <% end %>    
     </table>

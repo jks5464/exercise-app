@@ -86,6 +86,16 @@ Then /^(?:|I )should see "([^\"]*)"(?: within "([^\"]*)")?$/ do |text, selector|
   end
 end
 
+Then /^(?:|I )should see exercise name(?: within "([^\"]*)")?$/ do |selector|
+  with_scope(selector) do
+    if page.respond_to? :should
+      page.should have_content(@exercise.name)
+    else
+      assert page.has_content?(@exercise.name)
+    end
+  end
+end
+
 When /^(?:|I )press "([^\"]*)"(?: within "([^\"]*)")?$/ do |button, selector|
   with_scope(selector) do
     click_button(button)
