@@ -114,8 +114,6 @@ When /^(?:|I )click the link "([^\"]*)"(?: within "([^\"]*)")?$/ do |link, selec
   end
 end
 
-
-
 When /^I enter "(.*)" into "(.*)"$/ do |value, field|
     fill_in(field, :with => value)
 end
@@ -128,6 +126,14 @@ When /^I enter unit name into "(.*)"$/ do |field|
     fill_in(field, :with => @unit.name)
 end
 
+When /^I select exercise name in "(.*)"$/ do |field|
+    select @exercise.name, :from => field
+end
+
+When /^I select unit name in "(.*)"$/ do |field|
+    select @unit.name, :from => field
+end
+
 Given /^A user with name "(.*?)" and UID "(.*?)" and auth provider "(.*?)"$/ do |username, uid, provider|
   provider.downcase!
   provider = 'google_oauth2' if provider.eql?('google')
@@ -135,6 +141,7 @@ Given /^A user with name "(.*?)" and UID "(.*?)" and auth provider "(.*?)"$/ do 
 end
 
 Given /^There exists a valid exercise with name "(.*?)"$/ do |name|
+  puts("Exercise name:-#{name}-")
   @exercise = FactoryBot.create(:exercise, :name => name)
 end
 

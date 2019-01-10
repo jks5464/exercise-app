@@ -7,7 +7,7 @@ class MeasurementsController < AuthenticationController
   end
   
   def is_number_or_blank?(m)
-    return ((is_number?(m) and Float(m) >= 0.0 and m.length <=5) or m == "")
+    return ((is_number?(m) and Float(m) >= 0.0 and m.to_s.split("").size  <=5) or m == "")
   end
   
   def valid_measurements?(measurements)
