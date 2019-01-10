@@ -66,6 +66,8 @@ Given /^(?:|I )login and am on (.+)$/ do |page_name|
 end
 
 Then /^(?:|I )should be on (.+)$/ do |page_name|
+  puts("current_path: #{URI.parse(current_url).path}")
+  puts("should_path: #{path_to(page_name)}")
   current_path = URI.parse(current_url).path
   if current_path.respond_to? :should
     current_path.should == path_to(page_name)
@@ -84,9 +86,25 @@ Then /^(?:|I )should see "([^\"]*)"(?: within "([^\"]*)")?$/ do |text, selector|
   end
 end
 
+Then /^(?:|I )should see exercise name(?: within "([^\"]*)")?$/ do |selector|
+  with_scope(selector) do
+    if page.respond_to? :should
+      page.should have_content(@exercise.name)
+    else
+      assert page.has_content?(@exercise.name)
+    end
+  end
+end
+
 When /^(?:|I )press "([^\"]*)"(?: within "([^\"]*)")?$/ do |button, selector|
   with_scope(selector) do
-    click_button(button)
+    click_button(button, visible: false)
+  end
+end
+
+When /^(?:|I )choose "([^\"]*)"(?: within "([^\"]*)")?$/ do |button, selector|
+  with_scope(selector) do
+    choose("category_#{button}", visible: false)
   end
 end
 
@@ -96,16 +114,39 @@ When /^(?:|I )click the link "([^\"]*)"(?: within "([^\"]*)")?$/ do |link, selec
   end
 end
 
-
-
 When /^I enter "(.*)" into "(.*)"$/ do |value, field|
     fill_in(field, :with => value)
+end
+
+When /^I enter exercise name into "(.*)"$/ do |field|
+    fill_in(field, :with => @exercise.name)
+end
+
+When /^I enter unit name into "(.*)"$/ do |field|
+    fill_in(field, :with => @unit.name)
+end
+
+When /^I select exercise name in "(.*)"$/ do |field|
+    select @exercise.name, :from => field
+end
+
+When /^I select unit name in "(.*)"$/ do |field|
+    select @unit.name, :from => field
 end
 
 Given /^A user with name "(.*?)" and UID "(.*?)" and auth provider "(.*?)"$/ do |username, uid, provider|
   provider.downcase!
   provider = 'google_oauth2' if provider.eql?('google')
   @user = FactoryBot.build(:user, :name => username, :uid => uid, :provider => provider)
+end
+
+Given /^There exists a valid exercise with name "(.*?)"$/ do |name|
+  puts("Exercise name:-#{name}-")
+  @exercise = FactoryBot.create(:exercise, :name => name)
+end
+
+Given /^There exists a valid unit with name "(.*?)"$/ do |name|
+  @unit = FactoryBot.create(:unit, :name => name)
 end
 
 When /^I login using "(.*?)" as the user$/ do |provider|
@@ -120,3 +161,4 @@ def logon(provider, username='Inigo Montoya', oauth_uid='123')
   visit '/'
   click_link 'Sign in with Google'
 end
+

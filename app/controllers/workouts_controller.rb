@@ -5,16 +5,31 @@ class WorkoutsController < AuthenticationController
   def new
   end
   
-  def show
-    puts("showing the progress")
+  def homepage
+    puts("Go back to the homepage")
   end
   
   def my_workouts
-    puts("displaying my workouts")
+    puts("Displaying my workouts page")
+    puts("User has id: #{session[:user_id]}")
+    @workouts = Workout.where(user_id: session[:user_id])
+    @workouts = [] if (@workouts.nil?)
   end
-
-  def homepage
-    puts("go back to the homepage")
+  
+  def create_workout
+    puts("Displaying create workout page")
+    puts("Displaying list of exercises")
+    @exercises = Exercise.where(user_id: session[:user_id])
+    @exercises = [] if (@exercises.nil?)
+  end
+  
+  def process_create_workout
+    puts("Inserting new workout to database...")
+    name = params[:name]
+    
+    Workout.create(user_id: session[:user_id], name: name)
+  
+    redirect_to my_workouts_path
   end
   
 end

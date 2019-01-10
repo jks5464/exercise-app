@@ -7,7 +7,7 @@ class MeasurementsController < AuthenticationController
   end
   
   def is_number_or_blank?(m)
-    return ((is_number?(m) and Float(m) >= 0.0) or m == "")
+    return ((is_number?(m) and Float(m) >= 0.0 and m.to_s.split("").size  <=5) or m == "")
   end
   
   def valid_measurements?(measurements)
@@ -29,8 +29,8 @@ class MeasurementsController < AuthenticationController
 
   def my_measurements
     puts("Displaying my measurements page")
-    puts("User has uid: #{session[:user_id]}")
-    @measurements = Measurement.where(uid: session[:user_id])
+    puts("User has id: #{session[:user_id]}")
+    @measurements = Measurement.where(user_id: session[:user_id])
     @measurements = [] if (@measurements.nil?)
   end
   
@@ -45,7 +45,7 @@ class MeasurementsController < AuthenticationController
     height = params[:height]
     
     if valid_measurements?([weight, body_fat, height]) then
-      Measurement.create(uid: session[:user_id], height: height, weight: weight, body_fat: body_fat)  
+      Measurement.create(user_id: session[:user_id], height: height, weight: weight, body_fat: body_fat)  
     else
       flash[:error] = "Invalid measurements"
     end

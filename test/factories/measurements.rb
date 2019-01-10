@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :measurement do
-    uid { "MyString" }
+    user_id { "MyString" }
     height { "MyString" }
     weight { "MyString" }
     body_fat { "MyString" }
