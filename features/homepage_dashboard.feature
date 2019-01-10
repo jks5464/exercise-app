@@ -24,7 +24,7 @@ Scenario: I click on My Measurements
   And I press "My Measurements"
   Then I should be on the my measurements page
 
-@omniauth_test
+@omniauth_test 
 Scenario: I click on My Workouts
 
   Given I login and am on the dashboard page
