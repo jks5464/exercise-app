@@ -13,6 +13,16 @@
 
 ActiveRecord::Schema.define(version: 20190109172522) do
 
+  create_table "clients", force: :cascade do |t|
+    t.string   "name"
+    t.string   "weight"
+    t.string   "body_fat"
+    t.string   "height"
+    t.string   "date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "exercise_sets", force: :cascade do |t|
     t.integer  "rep_count"
     t.integer  "rep_value"
@@ -50,16 +60,6 @@ ActiveRecord::Schema.define(version: 20190109172522) do
   add_index "goals", ["exercise_id"], name: "index_goals_on_exercise_id"
   add_index "goals", ["unit_id"], name: "index_goals_on_unit_id"
   add_index "goals", ["user_id"], name: "index_goals_on_user_id"
-
-  create_table "clients", force: :cascade do |t|
-    t.string   "name"
-    t.string   "weight"
-    t.string   "body_fat"
-    t.string   "height"
-    t.string   "date"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
 
   create_table "measurements", force: :cascade do |t|
     t.string   "height"
