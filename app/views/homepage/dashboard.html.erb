@@ -9,7 +9,7 @@
 <% end %>
 
 <%= form_tag my_clients_path, :method => :get do %>
-  <%= submit_tag 'My Clients' %>
+  <%= hidden_field_tag 'My Clients' %>
 <% end %>
 
 <%= form_tag my_workouts_path, :method => :get do %>

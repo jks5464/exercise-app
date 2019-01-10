@@ -34,7 +34,7 @@ gem 'rails_refactor'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 gem 'sprockets', '~> 3.7.2'
-
+  
 group :development, :test do
   gem 'byebug'
   gem 'factory_bot_rails'

@@ -17,9 +17,9 @@ test: &test
  database: db/test
 
 production:
-  adapter: postgresql
-  database: db/production
-  url: <%= ENV['DATABASE_URL'] %>
+ adapter: postgresql
+ database: db/production
+ url: <%= ENV['DATABASE_URL'] %>
  
 cucumber:
  <<: *test
