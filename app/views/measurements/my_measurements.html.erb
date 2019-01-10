@@ -15,7 +15,7 @@
       <% @measurements.each_with_index do |m, i| %>
         <tr <%= 'id=last_row' if i == (@measurements.size - 1) %> >
         <td><%= m.weight %></td>
-        <%= f.select :weight_units, [['lbs'],['kg']] %>
+        
         <td><%= m.body_fat %></td>
         <td><%= m.height %></td>
         </tr>
