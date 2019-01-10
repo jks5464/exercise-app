@@ -64,6 +64,8 @@ class GoalsController < AuthenticationController
   
   def enter_goal
     puts("displaying enter goal")
+    @exercises = Exercise.all
+    @units = Unit.all
   end
   
   def enter_goal_create
