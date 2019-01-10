@@ -1,29 +1,5 @@
-<<<<<<< HEAD
-class WorkoutsController < ApplicationController
-
-  before_action :get_db_from_session
-  after_action  :store_db_in_session
-  
-  private
-  
-  def get_db_from_session
-
-    @db = Database.new()
-    
-    if !session[:db].blank?
-      @db = YAML.load(session[:db])
-    end
-  end
-
-  def store_db_in_session
-
-    session[:db] = @db.to_yaml
-  end
-  
-=======
 class WorkoutsController < AuthenticationController
   
->>>>>>> 1c965423878c7737d1c5c5b80f1ab16e58a87be5
   public
   
   def new
