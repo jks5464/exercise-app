@@ -162,3 +162,18 @@ def logon(provider, username='Inigo Montoya', oauth_uid='123')
   click_link 'Sign in with Google'
 end
 
+Given /the following exercises exist/ do |exercise_table|
+  exercise_table.hashes.each do |exercise|
+    # you should arrange to add that movie to the database here.
+    Exercise.create(exercise)
+  end
+end
+
+Given /^I wait for (.*?) second$/ do |seconds|
+  sleep seconds.to_i
+end
+
+Then /^save the page$/ do
+  save_page
+end
+

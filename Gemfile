@@ -26,6 +26,8 @@ gem 'rails_refactor'
 
 gem 'jquery-ui-rails'
 
+gem 'selenium-webdriver'
+
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
