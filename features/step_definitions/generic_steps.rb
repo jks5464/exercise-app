@@ -154,6 +154,7 @@ When /^I login using "(.*?)" as the user$/ do |provider|
 end
  
 def logon(provider, username='Inigo Montoya', oauth_uid='123')
+  WebMock.allow_net_connect!
   provider.downcase!
   provider = 'google_oauth2' if provider.eql?('google')
   OmniAuth.config.add_mock(provider.to_sym, {:uid => oauth_uid, :provider => provider, :info => {:name => username}, :credentials => {:token => "random_token", :expires_at => 0}})
