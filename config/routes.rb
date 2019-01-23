@@ -3,8 +3,6 @@ Rails.application.routes.draw do
   get 'sessions/create'
 
   get 'sessions/destroy'
-
-  get 'home/show'
   
   get 'auth/:provider/callback', to: 'sessions#create'
   get 'auth/failure', to: redirect('/')
@@ -12,7 +10,6 @@ Rails.application.routes.draw do
   
 
   resources :sessions, only: [:create, :destroy]
-  resource :home, only: [:show]
   get 'splash_screen' => 'splash#splash_screen', :as => 'splash_screen'
   get  'my_measurements' => 'measurements#my_measurements', :as => 'my_measurements'
   get  'enter_my_measurements' => 'measurements#enter_my_measurements', :as => 'enter_my_measurements'
