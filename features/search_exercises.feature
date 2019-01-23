@@ -5,6 +5,7 @@ Feature: search_exercises
     I want to search exercises by muscle groups or name.
 
 
+@selenium
 @omniauth_test
 Scenario: I search for an exercise that exists
   Given I login and am on the create workout page
