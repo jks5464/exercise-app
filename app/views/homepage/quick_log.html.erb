@@ -1,0 +1,16 @@
+<div class="exercises">
+<p>
+  Log an Exercise:<br />
+  <% if @exercises.empty? %>
+      <%= "No exercises have been created yet." %>
+  <% else %>
+    Current existing exercises to choose from:
+    <select name="user_id">
+    <%= @exercises.each do |exercise| %>
+      <option value="<%= exercise.id %>"><%= exercise.name %></option>
+    <% end %>
+    </select><br /><br />
+  <% end %>
+</p>
+</div>
+<%= render :template => 'homepage/template' %>
