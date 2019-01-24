@@ -1,63 +1,74 @@
 <script src="/assets/search_exercises.js"></script>
 <script src="/assets/create_workout.js"></script>
 
-<div class="exercises">
-    
-  <p>
-    Create Workout:
-  </p>
-  <%= label_tag 'Workout Name:' %>
-  <%= text_field_tag 'name', '', :size => 6, :autocomplete => 'off' %>
-  <br>
-  
-    <div id="dialog-form" title="add">
-      <form>
-        <fieldset>
-
-          <label for="number">Distance/Time</label>
-          <input type="text" name="number" id="number" class="text ui-widget-content ui-corner-all">
-          <br>
-          <label for="units">Units</label>
-          <br>
-          <input type="text" name="units" id="units" class="text ui-widget-content ui-corner-all">
-          <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
-        </fieldset>
-      </form>
-    </div>
-    
-    <div id="users-contain" class="ui-widget">
-  <h1> workout:</h1>
-  <table id="users" class="ui-widget ui-widget-content">
-    <thead>
-      <tr class="ui-widget-header ">
-        <th>Name</th>
-        <th>Number</th>
-        <th>Units</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-      </tr>
-    </tbody>
-  </table>
-</div>
-    <div class="exercise-search">
-      <input type="text" id="exercise-search-txt">
-      <div class="results" id="exercise-search-results">
-        
+<!-- hidden popup form when user adds a new exercise to their workout -->
+<div id="dialog-form" title="add">
+  <form>
+    <fieldset>
+      <div class="exercise-search">
+        <label for="exercise-search-txt">
+          Exercise
+        </label>
+        <input name="exercise-search-txt" type="text" id="exercise-search-txt">
+        <div class="results" id="exercise-search-results">
+          
+        </div>
       </div>
-    </div>
-    
-    <button id="add">add</button>
+      
+      <div id="exercise-category-data">
+      
+      </div>
+      
+    </fieldset>
+  </form>
 </div>
 
-<%= form_tag create_exercise_path, :method => :get do %>
-  <%= submit_tag 'Create New Exercise' %>
-<% end %>
-
-<%= form_tag process_create_workout_path, :method => :get do %>
-  <%= submit_tag 'Finish Creating New Workout' %>
-<% end %>
+<div class="container">
+  <!-- header bar -->
+  <div class="row" id="header">
+    Create Workout
+  </div>
+  
+  <!-- workout name -->
+  <div class="row">
+    <h1>Workout Name:</h1>
+  </div>
+  
+  <!-- task cards -->
+  <div class="row" id="task_card_list">
+    <div id="users-contain" class="ui-widget">
+      
+      <table id="users" class="ui-widget ui-widget-content">
+        <thead>
+          <tr class="ui-widget-header">
+            <th>Name</th>
+            <th>Number</th>
+            <th>Units</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  
+  <!-- add/create buttons -->
+  <div class="row">
+    <button id="add">add</button>
+    <%= form_tag create_exercise_path, :method => :get do %>
+      <%= submit_tag 'Create Exercise' %>
+    <% end %>
+  </div>
+  
+  <!-- finish button -->
+  <div class="row">
+    <%= form_tag process_create_workout_path, :method => :get do %>
+      <%= submit_tag 'Finish' %>
+    <% end %>
+  </div>
+</div>
 
 <%= render :template => 'homepage/template' %>
 
