@@ -3,8 +3,6 @@ Rails.application.routes.draw do
   get 'sessions/create'
 
   get 'sessions/destroy'
-
-  get 'home/show'
   
   get 'auth/:provider/callback', to: 'sessions#create'
   get 'auth/failure', to: redirect('/')
@@ -12,11 +10,11 @@ Rails.application.routes.draw do
   
 
   resources :sessions, only: [:create, :destroy]
-  resource :home, only: [:show]
   get 'splash_screen' => 'splash#splash_screen', :as => 'splash_screen'
   get  'my_measurements' => 'measurements#my_measurements', :as => 'my_measurements'
   get  'enter_my_measurements' => 'measurements#enter_my_measurements', :as => 'enter_my_measurements'
-  post  'process_enter_new_measurements' => 'measurements#process_enter_new_measurements', :as => 'process_enter_new_measurements'
+  post 'process_enter_new_measurements' => 'measurements#process_enter_new_measurements', :as => 'process_enter_new_measurements'
+  post 'process_create_workout' => 'workouts#process_create_workout', :as => 'process_create_workout'
  
   
   get  'dashboard' => 'homepage#dashboard', :as => 'dashboard'
@@ -25,7 +23,6 @@ Rails.application.routes.draw do
   
   get 'my_workouts' => 'workouts#my_workouts', :as => 'my_workouts'
   get 'create_workout' => 'workouts#create_workout', :as => 'create_workout'
-  post 'process_create_workout' => 'workouts#process_create_workout', :as => 'process_create_workout'
   
   get 'create_exercise' => 'workouts#create_exercise', :as => 'create_exercise'
   post 'process_create_exercise' => 'exercises#process_create_exercise', :as => 'process_create_exercise'
@@ -34,6 +31,9 @@ Rails.application.routes.draw do
   
   get 'quick_log' => 'homepage#quick_log', :as => 'quick_log'
   post 'enter_quick_log' => 'homepage#enter_quick_log', :as => 'enter_quick_log'
+  get 'search_exercises_json' => 'workouts#search_exercises_json', :as => 'search_exercises_json'
+  get 'units_json' => 'workouts#units_json', :as => 'units_json'
+  
   
  # root 'homepage#dashboard'
  root 'splash#splash_screen'

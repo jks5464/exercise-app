@@ -154,11 +154,27 @@ When /^I login using "(.*?)" as the user$/ do |provider|
 end
  
 def logon(provider, username='Inigo Montoya', oauth_uid='123')
+  WebMock.allow_net_connect!
   provider.downcase!
   provider = 'google_oauth2' if provider.eql?('google')
   OmniAuth.config.add_mock(provider.to_sym, {:uid => oauth_uid, :provider => provider, :info => {:name => username}, :credentials => {:token => "random_token", :expires_at => 0}})
  
   visit '/'
   click_link 'Sign in with Google'
+end
+
+Given /the following exercises exist/ do |exercise_table|
+  exercise_table.hashes.each do |exercise|
+    # you should arrange to add that movie to the database here.
+    Exercise.create(exercise)
+  end
+end
+
+Given /^I wait for (.*?) second$/ do |seconds|
+  sleep seconds.to_i
+end
+
+Then /^save the page$/ do
+  save_page
 end
 
