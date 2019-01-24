@@ -25,17 +25,24 @@
         
       <% end %>  
       
-      <%= javascript_include_tag "https://www.gstatic.com/charts/loader.js" %>
-      <%= javascript_include_tag "//www.google.com/jsapi", "chartkick" %>
-      <%= javascript_include_tag 'application' %>
-    
-      <%= area_chart [ { name: "Weight", data: Measurement.where(user_id: session[:user_id]).group_by_day(:updated_at).sum(:weight)}] %>
-    </table>
+      </table>
+      
   <% end %>
-  <%= link_to 'Home Page', '/dashboard' %>
+
+<%= link_to 'Home Page', '/dashboard' %>
 </div>
 
 
 <%= form_tag enter_my_measurements_path, :method => :get do %>
   <%= submit_tag 'Enter New Measurements' %>
 <% end %>
+
+<!-- charts -->
+<%= javascript_include_tag "https://www.gstatic.com/charts/loader.js" %>
+<%= javascript_include_tag "//www.google.com/jsapi", "chartkick" %>
+<%= javascript_include_tag 'application' %>
+    
+<%= area_chart [ { name: "Weight", data: Measurement.where(user_id: session[:user_id]).group_by_day(:updated_at).sum(:weight)}] %>
+<%= area_chart [ { name: "Body Fat", data: Measurement.where(user_id: session[:user_id]).group_by_day(:updated_at).sum(:body_fat)}] %>
+<%= area_chart [ { name: "Height", data: Measurement.where(user_id: session[:user_id]).group_by_day(:updated_at).sum(:height)}] %>
+    
