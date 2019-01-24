@@ -12,6 +12,7 @@
         <th>Weight</th>
         <th>Body Fat</th> 
         <th>Height</th>
+        <th>Date</th>
       </tr>
       <% @measurements.each_with_index do |m, i| %>
         <tr <%= 'id=last_row' if i == (@measurements.size - 1) %> >
@@ -19,13 +20,16 @@
         
         <td><%= m.body_fat %></td>
         <td><%= m.height %></td>
+        <td><%= m.updated_at.strftime("%B %d, %Y at %H:%M") %></td>
         </tr>
         
       <% end %>  
       
       <%= javascript_include_tag "https://www.gstatic.com/charts/loader.js" %>
       <%= javascript_include_tag "//www.google.com/jsapi", "chartkick" %>
-      <%= line_chart Measurement.group_by_day(:created_at).count %>
+      <%= javascript_include_tag 'application' %>
+    
+      <%= area_chart [ { name: "Weight", data: Measurement.where(user_id: session[:user_id]).group_by_day(:updated_at).sum(:weight)}] %>
     </table>
   <% end %>
   <%= link_to 'Home Page', '/dashboard' %>
