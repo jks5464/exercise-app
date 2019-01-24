@@ -1,0 +1,101 @@
+<div class="exercises">
+  <head>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  </head>
+  
+  <script>
+  $( function() {
+  var dialog, form,
+  name = $( "#name" )
+  number = $( "#number" ),
+  units = $( "#units" ),
+  allFields = $( [] ).add(name).add(number).add(units);
+  
+  function checkLength( o, n, min, max ) {
+    if ( o.val().length > max || o.val().length < min ) {
+      o.addClass( "ui-state-error" );
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  function enter_quick_log(){
+    var valid = true;
+    allFields.removeClass( "ui-state-error" );
+    
+    dialog.dialog( "close" );
+    
+    
+    return valid;
+  } 
+  $( "#add" ).button().on( "click", function() {
+    dialog.dialog( "open" );
+  });
+  dialog = $( "#dialog-form" ).dialog({
+    autoOpen: false,
+    height: 400,
+    width: 800,
+    modal: true,
+    buttons: {
+      "Enter exercise": enter_quick_log,
+      Cancel: function() {
+        dialog.dialog( "close" );
+      }
+    },
+    close: function() {
+      form[ 0 ].reset();
+      allFields.removeClass( "ui-state-error" );
+    }
+  });
+  form = dialog.find( "form" ).on( "submit", function( event ) {
+    event.preventDefault();
+    create_exercise_set();
+  });
+  });
+  </script>
+  
+  <p>
+    Log an Exercise:<br />
+    <% if @exercises.empty? %>
+        <%= "No exercises have been created yet." %>
+    <% else %>
+      Choose an exercise from the box and then click the button below:
+      <select name="user_id">
+      <%= @exercises.each do |exercise| %>
+        <option value="<%= exercise.id %>"><%= exercise.name %></option>
+      <% end %>
+      </select><br />
+      <button id="add">Continue</button>
+    <% end %>
+  </p>
+  
+  <div id="dialog-form" title="Quick Log">
+      <form>
+        <fieldset>
+
+          <label for="number">Please input the number of how much you did below.</label>
+          <br>
+          <input type="number" name="quantity" min="1" max="100" class="text ui-widget-content ui-corner-all">
+          <br><br>
+          <label for="units">Please input the units of how much you did (e.g. miles, minutes, lbs) below.</label>
+          <br>
+          <select>
+            <option value="miles">miles</option>
+            <option value="meters">meters</option>
+            <option value="hours">hours</option>
+            <option value="minutes">minutes</option>
+            <option value="seconds">seconds</option>
+            <option value="pounds">pounds</option>
+            <option value="kilograms">kilograms</option>
+          </select>
+          <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
+        </fieldset>
+      </form>
+    </div>
+    
+</div>
+<%= render :template => 'homepage/template' %>

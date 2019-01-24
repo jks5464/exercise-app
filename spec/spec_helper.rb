@@ -37,6 +37,14 @@ rescue ActiveRecord::PendingMigrationError => e
   exit 1
 end
 RSpec.configure do |config|
+  config.before(:all, type: :request) do
+    WebMock.allow_net_connect!
+  end 
+  
+  config.after(:all, type: :request) do
+    selenium_requests = %r{/((__.+__)|(hub/session.*))$}
+    WebMock.disable_net_connect! :allow => selenium_requests
+  end
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
 
