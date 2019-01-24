@@ -28,11 +28,10 @@ app.Search_Exercises.prototype._initAutocomplete = function() {
       complete: function(o){
           var j = JSON.parse(o.responseText);
           
-          var cardio_units_markup = "<select>";
-          var strength_units_markup = "<select>";
+          var cardio_units_markup = '<select id="units">';
+          var strength_units_markup = '<select id="units">';
           for (var i = 0; i < j.length; ++i) {
             var obj = j[i];
-            console.log(obj);
             var obj_markup = "<option value=" + obj.name + ">" + obj.name + "</option>";
             
             if (obj.category == "Cardio") {
@@ -44,12 +43,12 @@ app.Search_Exercises.prototype._initAutocomplete = function() {
           cardio_units_markup += "</select>";
           strength_units_markup += "</select>";
           
-          cardio_template = `
+          cardio_template = `<form><fieldset>
                 <div> 
                   <label for="number">
                       Distance/Time
                     </label>
-                    <input type="text" name="number" id="number" class="text ui-widget-content ui-corner-all">
+                    <input type="text" name="number" id="distance_time" class="text ui-widget-content ui-corner-all">
                 </div>` +
                 
                 `<div>` + 
@@ -58,28 +57,34 @@ app.Search_Exercises.prototype._initAutocomplete = function() {
                 
                 `<div>
                   <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
-                </div>`;
+                </div>
                 
-          strength_template = `
+                <div id="form_type" hidden>
+                  Cardio
+                </div>
+                
+                </fieldset></form>`;
+                
+          strength_template = `<form><fieldset>
                 <div> 
                   <label for="sets">
                     Sets
                   </label>
-                  <input type="number" name="sets" min="1" max="100" value="1">
+                  <input type="number" name="sets" min="1" max="100" value="1" id="sets">
                 </div>
                 
                 <div>
                   <label for="reps">
                     Reps
                   </label>
-                  <input type="number" name="reps" min="1" max="100" value="1">
+                  <input type="number" name="reps" min="1" max="100" value="1" id="reps">
                 </div>
                 
                 <div>
                   <label for="weight">
                     Weight
                   </label>
-                  <input type="number" name="weight" min="1" max="1000" value="1">
+                  <input type="number" name="weight" min="1" max="1000" value="1" id="weight">
                 </div>` +
                 
                 `<div>` +
@@ -88,7 +93,13 @@ app.Search_Exercises.prototype._initAutocomplete = function() {
                 
                 `<div>
                   <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
-                </div>`;
+                </div>
+                
+                <div id="form_type" hidden>
+                  Strength
+                </div>
+                
+                </fieldset></form>`;
       }
   });
   

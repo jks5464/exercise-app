@@ -6,8 +6,8 @@ $(function() {
 
 $(function() {
   var dialog, form,
-  name = $( "#name" )
-  number = $( "#number" ),
+  name = $( "#exercise-search-txt" )
+  number = $( "#dist" ),
   units = $( "#units" ),
   allFields = $( [] ).add(name).add(number).add(units);
 
@@ -20,25 +20,43 @@ $(function() {
     }
   }
 
+  function make_task_card() {
+    var markup = "";
+    
+    var form_type = $('#form_type').text().trim();
+    
+    var name = $("#exercise-search-txt").val();
+    if (form_type == "Strength") {
+      var sets = $("#sets").val();
+      var reps = $("#reps").val();
+      var weight = $("#weight").val();
+      var units = $("#units").val();
+      markup = "<div>" + name + " " + sets + " " + reps + " " + weight + " " + units + "</div>";
+      
+      
+    } else if (form_type == "Cardio") {
+      var distance_time = $("#distance_time").val();
+      var units = $("#units").val();
+      markup = "<div>" + name + " " + distance_time + " " + units + "</div>";
+      
+    }
+    
+    return markup;
+  }
+  
   function create_exercise_set() {
     var valid = true;
     allFields.removeClass( "ui-state-error" );
-    
-    valid = valid && checkLength( number, "number", 0, 3 );
-    valid = valid && checkLength( units, "units", 1, 10 );
   
     var selectedExercise = document.getElementById("exercise-search-txt").value;
-    
-  
-      $( "#users tbody" ).append( "<tr>" +
-        "<td>" + selectedExercise + "</td>" +
-        "<td>" + number.val() + "</td>" +
-        "<td>" + units.val() + "</td>" +
-      "</tr>" );
+      
+      $( "#task_card_list" ).append(make_task_card());
       dialog.dialog( "close" );
     
     return valid;
   } 
+  
+  
 
   $( "#add" ).button().on( "click", function() {
     dialog.dialog( "open" );
@@ -57,6 +75,7 @@ $(function() {
     },
     close: function() {
       form[ 0 ].reset();
+      $("#exercise-category-data").html("");
       allFields.removeClass( "ui-state-error" );
     }
   });
