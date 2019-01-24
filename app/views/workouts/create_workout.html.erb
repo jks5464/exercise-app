@@ -1,84 +1,8 @@
-<script>
-  $(function() {
-    new app.Search_Exercises;
-  });
-</script>
-  
+<script src="/assets/search_exercises.js"></script>
+<script src="/assets/create_workout.js"></script>
+
 <div class="exercises">
-  <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>jQuery UI Dialog - Modal form</title>
-  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-  <link rel="stylesheet" href="/resources/demos/style.css">
-
-  
-  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    </head>
-    <script>
-    $( function() {
-    var dialog, form,
-    name = $( "#name" )
-    number = $( "#number" ),
-    units = $( "#units" ),
-    allFields = $( [] ).add(name).add(number).add(units);
     
-    function checkLength( o, n, min, max ) {
-      if ( o.val().length > max || o.val().length < min ) {
-        o.addClass( "ui-state-error" );
-        return false;
-      } else {
-        return true;
-      }
-    }
- 
-    function create_exercise_set(){
-      var valid = true;
-      allFields.removeClass( "ui-state-error" );
-      
-      valid = valid && checkLength( number, "number", 0, 3 );
-      valid = valid && checkLength( units, "units", 1, 10 );
-
-      var selectedExercise = document.getElementById("exercise-search-txt").value;
-      
-
-        $( "#users tbody" ).append( "<tr>" +
-          "<td>" + selectedExercise + "</td>" +
-          "<td>" + number.val() + "</td>" +
-          "<td>" + units.val() + "</td>" +
-        "</tr>" );
-        dialog.dialog( "close" );
-      
-      return valid;
-    } 
-    
-    $( "#add" ).button().on( "click", function() {
-      dialog.dialog( "open" );
-    });
-    
-    dialog = $( "#dialog-form" ).dialog({
-      autoOpen: false,
-      height: 400,
-      width: 350,
-      modal: true,
-      buttons: {
-        "Enter exercise": create_exercise_set,
-        Cancel: function() {
-          dialog.dialog( "close" );
-        }
-      },
-      close: function() {
-        form[ 0 ].reset();
-        allFields.removeClass( "ui-state-error" );
-      }
-    });
-    form = dialog.find( "form" ).on( "submit", function( event ) {
-      event.preventDefault();
-      create_exercise_set();
-    });
-     });
-     </script>
   <p>
     Create Workout:
   </p>
