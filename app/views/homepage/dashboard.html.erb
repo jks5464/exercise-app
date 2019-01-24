@@ -1,3 +1,6 @@
+<%= javascript_include_tag "https://www.gstatic.com/charts/loader.js" %>
+<%= javascript_include_tag "//www.google.com/jsapi", "chartkick" %>
+<%= javascript_include_tag 'application' %>
 
 <h2>My Exercise Tracker</h2>
 <%= form_tag my_goals_path, :method => :get do%>
@@ -28,9 +31,11 @@
 <form>
       <fieldset>
         <legend>Dashboard</legend>
-        <p>
-          <label>my progress </label>
-        </p>
-        
+
+        <label>my progress</label>
+        <%= area_chart [ { name: "Weight", data: Measurement.where(user_id: session[:user_id]).group_by_day(:updated_at).sum(:weight)}] %>
+        <%= area_chart [ { name: "Body Fat", data: Measurement.where(user_id: session[:user_id]).group_by_day(:updated_at).sum(:body_fat)}] %>
+        <%= area_chart [ { name: "Height", data: Measurement.where(user_id: session[:user_id]).group_by_day(:updated_at).sum(:height)}] %>
+ 
       </fieldset>
     </form>
