@@ -30,4 +30,11 @@ class HomepageController < AuthenticationController
     puts("go back to the homepage")
   end
   
+  def quick_log
+    puts("Displaying quick log page...")
+    puts("Displaying list of exercises")
+    @exercises = Exercise.where(user_id: session[:user_id])
+    @exercises = [] if (@exercises.nil?)
+  end
+  
 end

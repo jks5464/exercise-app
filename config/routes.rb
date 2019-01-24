@@ -29,9 +29,13 @@ Rails.application.routes.draw do
   get 'enter_goal' => 'goals#enter_goal', :as => 'enter_goal'
   post 'enter_goal' => 'goals#enter_goal_create', :as => 'enter_goal_create'
   
+
   get 'search_exercises_json' => 'workouts#search_exercises_json', :as => 'search_exercises_json'
   get 'units_json' => 'workouts#units_json', :as => 'units_json'
-  
+
+  get 'quick_log' => 'homepage#quick_log', :as => 'quick_log'
+  post 'enter_quick_log' => 'homepage#enter_quick_log', :as => 'enter_quick_log'
+
   
  # root 'homepage#dashboard'
  root 'splash#splash_screen'
