@@ -1,50 +1,59 @@
-<div class="exercises">
-  <p>
-    Create Workout:
-  </p>
-  
-  <% if @exercises.empty? %>
-      <%= "No exercises have been created yet." %>
-  <% else %>
-    Current existing exercises to choose from:
-    <select name="user_id">
-    <%= @exercises.each do |exercise| %>
-      <option value="<%= exercise.id %>"><%= exercise.name %></option>
-    <% end %>
-    </select><br /><br />
-    <table>
-      <tr>
-        <th>Name</th>
-        <th>Category</th> 
-        <th>Description</th>
-      </tr>
-      <% @exercises.each_with_index do |e, i| %>
-        <tr <%= 'id=last_row' if i == (@exercises.size - 1) %> >
-        <td><%= e.name %></td>
-        <td><%= e.category %></td>
-        <% if e.description.empty? %>
-          <td>No description given.</td>
-        <% else %>
-          <td><%= e.description %></td>
-        <% end %>
-        </tr>
-        <% end %>  
-    </table>
-  <% end %>
+<script src="/assets/search_exercises.js"></script>
+<script src="/assets/create_workout.js"></script>
+
+<!-- hidden popup form when user adds a new exercise to their workout -->
+<div id="dialog-form" title="Add Exercise">
+  <form>
+    <fieldset>
+      <div class="exercise-search">
+        <label for="exercise-search-txt">
+          Exercise
+        </label>
+        <input name="exercise-search-txt" type="text" id="exercise-search-txt">
+        <div class="results" id="exercise-search-results">
+          
+        </div>
+      </div>
+      
+      <div id="exercise-category-data">
+      
+      </div>
+      
+    </fieldset>
+  </form>
 </div>
 
-<%= form_tag create_exercise_path, :method => :get do %>
-  <%= submit_tag 'Create New Exercise' %>
-<% end %>
-
-<%= form_tag process_create_workout_path, :method => :post do %>
-  <%= submit_tag 'Finish Creating New Workout' %>
-<% end %>
-
-<!-- Search box section --!>
-
-
-<!-- My Workout List section --!>
-
+<div class="container">
+  <!-- header bar -->
+  <div class="row" id="header">
+    Create Workout
+  </div>
+  
+  <!-- workout name -->
+  <div class="row">
+    <h1>Workout Name:</h1>
+  </div>
+  
+  <!-- task cards -->
+  <div class="row" id="task_card_list">
+    
+  </div>
+  
+  <!-- add/create buttons -->
+  <div class="row">
+    <button id="add">add</button>
+    <%= form_tag create_exercise_path, :method => :get do %>
+      <%= submit_tag 'Create Exercise' %>
+    <% end %>
+  </div>
+  
+  <!-- finish button -->
+  <div class="row">
+    <%= form_tag process_create_workout_path, :method => :get do %>
+      <%= submit_tag 'Finish' %>
+    <% end %>
+  </div>
+</div>
 
 <%= render :template => 'homepage/template' %>
+

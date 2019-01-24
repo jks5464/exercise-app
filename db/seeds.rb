@@ -5,3 +5,16 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+units = [{"name": "lbs", "category": "Strength"},
+         {"name": "kgs", "category": "Strength"},
+         {"name": "meters", "category": "Cardio"},
+         {"name": "miles", "category": "Cardio"},
+         {"name": "minutes", "category": "Cardio"},
+         {"name": "hours", "category": "Cardio"},
+         {"name": "seconds", "category": "Cardio"}
+         ]
+
+units.each do |unit|
+    Unit.create(unit)
+end
