@@ -18,18 +18,24 @@ class WorkoutsController < AuthenticationController
   
   def create_workout
     puts("Displaying create workout page")
-    puts("Displaying list of exercises")
-    @exercises = Exercise.where(user_id: session[:user_id])
-    @exercises = [] if (@exercises.nil?)
   end
   
   def process_create_workout
     puts("Inserting new workout to database...")
     name = params[:name]
-    
     Workout.create(user_id: session[:user_id], name: name)
-  
     redirect_to my_workouts_path
+  end
+  
+  def search_exercises_json
+    @exercises = Exercise.search(params[:term])
+    respond_to :json
+  end
+  
+  def units_json
+    puts("dumping units from database")
+    @units = Unit.all()
+    respond_to :json
   end
   
 end
