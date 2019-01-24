@@ -13,7 +13,8 @@ Rails.application.routes.draw do
   get 'splash_screen' => 'splash#splash_screen', :as => 'splash_screen'
   get  'my_measurements' => 'measurements#my_measurements', :as => 'my_measurements'
   get  'enter_my_measurements' => 'measurements#enter_my_measurements', :as => 'enter_my_measurements'
-  post  'process_enter_new_measurements' => 'measurements#process_enter_new_measurements', :as => 'process_enter_new_measurements'
+  post 'process_enter_new_measurements' => 'measurements#process_enter_new_measurements', :as => 'process_enter_new_measurements'
+  post 'process_create_workout' => 'workouts#process_create_workout', :as => 'process_create_workout'
  
   
   get  'dashboard' => 'homepage#dashboard', :as => 'dashboard'
@@ -22,7 +23,6 @@ Rails.application.routes.draw do
   
   get 'my_workouts' => 'workouts#my_workouts', :as => 'my_workouts'
   get 'create_workout' => 'workouts#create_workout', :as => 'create_workout'
-  post 'process_create_workout' => 'workouts#process_create_workout', :as => 'process_create_workout'
   
   get 'create_exercise' => 'workouts#create_exercise', :as => 'create_exercise'
   post 'process_create_exercise' => 'exercises#process_create_exercise', :as => 'process_create_exercise'

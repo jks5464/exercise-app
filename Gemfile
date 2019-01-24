@@ -28,8 +28,6 @@ gem 'jquery-ui-rails'
 
 gem 'selenium-webdriver', '~> 2.53.4'
 
-gem 'puma'
-
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

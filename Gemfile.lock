@@ -157,7 +157,6 @@ GEM
       omniauth (~> 1.2)
     pg (0.21.0)
     public_suffix (3.0.3)
-    puma (3.12.0)
     rack (1.6.11)
     rack-test (0.6.3)
       rack (>= 1.0)
@@ -277,7 +276,6 @@ DEPENDENCIES
   jquery-ui-rails
   omniauth-google-oauth2 (~> 0.2.1)
   pg (~> 0.20)
-  puma
   rails (= 4.2.9)
   rails_refactor
   rspec-rails

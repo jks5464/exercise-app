@@ -18,14 +18,15 @@ class WorkoutsController < AuthenticationController
   
   def create_workout
     puts("Displaying create workout page")
+    puts("Displaying list of exercises")
+    @exercises = Exercise.where(user_id: session[:user_id])
+    @exercises = [] if (@exercises.nil?)
   end
   
   def process_create_workout
     puts("Inserting new workout to database...")
     name = params[:name]
-    
     Workout.create(user_id: session[:user_id], name: name)
-  
     redirect_to my_workouts_path
   end
   
