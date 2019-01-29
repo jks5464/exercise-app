@@ -3,14 +3,32 @@ $(function() {
   new app.Search_Exercises;
 });
 
-// setup edit links
+
 $(function() {
-  // object for autocomplete data processing
+  // setup edit buttons for workout tasks
   $("#task_card_list").on('click', '.edit_button', function() {
-    $(this).hide();
-    $(this).parent().find(".edit_form").show();
+    $(this).parent().parent().find(".show_form").css('display', 'none');
+    $(this).parent().parent().find(".edit_form").css('display', 'inline-block');
   });
-  new app.Search_Exercises;
+  
+  // setup done buttons after editing a workout task
+  $("#task_card_list").on('click', '.done_button', function() {
+    var show_form = $(this).parent().parent().find(".show_form");
+    var edit_form = $(this).parent().parent().find(".edit_form");
+    
+    var new_sets_val = edit_form.find(".sets_edit").val();
+    var new_reps_val = edit_form.find(".reps_edit").val();
+    var new_weight_val = edit_form.find(".weight_edit").val();
+    
+    show_form.find(".sets_info").text(new_sets_val);
+    show_form.find(".reps_info").text(new_reps_val);
+    show_form.find(".weight_info").text(new_weight_val);
+    
+    show_form.css('display', 'inline-block');
+    edit_form.css('display', 'none');
+    
+    
+  });
 });
 
 $(function() {
@@ -29,28 +47,46 @@ $(function() {
     }
   }
 
+  function make_strength_task(name, sets, reps, weight, units) {
+    var task_name = "<span>" + name + " </span>";
+    
+    var sets_info = "<span class='sets_info'>" + sets + "</span>";
+    var reps_info = "<span class='reps_info'>" + reps + "</span>";
+    var weight_info = "<span class='weight_info'>" + weight + "</span>";
+    
+    var task_info = " - " + sets_info + " sets, " + reps_info + " reps, at " + weight_info + " " + units;
+    var edit_button = '<button type="button" class="btn btn-info btn-sm edit_button"><span class="glyphicon glyphicon-pencil"></span></button>';
+    var delete_button = '<button type="button" class="btn btn-info btn-sm delete_button"><span class="glyphicon glyphicon-trash"></span></button>';
+    var show_form =  "<span class='show_form'>" + task_info + edit_button + delete_button + "</span>";
+    
+    var sets_edit = '<label for="sets_edit">sets: </label><input name="sets_edit" class="sets_edit" type="number" value="' + sets + '"></input>';
+    var reps_edit = '<label for="reps_edit">reps: </label><input name="reps_edit" class="reps_edit" type="number" value="' + reps + '"></input>';
+    var weight_edit = '<label for="weight_edit">weight: </label><input name="weight_edit" class="weight_edit" type="number" value="' + weight + '"></input>';
+    var done_button = '<button type="button" class="btn btn-info btn-sm done_button"><span class="glyphicon glyphicon-ok"></span></button>';
+    var edit_form = '<span class="edit_form" hidden>' + 
+                      sets_edit + 
+                      reps_edit +
+                      weight_edit +
+                      done_button +
+                    '</span>';
+    var markup = "<div>" + 
+                task_name + 
+                show_form + 
+                edit_form + 
+              "</div>";
+    return markup;
+  }
   function make_task_card() {
     var markup = "";
-    
     var form_type = $('#form_type').text().trim();
-    
     var name = $("#exercise-search-txt").val();
+    
     if (form_type == "Strength") {
       var sets = $("#sets").val();
       var reps = $("#reps").val();
       var weight = $("#weight").val();
       var units = $("#units").val();
-      var edit_button = '<button type="button" class="btn btn-info btn-sm edit_button"><span class="glyphicon glyphicon-pencil"></span></button>';
-      var delete_button = '<button type="button" class="btn btn-info btn-sm delete_button"><span class="glyphicon glyphicon-trash"></span></button>';
-      var crud_buttons = edit_button + " " + delete_button;
-      
-      var edit_text_box = '<input type="text"></input>';
-      var edit_form = '<div class="edit_form" hidden>' + edit_text_box + '</div>';
-      markup = "<div>" + 
-                  name + " - " + sets + " sets, " + reps + " reps, at " + weight + " " + units + " " +
-                  crud_buttons + 
-                  edit_form + 
-                "</div>";
+      markup = make_strength_task(name, sets, reps, weight, units);
       
       
     } else if (form_type == "Cardio") {
