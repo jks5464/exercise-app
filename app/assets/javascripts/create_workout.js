@@ -3,6 +3,15 @@ $(function() {
   new app.Search_Exercises;
 });
 
+// setup edit links
+$(function() {
+  // object for autocomplete data processing
+  $("#task_card_list").on('click', '.edit_button', function() {
+    $(this).hide();
+    $(this).parent().find(".edit_form").show();
+  });
+  new app.Search_Exercises;
+});
 
 $(function() {
   var dialog, form,
@@ -31,14 +40,16 @@ $(function() {
       var reps = $("#reps").val();
       var weight = $("#weight").val();
       var units = $("#units").val();
-      var edit_link = '<button type="button" class="btn btn-info btn-sm edit_link"><span class="glyphicon glyphicon-pencil"></span></button>';
-      var delete_link = '<a>Delete</a>';
-      var edit_text_box = '<input type="text" hidden></input>';
+      var edit_button = '<button type="button" class="btn btn-info btn-sm edit_button"><span class="glyphicon glyphicon-pencil"></span></button>';
+      var delete_button = '<button type="button" class="btn btn-info btn-sm delete_button"><span class="glyphicon glyphicon-trash"></span></button>';
+      var crud_buttons = edit_button + " " + delete_button;
+      
+      var edit_text_box = '<input type="text"></input>';
+      var edit_form = '<div class="edit_form" hidden>' + edit_text_box + '</div>';
       markup = "<div>" + 
                   name + " - " + sets + " sets, " + reps + " reps, at " + weight + " " + units + " " +
-                  edit_link + " " + 
-                  delete_link + 
-                  edit_text_box +
+                  crud_buttons + 
+                  edit_form + 
                 "</div>";
       
       
@@ -112,12 +123,9 @@ $("#finish").click(function() {
   });
 });
 
-// setup edit links
-$("#finish").click(function() {
-    $(".edit_link").click(function() {
-      $(this).hide();
-  });
-});
+
+
+
 
 
 
