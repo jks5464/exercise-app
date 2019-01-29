@@ -22,13 +22,18 @@ gem 'coffee-rails', '~> 4.1.0'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 
+# for bootstrap and css
+gem 'bootstrap-sass', '~> 3.2.0'
+gem 'autoprefixer-rails'
+gem 'mini_racer'
+gem 'turbolinks'
+
+
 gem "omniauth-google-oauth2", "~> 0.2.1"
 
 gem 'rails_refactor'
 
 gem 'jquery-ui-rails'
-
-gem 'selenium-webdriver', '~> 2.53.4'
 
 
 # Use ActiveModel has_secure_password
@@ -59,6 +64,8 @@ group :test do
   gem 'rspec-rails'
   gem 'webmock'
   gem 'simplecov', :require => false
+  gem 'selenium-webdriver'
+  gem 'chromedriver-helper'
 end
 
 group :production do
