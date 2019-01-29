@@ -1,20 +1,22 @@
 <p>
-  My Workout:
+  My Workouts:
 </p>
 
+
+<!-- Planned Workouts section -->
+
+
+<!-- Saved Workouts section -->
+<div class="row" id="saved-workouts">
+  
+</div>
+
+<!-- Instructor Workouts section -->
+
+
+<!-- Create Workout button section -->
 <%= form_tag create_workout_path, :method => :get do %>
   <%= submit_tag 'Create New Workout' %>
 <% end %>
-<!-- Planned Workouts section --!>
-
-
-<!-- Saved Workouts section --!>
-
-
-<!-- Instructor Workouts section --!>
-
-
-<!-- Create Workout button section --!>
-
 
 <%= render :template => 'homepage/template' %>

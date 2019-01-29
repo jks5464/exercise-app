@@ -31,7 +31,15 @@ $(function() {
       var reps = $("#reps").val();
       var weight = $("#weight").val();
       var units = $("#units").val();
-      markup = "<div>" + name + " " + sets + " " + reps + " " + weight + " " + units + "</div>";
+      var edit_link = '<button type="button" class="btn btn-info btn-sm edit_link"><span class="glyphicon glyphicon-pencil"></span></button>';
+      var delete_link = '<a>Delete</a>';
+      var edit_text_box = '<input type="text" hidden></input>';
+      markup = "<div>" + 
+                  name + " - " + sets + " sets, " + reps + " reps, at " + weight + " " + units + " " +
+                  edit_link + " " + 
+                  delete_link + 
+                  edit_text_box +
+                "</div>";
       
       
     } else if (form_type == "Cardio") {
@@ -103,4 +111,13 @@ $("#finish").click(function() {
       }
   });
 });
+
+// setup edit links
+$("#finish").click(function() {
+    $(".edit_link").click(function() {
+      $(this).hide();
+  });
+});
+
+
 
