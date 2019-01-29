@@ -86,21 +86,4 @@ $(function() {
   });
 });
 
-function get_task_card_data() {
-  var results = [];
-  $("#")
-  
-}
-
-$("#finish").click(function() {
-  var task_card_data = get_task_card_data();
-  
-  $.ajax({
-      type:"POST",
-      url:"/process_create_workout",
-      data: {
-        task_card_data
-      }
-  });
-});
 

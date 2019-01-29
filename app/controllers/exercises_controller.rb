@@ -18,8 +18,7 @@ class ExercisesController < ApplicationController
     name = params[:name]
     category = params[:category]
     description = params[:description]
-    #muscle_group = params[:musclegroup]  # need to add muscle groups to the schema
-    
+
     if valid_exercises?([name, category, description]) then
       Exercise.create(user_id: session[:user_id], name: name, category: category, description: description)
     else
