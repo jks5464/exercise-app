@@ -20,6 +20,13 @@ gem 'coffee-rails', '~> 4.1.0'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 
+# for bootstrap and css
+gem 'bootstrap-sass', '~> 3.2.0'
+gem 'autoprefixer-rails'
+gem 'mini_racer'
+gem 'turbolinks'
+
+
 gem "omniauth-google-oauth2", "~> 0.2.1"
 
 gem 'rails_refactor'
