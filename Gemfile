@@ -4,6 +4,9 @@ source 'https://rubygems.org'
 gem "chartkick"
 gem 'groupdate'
 
+# for logging
+gem 'rails_12factor'
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.9'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
@@ -72,4 +75,3 @@ end
 group :production do
   gem 'pg', '~> 0.20'
 end
-
