@@ -37,4 +37,26 @@ class HomepageController < AuthenticationController
     @exercises = [] if (@exercises.nil?)
   end
   
+  def create_new_quick_log
+    puts("Creating new quick log...")
+    category = params[:category]
+    quick_log_data = get_quick_log_data(category, params)
+=begin
+    workout = Workout.create(name = "quicklog-unique-id", 
+             uid = not sure, 
+             user_id = current_user.id, 
+             completed = true)
+    exercise = exercise_with_name(params[:exercise_name])
+    task = Task.create(exercise_id = exercise.id
+                       workout_id = workout.id,
+                       completed = true)
+    set = Set.create()
+    # ====> Set  
+=end
+    workout = current_user.workouts.create("quicklog-1")
+    task = workout.tasks.create("quicklog-task-1")
+    task.sets.create(quick_log_data)
+    task.
+  end
+  
 end
