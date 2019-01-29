@@ -4,7 +4,7 @@
   </p>
   
   <% if @measurements.empty? %>
-    <%= "You don't have any measurements entered yet." %>
+    <%= "You don't have any measurements entered yet." %><br>
   <% else %>
     <table>
       <tr>
@@ -22,11 +22,10 @@
       <% end %>  
     </table>
   <% end %>
-  <%= link_to 'Home Page', '/dashboard' %>
 </div>
 
 <%= form_tag enter_my_measurements_path, :method => :get do %>
   <%= submit_tag 'Enter New Measurements' %>
 <% end %>
 
-
+<%= render :template => 'homepage/template' %>
