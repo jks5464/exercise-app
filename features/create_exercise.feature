@@ -8,7 +8,7 @@ Feature: create an exercise
 Scenario: I click on create exercise
   
   Given I login and am on the create workout page
-  When I press "Create New Exercise"
+  When I press "Create Exercise"
   Then I should be on the create exercise page
   
 @omniauth_test 
