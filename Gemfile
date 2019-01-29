@@ -26,8 +26,6 @@ gem 'rails_refactor'
 
 gem 'jquery-ui-rails'
 
-gem 'selenium-webdriver', '~> 2.53.4'
-
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
@@ -57,6 +55,8 @@ group :test do
   gem 'rspec-rails'
   gem 'webmock'
   gem 'simplecov', :require => false
+  gem 'selenium-webdriver'
+  gem 'chromedriver-helper'
 end
 
 group :production do

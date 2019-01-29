@@ -15,5 +15,5 @@ Scenario: Click on create workout
 Scenario: I create a workout
   
   Given I login and am on the create workout page
-  When I press "Finish Creating New Workout"
+  When I press "Finish"
   Then I should be on the my workouts page
