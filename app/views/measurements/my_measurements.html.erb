@@ -33,4 +33,4 @@
 <% end %>
 
 <!-- charts -->
-<%= area_chart [ { name: "Weight", data: Measurement.where(user_id: session[:user_id]).count }] %>
+<%= area_chart [ { name: "Weight", data: Measurement.where(user_id: session[:user_id]).count.group_by_day(:weight) }] %>
