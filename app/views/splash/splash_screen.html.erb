@@ -8,6 +8,7 @@
   <body>
     <div class="login">
     <% if current_user %>
+        
         Signed in as <strong><%= current_user.name %></strong>!
         <%= link_to "Sign out", signout_path, id: "sign_out" %>
         <%= link_to "home page", "/dashboard" %>

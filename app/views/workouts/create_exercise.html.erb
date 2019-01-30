@@ -1,20 +1,43 @@
-<p>
-  Create Exercise:<br />
-  <%= form_tag process_create_exercise_path, :method => :post do %>
-    <%= label_tag 'Name:' %>
-    <%= text_field_tag 'name', '', :maxlength => 140, :autocomplete => 'off' %><br />
-    Category:<br />
-    <%= radio_button_tag(:category, "Cardio") %>
-    <%= label_tag(:cardio, "Cardio") %>
-    <%= radio_button_tag(:category, "Strength") %>
-    <%= label_tag(:strength, "Strength") %><br />
-    <b>Everything below this is optional:</b><br />
-    <%= label_tag 'Description:' %>
-    <%= text_field_tag 'description', '', :maxlength => 140, :autocomplete => 'off' %><br />
-    <%= label_tag 'Muscle Group:' %>
-    <%= text_field_tag 'muscle group', '', :maxlength => 140, :autocomplete => 'off' %><br />
-    <%= submit_tag 'Enter' %>
+<html>
+<body>
+  
+  <legend>Create Exercise:</legend>
+  
+  <fieldset>
+  <div class="form-group">
+    <%= form_tag process_create_exercise_path, :method => :post do %>
+      <label for="name">Name:</label>
+      <input type="text" name="name" class="form-control" id="name" value="" maxlength="140" autocomplete="off" placeholder="Enter name of exercise">
+  </div>
+  
+  <div class="form-group">
+    <label for="category_select">Category:</label>
+    <div class="form-check" id="category_select">
+      <label class="form-check-label">
+        <input type="radio" name="category" id="category_Cardio" value="Cardio" class="form-check-input">
+        Cardio
+      </label>
+    </div>
+    <div class="form-check">
+      <label class="form-check-label">
+        <input type="radio" name="category" id="category_Strength" value="Strength" class="form-check-input">
+        Strength
+      </label>
+    </div>
+  </div>
+  
+  <div class="form-group">
+    <label for="description">Description:</label>
+      <input type="text" name="description" id="description" value="" maxlength="140" autocomplete="off" placeholder="optional">
+    <label for="muscle_group">Muscle Group:</label>
+      <input type="text" name="muscle group" id="muscle_group" value="" maxlength="140" autocomplete="off" placeholder="optional">
+    <input class="btn btn-primary" type="submit" name="commit" value="Enter">
+  </div>
   <% end %>
-</p>
+  
+  </fieldset>
+</body>
 
 <%= render :template => 'homepage/template' %>
+
+</html>
