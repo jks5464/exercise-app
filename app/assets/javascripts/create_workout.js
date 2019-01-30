@@ -3,16 +3,42 @@ $(function() {
   new app.Search_Exercises;
 });
 
-
 $(function() {
-  // setup edit buttons for workout tasks
-  $("#task_card_list").on('click', '.edit_button', function() {
+  // setup edit button for workout name
+  $("#workout_name_edit_button").click(function() {
     $(this).parent().parent().find(".show_form").css('display', 'none');
     $(this).parent().parent().find(".edit_form").css('display', 'inline-block');
   });
   
-  // setup done buttons after editing a workout task
-  $("#task_card_list").on('click', '.done_button', function() {
+   // setup edit button for workout name
+  $("#workout_name_done_button").click(function() {
+    var show_form = $(this).parent().parent().find(".show_form");
+    var edit_form = $(this).parent().parent().find(".edit_form");
+    
+    var new_workout_name_val = edit_form.find(".workout_name_edit").val();
+    
+    show_form.find(".workout_name_info").text(new_workout_name_val);
+    
+    show_form.css('display', 'inline-block');
+    edit_form.css('display', 'none');
+  });
+});
+
+
+$(function() {
+  // setup delete buttons for strength tasks
+  $("#task_card_list").on('click', '.strength_delete_button', function() {
+    $(this).parent().parent().remove();
+  });
+  
+  // setup edit buttons for strength tasks
+  $("#task_card_list").on('click', '.strength_edit_button', function() {
+    $(this).parent().parent().find(".show_form").css('display', 'none');
+    $(this).parent().parent().find(".edit_form").css('display', 'inline-block');
+  });
+  
+  // setup done buttons strength task
+  $("#task_card_list").on('click', '.strength_done_button', function() {
     var show_form = $(this).parent().parent().find(".show_form");
     var edit_form = $(this).parent().parent().find(".edit_form");
     
@@ -26,8 +52,30 @@ $(function() {
     
     show_form.css('display', 'inline-block');
     edit_form.css('display', 'none');
+  });
+  
+  // setup delete buttons for cardio tasks
+  $("#task_card_list").on('click', '.cardio_delete_button', function() {
+    $(this).parent().parent().remove();
+  });
+  
+  // setup edit buttons for cardio tasks
+  $("#task_card_list").on('click', '.cardio_edit_button', function() {
+    $(this).parent().parent().find(".show_form").css('display', 'none');
+    $(this).parent().parent().find(".edit_form").css('display', 'inline-block');
+  });
+  
+  // setup done buttons cardio task
+  $("#task_card_list").on('click', '.cardio_done_button', function() {
+    var show_form = $(this).parent().parent().find(".show_form");
+    var edit_form = $(this).parent().parent().find(".edit_form");
     
+    var new_distance_time_val = edit_form.find(".distance_time_edit").val();
     
+    show_form.find(".distance_time_info").text(new_distance_time_val);
+    
+    show_form.css('display', 'inline-block');
+    edit_form.css('display', 'none');
   });
 });
 
@@ -55,27 +103,52 @@ $(function() {
     var weight_info = "<span class='weight_info'>" + weight + "</span>";
     
     var task_info = " - " + sets_info + " sets, " + reps_info + " reps, at " + weight_info + " " + units;
-    var edit_button = '<button type="button" class="btn btn-info btn-sm edit_button"><span class="glyphicon glyphicon-pencil"></span></button>';
-    var delete_button = '<button type="button" class="btn btn-info btn-sm delete_button"><span class="glyphicon glyphicon-trash"></span></button>';
-    var show_form =  "<span class='show_form'>" + task_info + edit_button + delete_button + "</span>";
+    var edit_button = '<button type="button" class="btn btn-info btn-sm strength_edit_button"><span class="glyphicon glyphicon-pencil"></span></button>';
+    var delete_button = '<button type="button" class="btn btn-info btn-sm strength_delete_button"><span class="glyphicon glyphicon-trash"></span></button>';
+    var show_form =  "<span class='show_form'>" + task_info + " " + edit_button + " " + delete_button + "</span>";
     
     var sets_edit = '<label for="sets_edit">sets: </label><input name="sets_edit" class="sets_edit" type="number" value="' + sets + '"></input>';
     var reps_edit = '<label for="reps_edit">reps: </label><input name="reps_edit" class="reps_edit" type="number" value="' + reps + '"></input>';
     var weight_edit = '<label for="weight_edit">weight: </label><input name="weight_edit" class="weight_edit" type="number" value="' + weight + '"></input>';
-    var done_button = '<button type="button" class="btn btn-info btn-sm done_button"><span class="glyphicon glyphicon-ok"></span></button>';
+    var done_button = '<button type="button" class="btn btn-info btn-sm strength_done_button"><span class="glyphicon glyphicon-ok"></span></button>';
     var edit_form = '<span class="edit_form" hidden>' + 
                       sets_edit + 
                       reps_edit +
-                      weight_edit +
+                      weight_edit + " " +
                       done_button +
                     '</span>';
-    var markup = "<div>" + 
+    var markup = "<div class='task_card'>" + 
                 task_name + 
                 show_form + 
                 edit_form + 
               "</div>";
     return markup;
   }
+  
+  function make_cardio_task(name, distance_time, units) {
+    var task_name = "<span>" + name + " </span>";
+    
+    var distance_time_info = "<span class='distance_time_info'>" + distance_time + "</span>";
+    
+    var task_info = " - " + distance_time_info + " " + units;
+    var edit_button = '<button type="button" class="btn btn-info btn-sm cardio_edit_button"><span class="glyphicon glyphicon-pencil"></span></button>';
+    var delete_button = '<button type="button" class="btn btn-info btn-sm cardio_delete_button"><span class="glyphicon glyphicon-trash"></span></button>';
+    var show_form =  "<span class='show_form'>" + task_info + " " + edit_button + " " + delete_button + "</span>";
+    
+    var distance_time_edit = '<label for="distance_time_edit"></label><input name="distance_time_edit" class="distance_time_edit" type="number" value="' + distance_time + '"></input>';
+    var done_button = '<button type="button" class="btn btn-info btn-sm cardio_done_button"><span class="glyphicon glyphicon-ok"></span></button>';
+    var edit_form = '<span class="edit_form" hidden>' + 
+                      distance_time_edit + " " + 
+                      done_button +
+                    '</span>';
+    var markup = "<div class='task_card'>" + 
+                task_name + 
+                show_form + 
+                edit_form + 
+              "</div>";
+    return markup;
+  }
+  
   function make_task_card() {
     var markup = "";
     var form_type = $('#form_type').text().trim();
@@ -88,11 +161,10 @@ $(function() {
       var units = $("#units").val();
       markup = make_strength_task(name, sets, reps, weight, units);
       
-      
     } else if (form_type == "Cardio") {
       var distance_time = $("#distance_time").val();
       var units = $("#units").val();
-      markup = "<div>" + name + " " + distance_time + " " + units + "</div>";
+      markup = make_cardio_task(name, distance_time, units);
       
     }
     
@@ -142,23 +214,28 @@ $(function() {
 });
 
 function get_task_card_data() {
-  var results = [];
-  $("#")
-  
+  var results = [1, 2, 3];
+  return results;
 }
 
-$("#finish").click(function() {
-  var task_card_data = get_task_card_data();
-  
-  $.ajax({
-      type:"POST",
-      url:"/process_create_workout",
-      data: {
-        task_card_data
-      }
+$(function() {
+  $("#finish_creating_workout_button").click(function() {
+    var task_card_data = get_task_card_data();
+    
+    $.ajax({
+        type:"POST",
+        beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
+        url:"/process_create_workout",
+        data: {
+          "task_card_data" : task_card_data
+        },
+        success: function(data) {
+          console.log("Redirecting to: " + data.redirect_path);
+          window.location.href = data.redirect_path;
+        }
+    });
   });
 });
-
 
 
 

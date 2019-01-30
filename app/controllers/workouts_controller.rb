@@ -22,9 +22,10 @@ class WorkoutsController < AuthenticationController
   
   def process_create_workout
     puts("Inserting new workout to database...")
-    name = params[:name]
-    Workout.create(user_id: session[:user_id], name: name)
-    redirect_to my_workouts_path
+    task_card_data = params[:task_card_data]
+    puts("Received task_card_data: #{task_card_data}")
+    puts("!"*100)
+    render json: { redirect_path: my_workouts_path }
   end
   
   def search_exercises_json
