@@ -1,12 +1,18 @@
+<head>
+<%= javascript_include_tag "https://www.google.com/jsapi", "chartkick" %>  
+<%= javascript_include_tag "application", "chartkick" %>
+</head>
+
+<body>
 <div class="measurements">
   <p> 
     Measurements so far:
   </p>
   
   <% if @measurements.empty? %>
-    <%= "You don't have any measurements entered yet." %>
+    <%= "You don't have any measurements entered yet." %><br>
   <% else %>
-    <table>
+    <table class="table">
       <tr>
         <th>Weight</th>
         <th>Body Fat</th> 
@@ -20,11 +26,11 @@
         <td><%= m.body_fat %></td>
         <td><%= m.height %></td>
         <td><%= m.updated_at.strftime("%B %d, %Y at %H:%M") %></td>
+
         </tr>
       <% end %>  
     </table>
   <% end %>
-  <%= link_to 'Home Page', '/dashboard' %>
 </div>
 
 <%= form_tag enter_my_measurements_path, :method => :get do %>
@@ -32,3 +38,12 @@
 <% end %>
 
 
+<!-- charts -->
+<%= 
+=begin
+  area_chart [ { name: "Weight", data: Measurement.where(user_id: session[:user_id]).count.group_by_day(:weight) }] 
+=end
+
+
+
+</body>

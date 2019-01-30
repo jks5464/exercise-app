@@ -33,7 +33,7 @@ class HomepageController < AuthenticationController
   def quick_log
     puts("Displaying quick log page...")
     puts("Displaying list of exercises")
-    @exercises = Exercise.where(user_id: session[:user_id])
+    @exercises = Exercise.all
     @exercises = [] if (@exercises.nil?)
   end
   

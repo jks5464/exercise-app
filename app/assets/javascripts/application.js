@@ -1,3 +1,6 @@
+//= require highcharts
+//= require chartkick
+
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks

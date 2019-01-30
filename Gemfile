@@ -1,5 +1,12 @@
 source 'https://rubygems.org'
 
+# for graph
+gem 'chartkick'
+gem 'active_median'
+gem 'chronic'
+
+# for logging
+gem 'rails_12factor'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.9'
@@ -69,4 +76,3 @@ end
 group :production do
   gem 'pg', '~> 0.20'
 end
-
