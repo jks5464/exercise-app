@@ -1,4 +1,4 @@
-//= require Chart.bundle
+//= require highcharts
 //= require chartkick
 
 //= require jquery
