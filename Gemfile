@@ -1,7 +1,13 @@
 source 'https://rubygems.org'
 
 # for graph
+
 gem "chartkick"
+gem 'groupdate'
+
+gem 'chartkick'
+gem 'active_median'
+gem 'chronic'
 gem 'groupdate'
 
 # for logging
