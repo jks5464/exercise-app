@@ -7,7 +7,7 @@
   </p>
   
   <% if @measurements.empty? %>
-    <%= "You don't have any measurements entered yet." %>
+    <%= "You don't have any measurements entered yet." %><br>
   <% else %>
     <table>
       <tr>
@@ -25,7 +25,6 @@
       <% end %>  
     </table>
   <% end %>
-  <%= link_to 'Home Page', '/dashboard' %>
 </div>
 
 <%= form_tag enter_my_measurements_path, :method => :get do %>
@@ -34,3 +33,6 @@
 
 <!-- charts -->
 <%= area_chart [ { name: "Weight", data: Measurement.where(user_id: session[:user_id]).count.group_by_day(:weight) }] %>
+
+<%= render :template => 'homepage/template' %>
+
