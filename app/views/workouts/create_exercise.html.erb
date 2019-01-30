@@ -1,44 +1,56 @@
 <html>
 <body>
   
+<fieldset>
+
   <legend>Create Exercise:</legend>
   
-  <fieldset>
-  <div class="form-group">
+  <div class="row">
+    
     <%= form_tag process_create_exercise_path, :method => :post do %>
-      <label for="name">Name:</label>
-      <input type="text" name="name" class="form-control" id="name" value="" maxlength="140" autocomplete="off" placeholder="Enter name of exercise">
-  </div>
   
-  <div class="form-group">
-    <label for="category_select">Category:</label>
-    <div class="form-check" id="category_select">
-      <label class="form-check-label">
-        <input type="radio" name="category" id="category_Cardio" value="Cardio" class="form-check-input">
-        Cardio
-      </label>
+    <div class="form-group">
+      
+        <label for="name">Name:</label>
+        <input type="text" name="name" class="form-control" id="name" value="" maxlength="140" autocomplete="off" placeholder="Enter name of exercise">
+    
     </div>
-    <div class="form-check">
-      <label class="form-check-label">
-        <input type="radio" name="category" id="category_Strength" value="Strength" class="form-check-input">
-        Strength
-      </label>
+    
+    <div class="form-group">
+      
+      <label for="category_select">Category:</label>
+      
+      <div class="form-check" id="category_select">
+        <label class="form-check-label">
+          <input type="radio" name="category" id="category_Cardio" value="Cardio" class="form-check-input">
+          Cardio
+        </label>
+      </div>
+      
+      <div class="form-check">
+        <label class="form-check-label">
+          <input type="radio" name="category" id="category_Strength" value="Strength" class="form-check-input">
+          Strength
+        </label>
+      </div>
+      
     </div>
-  </div>
+    
+    <div class="form-group">
+      <label for="description">Description:</label>
+        <input type="text" name="description" id="description" value="" maxlength="140" autocomplete="off" placeholder="optional" class="form-control">
+      <label for="muscle_group">Muscle Group:</label>
+        <input type="text" name="muscle group" id="muscle_group" value="" maxlength="140" autocomplete="off" placeholder="optional" class="form-control">
+      <input class="btn btn-primary" type="submit" name="commit" value="Enter" style="margin-top: 1em;">
+    </div>
   
-  <div class="form-group">
-    <label for="description">Description:</label>
-      <input type="text" name="description" id="description" value="" maxlength="140" autocomplete="off" placeholder="optional">
-    <label for="muscle_group">Muscle Group:</label>
-      <input type="text" name="muscle group" id="muscle_group" value="" maxlength="140" autocomplete="off" placeholder="optional">
-    <input class="btn btn-primary" type="submit" name="commit" value="Enter">
   </div>
-
-  <% end %>
+</fieldset>
   
-  </fieldset>
 </body>
 
+
 <%= render :template => 'homepage/template' %>
+<% end %>
 
 </html>
