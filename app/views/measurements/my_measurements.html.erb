@@ -5,7 +5,7 @@
   </p>
   
   <% if @measurements.empty? %>
-    <%= "You don't have any measurements entered yet." %>
+    <%= "You don't have any measurements entered yet." %><br>
   <% else %>
     <table>
       <tr>
@@ -37,6 +37,7 @@
   <%= submit_tag 'Enter New Measurements' %>
 <% end %>
 
+<%= render :template => 'homepage/template' %>
 <!-- charts -->
 <!--
 <%= javascript_include_tag "https://www.gstatic.com/charts/loader.js" %>
