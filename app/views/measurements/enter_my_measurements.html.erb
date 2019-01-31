@@ -1,48 +1,68 @@
 <html>
 <body>
 
-<div class="container">
   <fieldset>
-    
+  
     <legend>Enter Current Measurements:</legend>
   
-    <div class="row">
-      <%= form_tag process_enter_new_measurements_path, :method => 'post' do %>
+    <%= form_tag process_enter_new_measurements_path, :method => 'post' do %>
+    
+    <div class="form-group row" style="margin-left: auto; margin-right: auto;">
+      <label for="weight" class="col-sm-2" style="padding-top: 8px; padding-bottom: 8px; text-align: right;">Weight:</label>
       
-      <div class="form-group form-inline"> 
-        <label for="weight">Weight:</label>
+      <div class="col-sm-2" style="padding: 0em; padding-right: 5px;">
         <input class="form-control" type="text" name="weight" id="weight" value="" size="6" autocomplete="off" placeholder="Example: 150">
+      </div>
+      
+      <div class="col-sm-1" style="padding: 0em;">
         <select class="form-control">
           <option value="lbs.">lbs</option>
         </select>
       </div>
-          
-      <div class="form-group form-inline">
+    </div>
             
-        <label for="body_fat">Body Fat:</label>
+    <div class="form-group row" style="margin-left: auto; margin-right: auto;">
+      <label for="body_fat" class="col-sm-2" style="padding-top: 8px; padding-bottom: 8px; text-align: right;">Body Fat:</label>
+      
+      <div class="col-sm-2" style="padding: 0em; padding-right: 5px;">
         <input class="form-control" placeholder="Example: 23" type="text" name="body_fat" id="body_fat" value="" size="6" autocomplete="off">
+      </div>
+      
+      <div class="col-sm-1" style="padding: 0em;">
         <select class="form-control">
           <option value="%">%</option>
         </select>
       </div>
+    </div>
+            
+    <div class="form-group row" style="margin-left: auto; margin-right: auto;">
+      <label for="height" class="col-sm-2" style="padding-top: 8px; padding-bottom: 8px; text-align: right;">Height:</label>
           
-      <div class="form-group form-inline">
-        <label for="height">Height:</label>
+      <div class="col-sm-2" style="padding: 0em; padding-right: 5px;">
         <input class="form-control" placeholder="Example: 5.5" type="text" name="height" id="height" value="" size="6" autocomplete="off">
+      </div>
+      
+      <div class="col-sm-1" style="padding: 0em;">
         <select class="form-control">
           <option value="ft">ft</option>
         </select>
       </div>
-          
-      <input class="btn btn-primary" type="submit" name="commit" value="Submit Record">
-      
     </div>
+        
+    <div class="form-group row" style="margin-left: auto; margin-right: auto;">
+      <input class="btn btn-primary" type="submit" name="commit" value="Submit Record">
+    </div>
+    
+    <div class="form-group row" style="margin-left: auto; margin-right: auto;">
+      <a class="btn btn-primary" href="/my_measurements">Return to My Measurements</a>
+    </div>
+        
   </fieldset>
 
-  <a class="btn btn-primary" href="/my_measurements">Return to My Measurements</a>
-</div>
+  
 
-<%= render :template => 'homepage/template' %>
-<% end %>
+  <%= render :template => 'homepage/template' %>
+  <% end %>
+  
 </body>
 </html>
