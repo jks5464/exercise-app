@@ -1,40 +1,85 @@
-<h2>Add Goal</h2>
+<html>
+<body>
+  
+<div class="container">
+  
+  <fieldset>
+    <div class="enter_goal">
+  
+    <legend>Add Goal</legend>
 
-<div class="enter_goal">
-<%= form_tag enter_goal_create_path, :method => 'post' do %>
-  <%= label_tag 'Name:' %>
-  <%= text_field_tag 'name', '', :size => 3, :autocomplete => 'off' %>
-  <br />
-  
-  <%= label_tag 'Description:' %>
-  <%= text_field_tag 'description', '', :size => 3, :autocomplete => 'off' %>
-  <br />
-  
-  <%= label_tag 'Exercise:' %>
-  <select name="exercise">
-    <%= @exercises.each do |exercise| %>
-      <option value="<%= exercise.name %>"><%=exercise.name%></option>
-    <% end %>
-  </select>
-  <br />
-  
-  <%= label_tag 'Value:' %>
-  <%= text_field_tag 'value', '', :size => 3, :autocomplete => 'off' %>
-  <br />
-  
-  <%= label_tag 'Unit:' %>
-  <select name="unit">
-    <%= @units.each do |unit| %>
-      <option value="<%= unit.name %>"><%= unit.name %></option>
-    <% end %>
-  </select>
-  <br />
-  
-  <%= label_tag 'By:' %>
-  <%= date_field_tag 'date', '', :size => 3, :autocomplete => 'off' %>
-  <br />
-  <%= submit_tag 'Enter' %>
-<% end %>
+      <div class="row">
+        <%= form_tag enter_goal_create_path, :method => 'post' do %>
+        
+        <div class="form-group row" style="margin-left: auto; margin-right: auto;">
+          <label for="name" class="col-sm-2" style="padding-top: 8px; padding-bottom: 8px; text-align: right;">Name:</label>
+        
+          <div class="col-sm-4" style="padding: 0em; padding-right: 5px;">
+            <input class="form-control" type="text" name="name" id="name" value="" size="3" autocomplete="off">
+          </div>
+        </div>
+        
+        <div class="form-group row" style="margin-left: auto; margin-right: auto;">
+          <label for="description" class="col-sm-2" style="padding-top: 8px; padding-bottom: 8px; text-align: right;">Description:</label>
+        
+          <div class="col-sm-4" style="padding: 0em; padding-right: 5px;">
+            <input class="form-control" type="text" name="description" id="description" value="" size="3" autocomplete="off">
+          </div>
+        </div>
+        
+        <div class="form-group row" style="margin-left: auto; margin-right: auto;">
+          <label for="exercise" class="col-sm-2" style="padding-top: 8px; padding-bottom: 8px; text-align: right;">Exercise:</label>
+          
+          <div class="col-sm-4" style="padding: 0em; padding-right: 5px;">
+            <select class="form-control" name="exercise">
+              <%= @exercises.each do |exercise| %>
+                <option value="<%= exercise.name %>"><%=exercise.name%></option>
+              <% end %>
+            </select>
+          </div>
+        </div>
+    
+        <div class="form-group row" style="margin-left: auto; margin-right: auto;">
+          
+          <label for="value" class="col-sm-2" style="padding-top: 8px; padding-bottom: 8px; text-align: right;">Value:</label>
+         
+          <div class="col-sm-2" style="padding: 0em; padding-right: 0px;">
+            <input class="form-control" type="text" name="value" id="value" value="" size="3" autocomplete="off">
+          </div>
+          
+          <label for="unit" class="col-sm-1" style="padding-top: 8px; padding-bottom: 8px; text-align: right; text-align: right;">Unit:</label>
+          
+          <div class="col-sm-1" style="padding: 0em;">
+            <select class="form-control" name="unit">
+              <%= @units.each do |unit| %>
+                <option value="<%= unit.name %>"><%= unit.name %></option>
+              <% end %>
+            </select>
+          </div>
+          
+        </div>
+        
+        <div class="form-group row" style="margin-left: auto; margin-right: auto;">
+          <label for="date_field_tag" class="col-sm-2" style="padding-top: 8px; padding-bottom: 8px; text-align: right;">By:</label>
+        
+          <div class="col-sm-4" style="padding: 0em; padding-right: 5px;">
+            <input class="form-control" type="date" name="date" id="date" value="" size="3" autocomplete="off">
+          </div>
+        </div>
+        
+        <div class="form-group row" style="margin-left: auto; margin-right: auto; float: right; padding-right: 30em;">
+          <input class="btn btn-primary" type="submit" name="commit" value="Add Goal">
+        </div>
+      </div>
+    
+  </fieldset>
+    
 </div>
+  
+
+<% end %>
 
 <%= render :template => 'homepage/template' %>
+
+</body>
+</html>
