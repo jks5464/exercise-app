@@ -1,0 +1,49 @@
+<div id="wrapper" class="toggled">
+
+    <!-- Sidebar -->
+    <div id="sidebar-wrapper" class="toggled">
+  
+      <ul class="sidebar-nav">
+          <li class="sidebar-brand" style="padding-bottom: 3em;">
+              <h1>My Exercise Tracker</h1>
+          </li>
+          <li>
+            <form style="padding: 0px; margin: 0px; margin-top: 20px;" action="/my_goals" accept-charset="UTF-8" method="get"><input name="utf8" type="hidden" value="✓">
+              <input class="btn btn-primary" style="float: left; width: 250px;" type="submit" name="commit" value="My Goals">
+            </form>
+          </li>
+          <li>
+            <form style="margin: 0px; margin-top: 20px; width: 250px;"  action="/my_measurements" accept-charset="UTF-8" method="get"><input name="utf8" type="hidden" value="✓">
+              <input class="btn btn-primary" type="submit" name="commit" value="My Measurements">
+            </form>
+          </li>
+          <li>
+              <form style="margin: 0px; margin-top: 20px; width: 250px;"  action="/my_workouts" accept-charset="UTF-8" method="get"><input name="utf8" type="hidden" value="✓">
+                <input class="btn btn-primary" type="submit" name="commit" value="My Workouts">
+              </form>
+          </li>
+          <li>
+            <form style="margin: 0px; margin-top: 20px; margin: 0px;" action="/quick_log_path" accept-charset="UTF-8" method="get"><input name="utf8" type="hidden" value="✓">
+                <input class="btn btn-primary hidden" type="submit" name="commit" value="My Clients">
+              </form>
+          </li>
+          <li>
+            <form style="margin: 0px; margin-top: 20px; margin: 0px;" action="/quick_log" accept-charset="UTF-8" method="get"><input name="utf8" type="hidden" value="✓">
+              <input class="btn btn-primary" type="submit" name="commit" value="Quick Log">
+            </form>
+          </li>
+          <li>
+                <div class="login">
+            <% if current_user %>
+                Signed in as <strong><%= current_user.name %></strong>!
+                <%= link_to "Sign out", signout_path, id: "sign_out" %>
+            <% else %>
+                <%= link_to "Sign in with Google", "/auth/google_oauth2", id: "sign_in" %>
+            <% end %>
+          </div>
+          </li>
+      </ul>
+      
+      
+    </div>
+  <!-- /#sidebar-wrapper -->
