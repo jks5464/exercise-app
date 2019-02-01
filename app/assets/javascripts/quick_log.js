@@ -10,6 +10,42 @@ $(function() {
   number = $( "#dist" ),
   units = $( "#units" ),
   allFields = $( [] ).add(name).add(number).add(units);
+  
+  function make_data_dict(form_type) {
+    data_dict = {};
+    if (form_type == "Strength") {
+      data_dict["exercise_name"] = $("#exercise-search-txt").val().trim();
+      data_dict["set_count"] = $("#sets").val().trim();
+      data_dict["rep_count"] = $("#reps").val().trim();
+      data_dict["rep_value"] = $("#weight").val().trim();
+      data_dict["rep_unit"] = $("#units").val().trim();  
+    } else if (form_type == "Cardio") {
+      data_dict["exercise_name"] = $("#exercise-search-txt").val().trim();
+      data_dict["set_count"] = 1;
+      data_dict["rep_count"] = 1;
+      data_dict["rep_value"] = $("#distance_time").val().trim();
+      data_dict["rep_unit"] = $("#units").val().trim();  
+    }
+    return data_dict;
+  }
+  
+  function send_quick_log_data() {
+    var form_type = $("#form_type").text().trim();
+    var data_dict = make_data_dict(form_type);
+    var task_card_data = [data_dict];
+    
+    $.ajax({
+      type:"POST",
+      beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
+      url:"/process_new_quick_log",
+      data: {
+        task_card_data : task_card_data
+      },
+      complete: function(o) {
+        window.location.reload(true);
+      }
+    });
+  }
 
   function checkLength( o, n, min, max ) {
     if ( o.val().length > max || o.val().length < min ) {
@@ -68,8 +104,9 @@ $(function() {
     width: 350,
     modal: true,
     buttons: {
-      "Enter exercise": create_exercise_set,
+      "Enter exercise": send_quick_log_data,
       Cancel: function() {
+        
         dialog.dialog( "close" );
       }
     },
@@ -77,6 +114,7 @@ $(function() {
       form[ 0 ].reset();
       $("#exercise-category-data").html("");
       allFields.removeClass( "ui-state-error" );
+      
     }
   });
     
@@ -84,6 +122,10 @@ $(function() {
     event.preventDefault();
     create_exercise_set();
   });
+  
+  
 });
+
+
 
 

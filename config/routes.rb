@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   get  'enter_my_measurements' => 'measurements#enter_my_measurements', :as => 'enter_my_measurements'
   post 'process_enter_new_measurements' => 'measurements#process_enter_new_measurements', :as => 'process_enter_new_measurements'
   post 'process_create_workout' => 'workouts#process_create_workout', :as => 'process_create_workout'
+  post 'process_new_quick_log' => 'homepage#process_new_quick_log', :as => 'process_new_quick_log'
  
   
   get  'dashboard' => 'homepage#dashboard', :as => 'dashboard'
@@ -31,6 +32,7 @@ Rails.application.routes.draw do
   
   get 'quick_log' => 'homepage#quick_log', :as => 'quick_log'
   post 'enter_quick_log' => 'homepage#enter_quick_log', :as => 'enter_quick_log'
+  get 'view_exercises' => 'homepage#view_exercises', :as => 'view_exercises'
   get 'search_exercises_json' => 'workouts#search_exercises_json', :as => 'search_exercises_json'
   get 'units_json' => 'workouts#units_json', :as => 'units_json'
   

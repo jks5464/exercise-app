@@ -188,7 +188,7 @@ Given /^I wait for (.*?) second$/ do |seconds|
   sleep seconds.to_i
 end
 
-Then /^save the page$/ do
+Then /^I save the page$/ do
   save_page
 end
 
@@ -196,3 +196,7 @@ Then /^I wait for ajax$/ do
   wait_for_ajax
 end
 
+Then /^I send keys down, tab to "(.*?)"$/ do |field|
+  find(field).native.send_keys(:down)
+  find(field).native.send_keys(:tab)
+end
