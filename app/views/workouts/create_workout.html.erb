@@ -31,7 +31,21 @@
   
   <!-- workout name -->
   <div class="row">
-    <h1>Workout Name:</h1>
+    Workout Name: 
+    <span>
+      <span class="show_form">
+        <span class="workout_name_info">Default Name</span>
+        <button type="button" class="btn btn-info btn-sm" id="workout_name_edit_button">
+            <span class="glyphicon glyphicon-pencil"></span>
+        </button>
+      </span>
+      <span class="edit_form" hidden>
+        <input name="workout_name_edit" type="text" class="workout_name_edit" value="Default Name">
+        <button type="button" class="btn btn-info btn-sm" id="workout_name_done_button">
+          <span class="glyphicon glyphicon-ok"></span>
+        </button>
+      </span>
+    </span>
   </div>
   
   <!-- task cards -->
@@ -49,9 +63,7 @@
   
   <!-- finish button -->
   <div class="row">
-    <%= form_tag my_workouts_path, :method => :get do %>
-      <%= submit_tag 'Finish' %>
-    <% end %>
+    <button id="finish_creating_workout_button">Finish</button>
   </div>
 </div>
 
