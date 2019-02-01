@@ -31,6 +31,7 @@ Rails.application.routes.draw do
   
   get 'quick_log' => 'homepage#quick_log', :as => 'quick_log'
   post 'enter_quick_log' => 'homepage#enter_quick_log', :as => 'enter_quick_log'
+  get 'view_exercises' => 'homepage#view_exercises', :as => 'view_exercises'
   get 'search_exercises_json' => 'workouts#search_exercises_json', :as => 'search_exercises_json'
   get 'units_json' => 'workouts#units_json', :as => 'units_json'
   

@@ -49,6 +49,9 @@ module NavigationHelpers
       
     when /the enter goal page/
       '/enter_goal'
+      
+    when /the view exercises page/
+      '/view_exercises'
 
 
     # Add more mappings here.

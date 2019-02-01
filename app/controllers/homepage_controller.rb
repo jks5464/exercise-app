@@ -36,5 +36,11 @@ class HomepageController < AuthenticationController
     @exercises = Exercise.where(user_id: session[:user_id])
     @exercises = [] if (@exercises.nil?)
   end
+  def view_exercises
+    puts("Displaying view exercises page")
+    @exercises = Exercise.all
+    @units = Unit.all
+  end
+    
   
 end

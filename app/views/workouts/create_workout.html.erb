@@ -47,6 +47,7 @@
     <% end %>
   </div>
   
+ 
   <!-- finish button -->
   <div class="row">
     <%= form_tag my_workouts_path, :method => :get do %>
@@ -54,6 +55,6 @@
     <% end %>
   </div>
 </div>
-
+<%= link_to 'View All Exercises', view_exercises_path %>
 <%= render :template => 'homepage/template' %>
 

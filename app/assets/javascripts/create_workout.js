@@ -31,7 +31,7 @@ $(function() {
       var reps = $("#reps").val();
       var weight = $("#weight").val();
       var units = $("#units").val();
-      markup = "<div>" + name + " " + sets + " " + reps + " " + weight + " " + units + "</div>";
+      markup = "<div class = boxed>" + name + " " + sets + "sets " + reps + " reps at " + weight + " " + units + "</div>";
       
       
     } else if (form_type == "Cardio") {
