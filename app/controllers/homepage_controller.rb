@@ -39,8 +39,8 @@ class HomepageController < AuthenticationController
   
   def create_new_quick_log
     puts("Creating new quick log...")
-    category = params[:category]
-    quick_log_data = get_quick_log_data(category, params)
+    # category = params[:category]
+    # quick_log_data = get_quick_log_data(category, params)
 =begin
     workout = Workout.create(name = "quicklog-unique-id", 
              uid = not sure, 
@@ -53,10 +53,10 @@ class HomepageController < AuthenticationController
     set = Set.create()
     # ====> Set  
 =end
-    workout = current_user.workouts.create("quicklog-1")
-    task = workout.tasks.create("quicklog-task-1")
-    task.sets.create(quick_log_data)
-    task.
+    # workout = current_user.workouts.create("quicklog-1")
+    # task = workout.tasks.create("quicklog-task-1")
+    # task.sets.create(quick_log_data)
+    # task.
   end
   
 end
