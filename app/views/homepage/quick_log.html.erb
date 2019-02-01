@@ -2,24 +2,71 @@
 <script src="/assets/quick_log.js"></script>
 
   <p>
-    <b>Logging:</b><br />
-    
-    Here will be the history of completed exercises/workouts<br />
-    <div class="container">
-    <!-- task cards -->
-    <div class="row" id="task_card_list">
-      
-    </div>
+    <b>Logging History:</b><br>
     <% if @exercises.empty? %>
         <b><%= "No exercises have been created yet." %></b>
         <%= form_tag create_exercise_path, :method => :get do %>
           <%= submit_tag 'Click here to create an exercise' %>
         <% end %>
     <% else %>
-      <button id="add">Log a new exercise</button>
+      <button id="add">Log a new exercise</button><br>
+      <%= form_tag create_exercise_path, :method => :get do %>
+        Don't see the exercise you're looking for? Add one below<br>
+        <%= submit_tag 'Click here to create an exercise' %>
+      <% end %>
     <% end %>
   </p>
-  
+  <% if @workouts.empty? %>
+    Here will be the history of completed exercises/workouts<br />
+  <% else %>
+  <table>
+      <tr>
+        <th>Name</th>
+        <th>Workout ID</th>
+        <th>Workout Completed?</th>
+      </tr>
+      <% @workouts.each_with_index do |w, i| %>
+      <tr <%= 'id=last_row' if i == (@workouts.size - 1) %> >
+      <td><%= w.name %></td>
+      <td><%= w.id %></td>
+      <td><%= w.completed %></td>
+      </tr>
+      <% end %>  
+  </table><br>
+  <table>
+      <tr>
+        <th>Task Workout ID</th>
+        <th>Task Exercise ID</th>
+        <th>Task Completed?</th>
+      </tr>
+      <% @tasks.each_with_index do |t, i| %>
+      <tr <%= 'id=last_row' if i == (@tasks.size - 1) %> >
+      <td><%= t.workout_id %></td>
+      <td><%= t.exercise_id %></td>
+      <td><%= t.completed %></td>
+      </tr>
+      <% end %>  
+  </table><br>
+  <table>
+      <tr>
+        <th>Exercise Name</th>
+        <th>Rep Count</th>
+        <th>Rep Value</th>
+        <th>Rep Unit</th>
+      </tr>
+      <% @exercise_sets.each_with_index do |e, i| %>
+      <tr <%= 'id=last_row' if i == (@exercise_sets.size - 1) %> >
+      <td><%= e.task_id %></td>
+      <td><%= e.rep_count %></td>
+      <td><%= e.rep_value %></td>
+      <td><%= e.rep_unit %></td>
+      </tr>
+      <% end %>  
+  </table><br>
+  <% end %>
+    <div class="container">
+    <!-- task cards -->
+    <div class="row" id="task_card_list">
   <!-- hidden popup form when user adds a new exercise to their workout -->
   <div id="dialog-form" title="Quick Log">
       <form>
