@@ -16,57 +16,41 @@
       <% end %>
     <% end %>
   </p>
+  
   <% if @workouts.empty? %>
     Here will be the history of completed exercises/workouts<br />
   <% else %>
-  <table>
-      <tr>
-        <th>Name</th>
-        <th>Workout ID</th>
-        <th>Workout Completed?</th>
-      </tr>
-      <% @workouts.each_with_index do |w, i| %>
-      <tr <%= 'id=last_row' if i == (@workouts.size - 1) %> >
-      <td><%= w.name %></td>
-      <td><%= w.id %></td>
-      <td><%= w.completed %></td>
-      </tr>
-      <% end %>  
-  </table><br>
-  <table>
-      <tr>
-        <th>Task Workout ID</th>
-        <th>Task Exercise ID</th>
-        <th>Task Completed?</th>
-      </tr>
-      <% @tasks.each_with_index do |t, i| %>
-      <tr <%= 'id=last_row' if i == (@tasks.size - 1) %> >
-      <td><%= t.workout_id %></td>
-      <td><%= t.exercise_id %></td>
-      <td><%= t.completed %></td>
-      </tr>
-      <% end %>  
-  </table><br>
-  <table>
-      <tr>
-        <th>Exercise Name</th>
-        <th>Rep Count</th>
-        <th>Rep Value</th>
-        <th>Rep Unit</th>
-      </tr>
-      <% @exercise_sets.each_with_index do |e, i| %>
-      <tr <%= 'id=last_row' if i == (@exercise_sets.size - 1) %> >
-      <td><%= e.task_id %></td>
-      <td><%= e.rep_count %></td>
-      <td><%= e.rep_value %></td>
-      <td><%= e.rep_unit %></td>
-      </tr>
-      <% end %>  
-  </table><br>
+    <table>
+        <tr>
+          <th>Exercise Name</th>
+          <th>Set Count</th>
+          <th>Rep Count</th>
+          <th>Rep Value</th>
+          <th>Rep Unit</th>
+        </tr>
+        <% @workouts.reverse_each do |workout, i| %>
+          <% workout.task.each do | task | %>
+          <tr>
+            <td><%= task.exercise.name %></td>
+            <td><%= task.exercise_set.count %></td>
+            <td><%= task.exercise_set[0].rep_count %></td>
+            <td><%= task.exercise_set[0].rep_value %></td>
+            <td><%= task.exercise_set[0].rep_unit %></td>
+          </tr>
+          <% end %>
+        <% end %>  
+        <% @exercise_sets.each_with_index do |e, i| %>
+        <tr <%= 'id=last_row' if i == (@exercise_sets.size - 1) %> >
+        
+        </tr>
+        <% end %>  
+    </table>
   <% end %>
-    <div class="container">
-    <!-- task cards -->
-    <div class="row" id="task_card_list">
+  
+  <div class="container">
+  <!-- task cards -->
+  <div class="row" id="task_card_list">
+    
   <!-- hidden popup form when user adds a new exercise to their workout -->
   <div id="dialog-form" title="Quick Log">
       <form>
