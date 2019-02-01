@@ -32,11 +32,11 @@
               <input class="btn-primary" style="float: left; width: 250px;" type="submit" type="submit" name="commit" value="Quick Log">
             </form>
           </li>
-          <li class="sidebar-logout">
+          <li class="sidebar-logout" style="text-align: center; margin-top:">
             <div class="login">
               <% if current_user %>
                   Signed in as <strong><%= current_user.name %></strong>!
-                  <a id="sign_out" href="/signout">Sign out</a>
+                  <a style="text-align: center;" id="sign_out" href="/signout">Sign out</a>
               <% else %>
                   <a id="sign_in" href="/auth/google_oath2">Sign in with Google</a>
               <% end %>

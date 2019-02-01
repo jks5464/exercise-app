@@ -1,11 +1,9 @@
 <div class="container-fluid">
   
-  <legend>Quick Log</legend>
-  
   <div class="row">
     
     <div class="form-group">
-      <h1>Logging History:</h1>
+      <legend>Logging History:</legend>
       <% if @exercises.empty? %>
           <b><%= "No exercises have been created yet." %></b>
           <%= form_tag create_exercise_path, :method => :get do %>

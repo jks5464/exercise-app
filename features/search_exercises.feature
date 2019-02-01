@@ -12,7 +12,7 @@ Scenario: I search for an exercise that exists
   | name                    | category  | description   | user_id   |
   | Bench Press             | Strength  |               | 1         |
   | Squat                   | Strength  |               | 1         |
-  And I press "add"
+  And I press "Add Exercise"
   And I enter "Be" into "exercise-search-txt"
   And I wait for ajax
   Then I should see "Bench Press" within "#exercise-search-results"
