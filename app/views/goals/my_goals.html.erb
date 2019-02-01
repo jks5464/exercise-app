@@ -2,9 +2,11 @@
     
     <div class="goals">
         
-        <div class="row">
-            <legend>My Goals</legend>
+      <legend>My Goals</legend>
             
+      <div class="row">
+        
+        <div class="form-group">
             <% if @goals.empty? %>
                 <%= "You don't have any goals entered yet." %>
             <% else %>
@@ -29,7 +31,7 @@
             <% end %>
         </div>
     
-        <div class="row">
+        <div class="form-group">
             <%= form_tag enter_goal_path, :method => :get do %>
               <input class="btn btn-primary" type="submit" name="commit" value="Add Goal">
             <% end %>
