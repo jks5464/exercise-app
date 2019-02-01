@@ -2,7 +2,7 @@
 <script src="/assets/quick_log.js"></script>
 
   <p>
-    <b>Logging:</b><br>
+    <b>Logging History:</b><br>
     <% if @exercises.empty? %>
         <b><%= "No exercises have been created yet." %></b>
         <%= form_tag create_exercise_path, :method => :get do %>
@@ -11,7 +11,8 @@
     <% else %>
       <button id="add">Log a new exercise</button><br>
       <%= form_tag create_exercise_path, :method => :get do %>
-          <%= submit_tag 'Click here to create an exercise' %>
+        Don't see the exercise you're looking for? Add one below<br>
+        <%= submit_tag 'Click here to create an exercise' %>
       <% end %>
     <% end %>
   </p>
@@ -48,11 +49,10 @@
   </table><br>
   <table>
       <tr>
-        <th>Exercise Set Task ID</th>
+        <th>Exercise Name</th>
         <th>Rep Count</th>
         <th>Rep Value</th>
         <th>Rep Unit</th>
-        <th>Exercise Set Completed?</th>
       </tr>
       <% @exercise_sets.each_with_index do |e, i| %>
       <tr <%= 'id=last_row' if i == (@exercise_sets.size - 1) %> >
@@ -60,7 +60,6 @@
       <td><%= e.rep_count %></td>
       <td><%= e.rep_value %></td>
       <td><%= e.rep_unit %></td>
-      <td><%= e.completed %></td>
       </tr>
       <% end %>  
   </table><br>

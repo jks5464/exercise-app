@@ -37,14 +37,21 @@ class HomepageController < AuthenticationController
     
     puts("Displaying user's workouts...")
     @current_user = current_user()
-    #@workouts = @current_user.workout
-    #@workouts = [] if (@current_user.workout.nil?)
     
     @workouts = @current_user.workout
-    puts("User workouts: #{@workouts.first.name}")
-    puts("!"*100)
     @workouts = [] if (@workouts.nil?)
     
+    workout_name = "Workout_" + session[:user_id].to_s + "_" + Time.now.to_s
+    puts("!"*100)
+    puts(workout_name)
+    new_workout = Workout.create("name": workout_name, "user_id": session[:user_id], "completed": "true")
+    @workouts.append(new_workout)
+
+    puts("All the things!")
+    puts("*"*100)
+    t_tmp2 = Task.create("exercise_id": "2", "completed": "true", "workout_id": new_workout.id)
+    ExerciseSet.create("rep_count": "25", "rep_value": "30", "rep_unit": "lbs", "completed": "true", "task_id": t_tmp2.id)
+
 
     @tasks = []
     @workouts.each do |workout|
