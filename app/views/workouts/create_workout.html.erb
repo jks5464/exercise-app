@@ -61,11 +61,13 @@
     <% end %>
   </div>
   
+ 
   <!-- finish button -->
   <div class="row">
     <button id="finish_creating_workout_button">Finish</button>
   </div>
 </div>
+<%= link_to 'View All Exercises', view_exercises_path %>
 
 <%= link_to 'Return to My Workouts', my_workouts_path %><br>
 <%= render :template => 'homepage/template' %>

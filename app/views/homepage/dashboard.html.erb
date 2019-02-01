@@ -30,6 +30,10 @@
           <%= form_tag my_clients_path, :method => :get do %>
           <%= hidden_field_tag 'My Clients' %>
           <% end %>
+          
+          <%= form_tag view_exercises_path, :method => :get do %>
+            <%= submit_tag 'View All Exercises' %>
+          <% end %>
   
           <div class="login">
             <% if current_user %>
