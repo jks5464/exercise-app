@@ -8,6 +8,13 @@
     <script src="/assets/search_exercises.js"></script>
     <script src="/assets/create_workout.js"></script>
     
+    <%= javascript_include_tag "https://www.google.com/jsapi", "chartkick" %>  
+    <%= javascript_include_tag "application", "chartkick" %>
+    
+    <%= javascript_include_tag "/assets/create_workout.js" %>
+    <%= javascript_include_tag "/assets/search_exercises.js" %>
+    <%= javascript_include_tag "/assets/quick_log.js" %>
+    
     <style src="/assets/progress.scss"></style>
     
     <%= stylesheet_link_tag    'application', media: 'all' %>
