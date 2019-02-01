@@ -32,9 +32,24 @@ class HomepageController < AuthenticationController
   
   def quick_log
     puts("Displaying quick log page...")
-    puts("Displaying list of exercises")
     @exercises = Exercise.all
     @exercises = [] if (@exercises.nil?)
+    
+    puts("Displaying user's workouts...")
+    @current_user = current_user()
+    
+    @workouts = @current_user.workout
+    @workouts = [] if (@workouts.nil?)
+  end
+  
+  def process_new_quick_log
+    puts("Creating new quick log...")
+    puts("="*100)
+    user = current_user
+    workout_name = "Workout_" + current_user.id.to_s + "_" + Time.now.to_s
+    task_card_data = params[:task_card_data]
+    Workout.insert_new_workout(user, workout_name, task_card_data, true, true, true)
+    head :ok, content_type: "text/html"
   end
   
 end
