@@ -1,0 +1,36 @@
+<div class="exercises">
+  <p>
+    View All Exercises:
+  </p>
+  
+  <% if @exercises.empty? %>
+      <%= "No exercises have been created yet." %>
+  <% else %>
+      <% @exercises.each_with_index do |e, i| %>
+        <div <%= 'id=last_row' if i == (@exercises.size - 1) %> >
+           <table id= "table">
+              <tr>
+                <td><%= e.name%></td>
+                <!--<td><input id="button2" type="submit" name="button2" onclick="myFunction2();" value="delete"/></td>-->
+                
+              </tr>
+            </table>
+        
+                                
+        <script>
+       
+        function myFunction2(){
+          var td = event.target.parentNode; 
+          var tr = td.parentNode;
+          tr.parentNode.removeChild(tr);
+         
+        };
+        
+        </script>
+
+       
+        <% end %>  
+  <% end %>
+</div>
+<%= link_to 'Create New Exercise', create_exercise_path %>
+<%= render :template => 'homepage/template' %>
