@@ -7,7 +7,21 @@ module WithinHelpers
     locator ? within(locator) { yield } : yield
   end
 end
+
+module WaitForAjax
+  def wait_for_ajax
+    Timeout.timeout(Capybara.default_max_wait_time) do
+      loop until finished_all_ajax_requests?
+    end
+  end
+
+  def finished_all_ajax_requests?
+    page.evaluate_script('jQuery.active').zero?
+  end
+end
+
 World(WithinHelpers)
+World(WaitForAjax)
 
 When /^I start a new game with word "(.*)"$/ do |word|
   stub_request(:post, "http://watchout4snakes.com/wo4snakes/Random/RandomWord").
@@ -154,18 +168,18 @@ When /^I login using "(.*?)" as the user$/ do |provider|
 end
  
 def logon(provider, username='Inigo Montoya', oauth_uid='123')
-  WebMock.allow_net_connect!
+  
   provider.downcase!
   provider = 'google_oauth2' if provider.eql?('google')
   OmniAuth.config.add_mock(provider.to_sym, {:uid => oauth_uid, :provider => provider, :info => {:name => username}, :credentials => {:token => "random_token", :expires_at => 0}})
  
+  
   visit '/'
   click_link 'Sign in with Google'
 end
 
 Given /the following exercises exist/ do |exercise_table|
   exercise_table.hashes.each do |exercise|
-    # you should arrange to add that movie to the database here.
     Exercise.create(exercise)
   end
 end
@@ -174,7 +188,15 @@ Given /^I wait for (.*?) second$/ do |seconds|
   sleep seconds.to_i
 end
 
-Then /^save the page$/ do
+Then /^I save the page$/ do
   save_page
 end
 
+Then /^I wait for ajax$/ do
+  wait_for_ajax
+end
+
+Then /^I send keys down, tab to "(.*?)"$/ do |field|
+  find(field).native.send_keys(:down)
+  find(field).native.send_keys(:tab)
+end

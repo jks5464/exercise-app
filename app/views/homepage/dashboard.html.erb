@@ -1,44 +1,80 @@
+<!DOCTYPE html>
+<html>
 
-<h2>My Exercise Tracker</h2>
-<%= form_tag my_goals_path, :method => :get do%>
-  <%= submit_tag 'My Goals' %>
-<% end %>
+<style src="/assets/progress.scss"></style>
 
-<%= form_tag my_measurements_path, :method => :get do%>
-  <%= submit_tag 'My Measurements'  %>
-<% end %>
+<div class="container" style="display: block; width: 100%;">
 
-<%= form_tag my_workouts_path, :method => :get do %>
-  <%= submit_tag 'My Workouts' %>
-<% end %>
 
-<%= form_tag quick_log_path, :method => :get do %>
-  <%= submit_tag 'Quick Log' %>
-<% end %>
-
-<%= form_tag view_exercises_path, :method => :get do %>
-  <%= submit_tag 'View All Exercises' %>
-<% end %>
-
-<%= form_tag my_clients_path, :method => :get do %>
-  <%= hidden_field_tag 'My Clients' %>
-<% end %>
-<body>
-    <div class="login">
-    <% if current_user %>
-        Signed in as <strong><%= current_user.name %></strong>!
-        <%= link_to "Sign out", signout_path, id: "sign_out" %>
-      <% else %>
-        <%= link_to "Sign in with Google", "/auth/google_oauth2", id: "sign_in" %>
-    <% end %>
+  <div class="row">
+    
+    <div class="col-sm-4" style="display: inline-block; width: 50%; padding: 1em;">
+    
+          <h1 style="display: hidden; padding-top: 2em; padding-bottom: 2em;">My Exercise Tracker</h1>
+          <%= form_tag my_goals_path, :method => :get do%>
+          <%= submit_tag 'My Goals' %>
+          <% end %>
+    
+          <%= form_tag my_measurements_path, :method => :get do%>
+          <%= submit_tag 'My Measurements'  %>
+          <% end %>
+    
+          <%= form_tag my_workouts_path, :method => :get do %>
+          <%= submit_tag 'My Workouts' %>
+          <% end %>
+    
+          <%= form_tag quick_log_path, :method => :get do %>
+          <%= submit_tag 'Quick Log' %>
+          <% end %>
+    
+          <%= form_tag my_clients_path, :method => :get do %>
+          <%= hidden_field_tag 'My Clients' %>
+          <% end %>
+          
+          <%= form_tag view_exercises_path, :method => :get do %>
+            <%= submit_tag 'View All Exercises' %>
+          <% end %>
+  
+          <div class="login">
+            <% if current_user %>
+                Signed in as <strong><%= current_user.name %></strong>!
+                <%= link_to "Sign out", signout_path, id: "sign_out" %>
+            <% else %>
+                <%= link_to "Sign in with Google", "/auth/google_oauth2", id: "sign_in" %>
+            <% end %>
+          </div>
+            
     </div>
-</body>
-<form>
+  
+  
+    <div class="col-sm-8" style="display: inline-block; width: 50%; padding: 1em;">
+    <form>
       <fieldset>
-        <legend>Dashboard</legend>
-        <p>
-          <label>my progress </label>
 
-        </p>
+        <legend>Dashboard</legend>
+        <p>my progress</p>
+        <div class="content">
+            <div class="group">
+              <div class="circular-progress60"></div>
+              <div class="circular-text">Weight</div>
+            </div>
+            
+            <div class="group">
+              <div class="circular-progress85"></div>
+              <div class="circular-text">Body Fat</div>
+            </div>
+            
+            <div class="group">
+              <div class="circular-progress100"></div>
+              <div class="circular-text">Height</div>
+            </div>
+            
+        </div>  
+
       </fieldset>
     </form>
+    </div>
+  </div>
+
+</div>
+</html>
