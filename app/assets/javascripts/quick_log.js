@@ -36,6 +36,7 @@ $(function() {
     
     $.ajax({
       type:"POST",
+      beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
       url:"/process_new_quick_log",
       data: {
         task_card_data : task_card_data
