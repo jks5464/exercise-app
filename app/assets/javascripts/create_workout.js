@@ -96,13 +96,13 @@ $(function() {
   }
 
   function make_strength_task(name, sets, reps, weight, units) {
-    var task_name = "<span>" + name + " </span>";
+    var task_name = "<span class='exercise_name'>" + name + " </span>";
     
     var sets_info = "<span class='sets_info'>" + sets + "</span>";
     var reps_info = "<span class='reps_info'>" + reps + "</span>";
     var weight_info = "<span class='weight_info'>" + weight + "</span>";
-    
-    var task_info = " - " + sets_info + " sets, " + reps_info + " reps, at " + weight_info + " " + units;
+    var units_info = "<span class='units_info'>" + units + "</span>";
+    var task_info = " - " + sets_info + " sets, " + reps_info + " reps, at " + weight_info + " " + units_info;
     var edit_button = '<button type="button" class="btn btn-info btn-sm strength_edit_button"><span class="glyphicon glyphicon-pencil"></span></button>';
     var delete_button = '<button type="button" class="btn btn-info btn-sm strength_delete_button"><span class="glyphicon glyphicon-trash"></span></button>';
     var show_form =  "<span class='show_form'>" + task_info + " " + edit_button + " " + delete_button + "</span>";
@@ -117,20 +117,22 @@ $(function() {
                       weight_edit + " " +
                       done_button +
                     '</span>';
+    var type_form = '<span class="task_type" hidden>Strength</span>';
     var markup = "<div class='task_card'>" + 
                 task_name + 
                 show_form + 
                 edit_form + 
+                type_form +
               "</div>";
     return markup;
   }
   
   function make_cardio_task(name, distance_time, units) {
-    var task_name = "<span>" + name + " </span>";
+    var task_name = "<span class='exercise_name'>" + name + " </span>";
     
     var distance_time_info = "<span class='distance_time_info'>" + distance_time + "</span>";
-    
-    var task_info = " - " + distance_time_info + " " + units;
+    var units_info = "<span class='units_info'>" + units + "</span>";
+    var task_info = " - " + distance_time_info + " " + units_info;
     var edit_button = '<button type="button" class="btn btn-info btn-sm cardio_edit_button"><span class="glyphicon glyphicon-pencil"></span></button>';
     var delete_button = '<button type="button" class="btn btn-info btn-sm cardio_delete_button"><span class="glyphicon glyphicon-trash"></span></button>';
     var show_form =  "<span class='show_form'>" + task_info + " " + edit_button + " " + delete_button + "</span>";
@@ -141,10 +143,12 @@ $(function() {
                       distance_time_edit + " " + 
                       done_button +
                     '</span>';
+    var type_form = '<span class="task_type" hidden>Cardio</span>';
     var markup = "<div class='task_card'>" + 
                 task_name + 
                 show_form + 
                 edit_form + 
+                type_form + 
               "</div>";
     return markup;
   }
@@ -214,12 +218,45 @@ $(function() {
 });
 
 function get_task_card_data() {
-  var results = [1, 2, 3];
-  return results;
+  var task_card_data = [];
+  $("#task_card_list").children().each(function(index) {
+    var data_dict = {};
+    if ($(this).find(".task_type").text() == "Strength") {
+      data_dict["exercise_name"] = $(this).find(".exercise_name").text().trim();
+      data_dict["set_count"] = $(this).find(".sets_info").text().trim();
+      data_dict["rep_count"] = $(this).find(".reps_info").text().trim();
+      data_dict["rep_value"] = $(this).find(".weight_info").text().trim();
+      data_dict["rep_unit"] = $(this).find(".units_info").text().trim();
+    } else if ($(this).find(".task_type").text() == "Cardio") {
+      data_dict["exercise_name"] = $(this).find(".exercise_name").text().trim();
+      data_dict["set_count"] = 1;
+      data_dict["rep_count"] = 1;
+      data_dict["rep_value"] = $(this).find(".distance_time_info").text().trim();
+      data_dict["rep_unit"] = $(this).find(".units_info").text().trim();
+    }
+    task_card_data.push(data_dict);
+  });
+  return task_card_data;
 }
 
 $(function() {
+  /*
+  Data sent to endpoint
+  { 
+    workout name : # name of workout
+    task_card_data : [ # list of data dictionaries needed to create tasks and sets
+                        {
+                          exercise_name : 
+                          set_count :
+                          rep_count : 
+                          rep_value :  
+                          rep_unit :
+                        }
+                      ]
+  }
+  */
   $("#finish_creating_workout_button").click(function() {
+    var workout_name = $(".workout_name_info").text();
     var task_card_data = get_task_card_data();
     
     $.ajax({
@@ -227,6 +264,7 @@ $(function() {
         beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
         url:"/process_create_workout",
         data: {
+          "workout_name" : workout_name,
           "task_card_data" : task_card_data
         },
         success: function(data) {

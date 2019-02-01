@@ -12,7 +12,7 @@ class WorkoutsController < AuthenticationController
   def my_workouts
     puts("Displaying my workouts page")
     puts("User has id: #{session[:user_id]}")
-    @workouts = Workout.where(user_id: session[:user_id])
+    @workouts = current_user.workout
     @workouts = [] if (@workouts.nil?)
   end
   
@@ -22,8 +22,21 @@ class WorkoutsController < AuthenticationController
   
   def process_create_workout
     puts("Inserting new workout to database...")
+    workout_name = params[:workout_name]
     task_card_data = params[:task_card_data]
-    puts("Received task_card_data: #{task_card_data}")
+    
+    new_workout = current_user.workout.create(name: workout_name, uid: 0, completed: false)
+    task_card_data.each do | i, td |
+      puts("Exercise name #{td['exercise_name']}")
+      exercise = Exercise.get_by_name(td['exercise_name'])
+      new_task = new_workout.task.create(exercise_id: exercise.id, completed: false)
+      (1..td["set_count"].to_i).each do | i |
+        new_task.exercise_set.create(rep_count: td["rep_count"], rep_value: td["rep_value"], rep_unit: td["rep_unit"], completed: false)
+      end
+    end
+    
+    
+    puts("New workout inserted")
     puts("!"*100)
     render json: { redirect_path: my_workouts_path }
   end

@@ -48,7 +48,7 @@ app.Search_Exercises.prototype._initAutocomplete = function() {
                   <label for="number">
                       Distance/Time
                     </label>
-                    <input type="text" name="number" id="distance_time" class="text ui-widget-content ui-corner-all">
+                    <input type="text" name="number" id="distance_time" min="1" value="1" class="text ui-widget-content ui-corner-all">
                 </div>` +
                 
                 `<div>` + 
