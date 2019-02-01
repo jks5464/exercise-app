@@ -75,26 +75,14 @@ class HomepageController < AuthenticationController
     
   end
   
-  def create_new_quick_log
+  def process_new_quick_log
     puts("Creating new quick log...")
-    # category = params[:category]
-    # quick_log_data = get_quick_log_data(category, params)
-=begin
-    workout = Workout.create(name = "quicklog-unique-id", 
-             uid = not sure, 
-             user_id = current_user.id, 
-             completed = true)
-    exercise = exercise_with_name(params[:exercise_name])
-    task = Task.create(exercise_id = exercise.id
-                       workout_id = workout.id,
-                       completed = true)
-    set = Set.create()
-    # ====> Set  
-=end
-    # workout = current_user.workouts.create("quicklog-1")
-    # task = workout.tasks.create("quicklog-task-1")
-    # task.sets.create(quick_log_data)
-    # task.
+    puts("="*100)
+    workout_name = "Workout_" + current_user.to_s + "_" + Time.now.to_s
+    task_card_data = params[:task_card_data]
+    WorkoutsController.insert_new_workout(workout_name, task_card_data)
+    
+    head :ok, content_type: "text/html"
   end
   
 end
