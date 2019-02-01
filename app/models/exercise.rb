@@ -5,4 +5,8 @@ class Exercise < ActiveRecord::Base
   def self.search(term)
     where('LOWER(name) LIKE :term', term: "%#{term.downcase}%")
   end
+  
+  def self.get_by_name(name)
+    where(name: name).first
+  end
 end

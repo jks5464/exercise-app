@@ -20,17 +20,6 @@ class WorkoutsController < AuthenticationController
     puts("Displaying create workout page")
   end
   
-  def self.insert_new_workout(workout_name, task_card_data)
-    new_workout = current_user.workout.create(name: workout_name, uid: 0, completed: false)
-    task_card_data.each do | i, td |
-      exercise = Exercise.get_by_name(td['exercise_name'])
-      new_task = new_workout.task.create(exercise_id: exercise.id, completed: false)
-      (1..td["set_count"].to_i).each do | i |
-        new_task.exercise_set.create(rep_count: td["rep_count"], rep_value: td["rep_value"], rep_unit: td["rep_unit"], completed: false)
-      end
-    end
-  end
-  
   def process_create_workout
     puts("Inserting new workout to database...")
     name = params[:name]

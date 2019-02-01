@@ -44,13 +44,6 @@ class HomepageController < AuthenticationController
     workout_name = "Workout_" + session[:user_id].to_s + "_" + Time.now.to_s
     puts("!"*100)
     puts(workout_name)
-    new_workout = Workout.create("name": workout_name, "user_id": session[:user_id], "completed": "true")
-    @workouts.append(new_workout)
-
-    puts("All the things!")
-    puts("*"*100)
-    t_tmp2 = Task.create("exercise_id": "2", "completed": "true", "workout_id": new_workout.id)
-    ExerciseSet.create("rep_count": "25", "rep_value": "30", "rep_unit": "lbs", "completed": "true", "task_id": t_tmp2.id)
 
 
     @tasks = []
@@ -78,10 +71,10 @@ class HomepageController < AuthenticationController
   def process_new_quick_log
     puts("Creating new quick log...")
     puts("="*100)
+    user = current_user
     workout_name = "Workout_" + current_user.to_s + "_" + Time.now.to_s
     task_card_data = params[:task_card_data]
-    WorkoutsController.insert_new_workout(workout_name, task_card_data)
-    
+    Workout.insert_new_workout(user, workout_name, task_card_data, true, true, true)
     head :ok, content_type: "text/html"
   end
   
