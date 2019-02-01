@@ -24,18 +24,10 @@ class WorkoutsController < AuthenticationController
     puts("Inserting new workout to database...")
     workout_name = params[:workout_name]
     task_card_data = params[:task_card_data]
+    user = current_user
     
-    new_workout = current_user.workout.create(name: workout_name, uid: 0, completed: false)
-    task_card_data.each do | i, td |
-      puts("Exercise name #{td['exercise_name']}")
-      exercise = Exercise.get_by_name(td['exercise_name'])
-      new_task = new_workout.task.create(exercise_id: exercise.id, completed: false)
-      (1..td["set_count"].to_i).each do | i |
-        new_task.exercise_set.create(rep_count: td["rep_count"], rep_value: td["rep_value"], rep_unit: td["rep_unit"], completed: false)
-      end
-    end
-    
-    
+    Workout.insert_new_workout(user, workout_name, task_card_data, false, false, false)
+
     puts("New workout inserted")
     puts("!"*100)
     render json: { redirect_path: my_workouts_path }
