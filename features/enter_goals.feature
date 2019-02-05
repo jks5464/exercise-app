@@ -23,7 +23,7 @@ Scenario: I enter a valid goal
   And I enter "50" into "value"
   And I select unit name in "unit"
   And I enter "2019-03-12" into "date"
-  And I press "Add Goal"
+  And I press "Enter"
   Then I should be on the my goals page
   And I should see "Timeline" within "div.goals"
   And I should see "Progress" within "div.goals"
@@ -43,6 +43,6 @@ Scenario: I enter an invalid goal
   And I enter "invalid value" into "value"
   And I select unit name in "unit"
   And I enter "03/12/2019" into "date"
-  And I press "Add Goal"
+  And I press "Enter"
   Then I should see "Invalid goal" within "div#flash_error"
   And I should be on the enter goal page
