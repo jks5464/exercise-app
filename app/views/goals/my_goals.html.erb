@@ -1,35 +1,41 @@
-<h2>My Goals</h2>
-
-<div class="goals">
-<% if @goals.empty? %>
-    <%= "You don't have any goals entered yet." %>
-<% else %>
-    <table>
-        <tr>
-            <th>Name</th>
-            <th>Description</th>
-            <th>Exercise</th>
-            <th>Timeline</th>
-            <th>Progress</th>
-        </tr>
-        <% @goals.each_with_index do |g, i| %>
-            <tr <%= 'id=last_row' if i == (@goals.size - 1) %> >
-                <td><%= g.name %></td>
-                <td><%= g.description %></td>
-                <td><%= g.exercise.name %></td>
-                <td></td>
-                <td></td>
-            </tr>
-        <% end %>    
-    </table>
-<% end %>
-
-<%= form_tag enter_goal_path, :method => :get do %>
-  <%= submit_tag 'Add Goal' %>
-<% end %>
-</div>
-
-
-
-
-<%= render :template => 'homepage/template' %>
+<div class="container">
+    
+    <div class="goals">
+        
+      <legend>My Goals</legend>
+            
+      <div class="row">
+        
+        <div class="form-group">
+            <% if @goals.empty? %>
+                <%= "You don't have any goals entered yet." %>
+            <% else %>
+                <table class="table">
+                    <tr>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Exercise</th>
+                        <th>Timeline</th>
+                        <th>Progress</th>
+                    </tr>
+                    <% @goals.each_with_index do |g, i| %>
+                        <tr <%= 'id=last_row' if i == (@goals.size - 1) %> >
+                            <td><%= g.name %></td>
+                            <td><%= g.description %></td>
+                            <td><%= g.exercise.name %></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    <% end %>    
+                </table>
+            <% end %>
+        </div>
+    
+        <div class="form-group">
+            <%= form_tag enter_goal_path, :method => :get do %>
+              <input class="btn btn-primary" type="submit" name="commit" value="Add Goal">
+            <% end %>
+        </div>
+        
+    </div>
+ </div>

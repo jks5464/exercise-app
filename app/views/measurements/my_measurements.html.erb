@@ -1,31 +1,52 @@
-<div class="measurements">
-  <p> 
-    Measurements so far:
-  </p>
+<div class="container-fluid">
   
-  <% if @measurements.empty? %>
-    <%= "You don't have any measurements entered yet." %><br>
-  <% else %>
-    <table>
-      <tr>
-        <th>Weight</th>
-        <th>Body Fat</th> 
-        <th>Height</th>
-      </tr>
-      <% @measurements.each_with_index do |m, i| %>
-        <tr <%= 'id=last_row' if i == (@measurements.size - 1) %> >
-        <td><%= m.weight %></td>
-        
-        <td><%= m.body_fat %></td>
-        <td><%= m.height %></td>
-        </tr>
-      <% end %>  
-    </table>
-  <% end %>
+    <div class="measurements">
+    
+      <legend>My Measurements</legend>
+    
+      <div class="row">
+      
+        <%= form_tag enter_my_measurements_path, :method => :get do %>
+      
+        <div class='form-group'>
+          <% if @measurements.empty? %>
+            <%= "You don't have any measurements entered yet." %><br>
+          <% else %>
+            <table class="table">
+              <tr>
+                <th>Weight</th>
+                <th>Body Fat</th> 
+                <th>Height</th>
+                <th>Date</th>
+              </tr>
+              <% @measurements.each_with_index do |m, i| %>
+                <tr <%= 'id=last_row' if i == (@measurements.size - 1) %> >
+                  <td><%= m.weight %></td>
+                  <td><%= m.body_fat %></td>
+                  <td><%= m.height %></td>
+                  <td><%= m.updated_at.strftime("%B %d, %Y at %H:%M") %></td>
+                </tr>
+              <% end %> 
+            </table>
+          <% end %>
+        </div>
+    
+        <div class='form-group'>
+          <input class="btn btn-primary" style="margin-top=2em;" type="submit" name="commit" value="Enter New Measurements">
+          <% end %>
+        </div>
+      
+      </div>
+      
+    </div>
+    
 </div>
 
-<%= form_tag enter_my_measurements_path, :method => :get do %>
-  <%= submit_tag 'Enter New Measurements' %>
-<% end %>
 
-<%= render :template => 'homepage/template' %>
+<!-- charts -->
+<%= 
+=begin
+  area_chart [ { name: "Weight", data: Measurement.where(user_id: session[:user_id]).count.group_by_day(:weight) }] 
+=end
+%>
+

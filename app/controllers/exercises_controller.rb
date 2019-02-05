@@ -26,6 +26,7 @@ class ExercisesController < ApplicationController
     end
     
     redirect_to create_workout_path
+    
   end
   
   def valid_exercises?(exercises)
