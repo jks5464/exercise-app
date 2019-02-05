@@ -1,11 +1,29 @@
-<h2>Exercise Tracker</h2>
-
-<div class="login">
-            <% if current_user %>
-                Signed in as <strong><%= current_user.name %></strong>!
-                <%= link_to "Sign out", signout_path, id: "sign_out" %>
-            <% else %>
-                <%= link_to "Sign in with Google", "/auth/google_oauth2", id: "sign_in" %>
-            <% end %>
-          </div>
+<!DOCTYPE html>
+<html>
+  <head>
+    <h1>Exercise Tracker</h1>
+    <%= stylesheet_link_tag    'application', media: 'all' %>
+    <%= csrf_meta_tags %>
+  </head>
+  <body>
+    <div class="login">
+    <% if !current_user %>
+        <%= link_to "Sign in with Google", "/auth/google_oauth2", id: "sign_in" %>
+    <% end %>
+    </div>
     
+    <div>
+      <div id="flash_error">
+        <% if flash[:error] %>
+          <%= flash[:error] %>
+        <% end %>
+      </div>
+    </div>
+    
+    <div class="container">
+      Project by Team Girl Scout Cookies
+      <div class="span-24">
+      </div>
+    </div>
+  </body>
+</html>
