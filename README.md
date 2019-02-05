@@ -1,5 +1,11 @@
 # Girl Scout Cookies Exercise Tracker
 
+
+### Setup
+
+1. Install chrome. This is required to run cucumber tests
+  - https://intoli.com/blog/installing-google-chrome-on-centos/
+
 **Production URL: https://exercise-track-app.herokuapp.com/**
 
 
