@@ -5,9 +5,6 @@
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     
-    <script src="/assets/search_exercises.js"></script>
-    <script src="/assets/create_workout.js"></script>
-    
     <%= javascript_include_tag "/assets/create_workout.js" %>
     <%= javascript_include_tag "/assets/search_exercises.js" %>
     <%= javascript_include_tag "/assets/quick_log.js" %>
@@ -38,7 +35,7 @@
     
       <%= yield %>
       <% unless current_page?(root_path) %>
-      <%= render :template => 'homepage/template' %>
+        <%= render :template => 'homepage/template' %>
       <% end %>
       
     </div>
