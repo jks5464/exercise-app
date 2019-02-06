@@ -18,7 +18,7 @@ Scenario: I enter in new measurements
   When I enter "130" into "weight"
   And I enter "20" into "body_fat"
   And I enter "6" into "height"
-  And I press "Enter"
+  And I press "Submit Record"
   Then I should be on the my measurements page
   And I should see "130" within "tr#last_row"
   And I should see "20" within "tr#last_row"
@@ -30,7 +30,7 @@ Scenario: I enter in invalid measurements
   Given I login and am on the enter measurements page
   When I enter "a" into "weight"
   And I enter "b" into "body_fat"
-  And I press "Enter"
+  And I press "Submit Record"
   Then I should be on the my measurements page
   And I should see "Invalid measurements" within "div#flash_error"
   
