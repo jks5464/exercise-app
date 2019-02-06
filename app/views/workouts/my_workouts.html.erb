@@ -1,3 +1,4 @@
+<script src="/assets/my_workouts.js"></script>
 <div class="container-fluid">
   
   <div class="goals">
@@ -25,7 +26,8 @@
         </div>
         
         <% @workouts.each do |workout| %>
-          <div class="row workout_card">
+          <div class="row workout_card" id=<%="#{workout.id}"%> >
+            <input class="complete_workout" type="checkbox">
               <span>
                 <%= workout.name %>
               </span>
