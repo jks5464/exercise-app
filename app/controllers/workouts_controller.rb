@@ -33,6 +33,16 @@ class WorkoutsController < AuthenticationController
     render json: { redirect_path: my_workouts_path }
   end
   
+  def process_complete_workout
+    complete = params[:complete]
+    workout_id = params[:workout_id]
+
+    puts("marking complete...")
+    Workout.mark_completed(workout_id, complete)
+    puts("done.")
+    render json: { status: 200 }
+  end
+  
   def search_exercises_json
     @exercises = Exercise.search(params[:term])
     respond_to :json
