@@ -1,51 +1,55 @@
-<h3>
-My Workouts:
-</h3>
-
-<!-- Create Workout button section -->
-<%= form_tag create_workout_path, :method => :get do %>
-  <%= submit_tag 'Create New Workout' %>
-<% end %>
-
-<!-- Saved Workouts section -->
-<div class="row" id="saved-workouts">
-  <div>
-    <h3>Saved Workouts</h3>
-  </div>
-</div>
+<div class="container-fluid">
   
-<!-- Planned Workouts section -->
-<div class="row" id="planned-workouts">
-  <div>
-    <h3>Planned Workouts</h3>
-  </div>
-  <% @workouts.each do |workout| %>
-  <div class="row workout_card">
-      <span>
-        <%= workout.name %>
-      </span>
-      <div>
-        <% workout.task.each do |task| %>
-          <div class="task_card">
-            <span class='exercise_name'><%= task.exercise.name %> - </span>
-            <span class='sets_info'><%= task.exercise_set.count %> sets </span>
-            <% task.exercise_set.each do |set| %>
-              <div class="task_card">
-                <span class='reps_info'><%= set[:rep_count] %> reps </span>
-                <span class='weight_info'>at <%= set[:rep_value] %> </span>
-                <span class='units_info'><%= set[:rep_unit] %></span>
+  <div class="goals">
+    
+      <legend>My Workouts</legend>
+      
+      <!-- Create Workout button section -->
+      <div class="form-group">
+        <%= form_tag create_workout_path, :method => :get do %>
+          <input class="btn btn-primary" type="submit" name="commit" value="Create New Workout">
+        <% end %>
+      </div>
+    
+      <div class="row" id="saved-workouts">
+        <div class="form-group">
+          <h1>Saved Workouts</h1>
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <div class="row" id="planned-workouts">
+          <div>
+            <h3>Planned Workouts</h3>
+          </div>
+        </div>
+        
+        <% @workouts.each do |workout| %>
+          <div class="row workout_card">
+              <span>
+                <%= workout.name %>
+              </span>
+              <div>
+                <% workout.task.each do |task| %>
+                  <div class="task_card">
+                    <span class='exercise_name'><%= task.exercise.name %> - </span>
+                    <span class='sets_info'><%= task.exercise_set.count %> sets </span>
+                    <% task.exercise_set.each do |set| %>
+                      <div class="task_card">
+                        <span class='reps_info'><%= set[:rep_count] %> reps </span>
+                        <span class='weight_info'>at <%= set[:rep_value] %> </span>
+                        <span class='units_info'><%= set[:rep_unit] %></span>
+                      </div>
+                    <% end %>
+                  </div>
+                <% end %>
               </div>
-            <% end %>
           </div>
         <% end %>
       </div>
+      
   </div>
-  <% end %>
 </div>
 
+
 <!-- Instructor Workouts section -->
-
-
-
-
-<%= render :template => 'homepage/template' %>

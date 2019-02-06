@@ -1,73 +1,89 @@
 <script src="/assets/search_exercises.js"></script>
 <script src="/assets/quick_log.js"></script>
 
-  <p>
-    <b>Logging History:</b><br>
-    <% if @exercises.empty? %>
-        <b><%= "No exercises have been created yet." %></b>
-        <%= form_tag create_exercise_path, :method => :get do %>
-          <%= submit_tag 'Click here to create an exercise' %>
-        <% end %>
-    <% else %>
-      <button id="add">Log a new exercise</button><br>
-      <%= form_tag create_exercise_path, :method => :get do %>
-        Don't see the exercise you're looking for? Add one below<br>
-        <%= submit_tag 'Click here to create an exercise' %>
-      <% end %>
-    <% end %>
-  </p>
+<div class="container-fluid">
   
-  <% if @workouts.empty? %>
-    Here will be the history of completed exercises/workouts<br />
-  <% else %>
-    <table>
-        <tr>
-          <th>Exercise Name</th>
-          <th>Set Count</th>
-          <th>Rep Count</th>
-          <th>Rep Value</th>
-          <th>Rep Unit</th>
-        </tr>
-        <% @workouts.reverse_each do |workout, i| %>
-          <% if workout.completed %>
-            <% workout.task.each do | task | %>
-            <tr>
-              <td><%= task.exercise.name %></td>
-              <td><%= task.exercise_set.count %></td>
-              <td><%= task.exercise_set[0].rep_count %></td>
-              <td><%= task.exercise_set[0].rep_value %></td>
-              <td><%= task.exercise_set[0].rep_unit %></td>
-            </tr>
-            <% end %>
-          <% end %>
-        <% end %>  
-    </table>
-  <% end %>
-  
-  <div class="container">
-  <!-- task cards -->
-  <div class="row" id="task_card_list">
+  <div class="row">
     
-  <!-- hidden popup form when user adds a new exercise to their workout -->
-  <div id="dialog-form" title="Quick Log">
-      <form>
-        <fieldset>
-          <div class="exercise-search">
-            <label for="exercise-search-txt">
-              Exercise
-            </label>
-            <input name="exercise-search-txt" type="text" id="exercise-search-txt">
-            <div class="results" id="exercise-search-results">
-              
-            </div>
+    <div class="form-group">
+      <legend>Logging History:</legend>
+      <% if @exercises.empty? %>
+          <b><%= "No exercises have been created yet." %></b>
+          <%= form_tag create_exercise_path, :method => :get do %>
+            <%= submit_tag 'Click here to create an exercise' %>
+          <% end %>
+      <% else %>
+        <div class="form-group">
+          <div class="form-group row" style="margin-left: auto; margin-right: auto;">
+            <a class="btn btn-primary" id="add">Log a new exercise</a>
           </div>
-          
-          <div id="exercise-category-data">
-          
-          </div>
-          
-        </fieldset>
-      </form>
+        </div>
+        <div class="form-group">
+          <%= form_tag create_exercise_path, :method => :get do %>
+            Don't see the exercise you're looking for? Add one below<br>
+            <input class="btn btn-primary" type="submit" name="commit" value="Click here to create an exercise">
+        </div>
+        <% end %>
+      <% end %>
+      
     </div>
+    
+    <div class="form-group">
+      <% if @workouts.empty? %>
+        Here will be the history of completed exercises/workouts<br />
+      <% else %>
+        <table class="table">
+            <tr>
+              <th>Exercise Name</th>
+              <th>Set Count</th>
+              <th>Rep Count</th>
+              <th>Rep Value</th>
+              <th>Rep Unit</th>
+            </tr>
+            <% @workouts.reverse_each do |workout, i| %>
+              <% if workout.completed %>
+                <% workout.task.each do | task | %>
+                <tr>
+                  <td><%= task.exercise.name %></td>
+                  <td><%= task.exercise_set.count %></td>
+                  <td><%= task.exercise_set[0].rep_count %></td>
+                  <td><%= task.exercise_set[0].rep_value %></td>
+                  <td><%= task.exercise_set[0].rep_unit %></td>
+                </tr>
+                <% end %>
+              <% end %>
+            <% end %>  
+        </table>
+      <% end %>
+      
+    </div>
+    
+    <div class="form-group">
+        <div class="row" id="task_card_list"></div>
+    </div>
+    
+  </div>
 </div>
-<%= render :template => 'homepage/template' %>
+
+
+<!-- hidden popup form when user adds a new exercise to their workout -->
+<div id="dialog-form" title="Quick Log">
+  <form>
+    <fieldset>
+      <div class="exercise-search">
+        <label for="exercise-search-txt">
+          Exercise
+        </label>
+        <input name="exercise-search-txt" type="text" id="exercise-search-txt">
+        <div class="results" id="exercise-search-results">
+          
+        </div>
+      </div>
+      
+      <div id="exercise-category-data">
+      
+      </div>
+      
+    </fieldset>
+  </form>
+</div>
