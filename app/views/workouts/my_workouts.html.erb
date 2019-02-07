@@ -26,6 +26,7 @@
         </div>
         
         <% @workouts.each do |workout| %>
+          <% if !workout.completed %>
           <div class="row workout_card" id=<%="#{workout.id}"%> >
             <input class="complete_workout" type="checkbox">
               <span>
@@ -47,11 +48,9 @@
                 <% end %>
               </div>
           </div>
+          <% end %>
         <% end %>
       </div>
       
   </div>
 </div>
-
-
-<!-- Instructor Workouts section -->
