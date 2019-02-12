@@ -35,6 +35,7 @@ Rails.application.routes.draw do
   get 'view_exercises' => 'homepage#view_exercises', :as => 'view_exercises'
   get 'search_exercises_json' => 'workouts#search_exercises_json', :as => 'search_exercises_json'
   get 'units_json' => 'workouts#units_json', :as => 'units_json'
+  get 'admin' => 'admin#admin', :as => 'admin'
   
   
  # root 'homepage#dashboard'
