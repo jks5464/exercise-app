@@ -1,13 +1,17 @@
 /* @override http://localhost:9292/default.css */
 body {
-	font-family: Helvetica, Arial, Geneva, sans-serif;
-    
-	margin: 100px;
-	padding: 2em;
-	border: 20px solid rgba(18, 211, 237, 1);
+	
     color: #034f84;
+    width: 100%;
 }
 
+html, body, {
+	font-family: Helvetica, Arial, Geneva, sans-serif;
+    top:0;
+    bottom:0;
+    left:0;
+    right:0;
+}
 
 span.word {
 	text-transform: uppercase;
@@ -21,19 +25,24 @@ span.word {
 form {
 	/* border: 1px solid grey; */
 	margin: 65px;
-  margin-top: 1em;
+    margin-top: 1em;
 }
 
 br {
    display: block;
    margin: 20px 0;
    line-height:22px;
-}
 
+}
 
 .boxed {
   width: 320px;
   padding: 10px;
   border: 5px solid gray;
   margin: 0;
+}
+
+.btn-primary.change-red {
+    background-color: red !important;
+    border-color: red;
 }

@@ -12,4 +12,17 @@ class Workout < ActiveRecord::Base
       end
     end
   end
+  
+  def self.mark_completed(id, completed)
+    # mark all workouts and its related tasks and its related sets as 'completed'
+    workout = where(id: id).first
+    workout.update(completed: completed)
+    
+    workout.task.each do | task |
+      task.update(completed: completed)
+      task.exercise_set.each do | set |
+        set.update(completed: completed)
+      end
+    end
+  end
 end

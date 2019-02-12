@@ -1,5 +1,51 @@
-<h1>
-  My Client:
-</h1>
-<%= render :template => 'homepage/template' %>
-
+<div class="container-fluid">
+    
+    <legend>My Clients</legend>
+    
+    <div>
+        -- My Trainers -- 
+        <% current_user.trainers.each do |trainer| %>
+            <div>
+                <%= trainer.name %>
+            </div>
+        <% end %>
+        ----
+    </div>
+    
+    <div>
+        -- My Clients -- 
+        <% current_user.clients.each do |client| %>
+            <div>
+                <%= client.name %>
+            </div>
+        <% end %>
+        ----
+    </div>
+    
+    <div>
+        <br>
+        <% if @clients.empty? %>
+            <%= "No clients have been paired with you yet." %>
+        <% else %>
+            <% @clients.each_with_index do |c, i| %>
+                <div <%= 'id=last_row' if i == (@clients.size - 1) %> >
+                   <table id= "table">
+                      <tr>
+                        <td><%= c.name%></td>
+                      </tr>
+                    </table>
+                </div>
+            <% end %>  
+        <% end %>
+        <br>
+        <button type="button" class"btn btn-info btn-sm" id="css-toggle">Click here to change CSS!</button>
+    </div>
+    
+    <!-- Menu Toggle Script -->
+  <script>
+    $("#css-toggle").click(function(e) {
+      e.preventDefault();
+      $(".btn-primary").toggleClass("change-red");
+    });
+  </script>
+</div>

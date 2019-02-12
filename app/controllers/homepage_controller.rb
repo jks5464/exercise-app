@@ -12,6 +12,10 @@ class HomepageController < AuthenticationController
   
   def dashboard
     puts("dashboard showing")
+    
+    @goals = Goal.where(user_id: session[:user_id])
+    @goals = [] if (@goals.nil?)
+    
   end
   
   def my_measurement
@@ -51,6 +55,7 @@ class HomepageController < AuthenticationController
     Workout.insert_new_workout(user, workout_name, task_card_data, true, true, true)
     head :ok, content_type: "text/html"
   end
+  
   def view_exercises
     puts("Displaying view exercises page")
     @exercises = Exercise.all

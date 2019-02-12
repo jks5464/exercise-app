@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   post 'process_enter_new_measurements' => 'measurements#process_enter_new_measurements', :as => 'process_enter_new_measurements'
   post 'process_create_workout' => 'workouts#process_create_workout', :as => 'process_create_workout'
   post 'process_new_quick_log' => 'homepage#process_new_quick_log', :as => 'process_new_quick_log'
+  post 'process_complete_workout' => 'workouts#process_complete_workout', :as => 'process_complete_workout'
  
   
   get  'dashboard' => 'homepage#dashboard', :as => 'dashboard'
