@@ -11,7 +11,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190212013437) do
+ActiveRecord::Schema.define(version: 20190212024316) do
+
+  create_table "client_trainer_relations", force: :cascade do |t|
+    t.integer "client_id"
+    t.integer "trainer_id"
+  end
 
   create_table "clients", force: :cascade do |t|
     t.string   "name"
@@ -78,6 +83,9 @@ ActiveRecord::Schema.define(version: 20190212013437) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  add_index "role_assignments", ["role_id"], name: "index_role_assignments_on_role_id"
+  add_index "role_assignments", ["user_id"], name: "index_role_assignments_on_user_id"
 
   create_table "roles", force: :cascade do |t|
     t.string   "name"

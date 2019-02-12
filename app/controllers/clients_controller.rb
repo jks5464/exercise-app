@@ -12,9 +12,9 @@ class ClientsController < AuthenticationController
   def my_clients
       puts("Displaying my clients page")
       puts("User has id: #{session[:user_id]}")
-      #@clients = current_user.client
-      #@clients = [] if (@clients.nil?)
-      @clients = []
+      
+      @clients = current_user.clients
+      @clients = [] if (@clients.nil?)
   end
   
 end

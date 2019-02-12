@@ -3,6 +3,26 @@
 </h1>
 
 <div>
+    <div>
+        -- My Trainers -- 
+        <% current_user.trainers.each do |trainer| %>
+            <div>
+                <%= trainer.name %>
+            </div>
+        <% end %>
+        ----
+    </div>
+    
+    <div>
+        -- My Clients -- 
+        <% current_user.clients.each do |client| %>
+            <div>
+                <%= client.name %>
+            </div>
+        <% end %>
+        ----
+    </div>
+    
     <% if @clients.empty? %>
         <%= "No clients have been paired with you yet." %>
     <% else %>
