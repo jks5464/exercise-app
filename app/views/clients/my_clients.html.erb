@@ -1,5 +1,19 @@
 <h1>
-  My Client:
+  My Clients:
 </h1>
-<%= render :template => 'homepage/template' %>
 
+<div>
+    <% if @clients.empty? %>
+        <%= "No clients have been paired with you yet." %>
+    <% else %>
+        <% @clients.each_with_index do |c, i| %>
+            <div <%= 'id=last_row' if i == (@clients.size - 1) %> >
+               <table id= "table">
+                  <tr>
+                    <td><%= c.name%></td>
+                  </tr>
+                </table>
+            </div>
+        <% end %>  
+    <% end %>
+</div>
