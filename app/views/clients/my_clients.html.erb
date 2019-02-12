@@ -1,19 +1,24 @@
-<h1>
-  My Clients:
-</h1>
-
-<div>
-    <% if @clients.empty? %>
-        <%= "No clients have been paired with you yet." %>
-    <% else %>
-        <% @clients.each_with_index do |c, i| %>
-            <div <%= 'id=last_row' if i == (@clients.size - 1) %> >
-               <table id= "table">
-                  <tr>
-                    <td><%= c.name%></td>
-                  </tr>
-                </table>
-            </div>
-        <% end %>  
-    <% end %>
+<script src="/assets/my_workouts.js"></script>
+<div class="container-fluid">
+    
+    <legend>My Clients</legend>
+    
+    <div>
+        <br>
+        <% if @clients.empty? %>
+            <%= "No clients have been paired with you yet." %>
+        <% else %>
+            <% @clients.each_with_index do |c, i| %>
+                <div <%= 'id=last_row' if i == (@clients.size - 1) %> >
+                   <table id= "table">
+                      <tr>
+                        <td><%= c.name%></td>
+                      </tr>
+                    </table>
+                </div>
+            <% end %>  
+        <% end %>
+        <br>
+        <button type="button" class"btn btn-info btn-sm">Click here to change CSS!</button>
+    </div>
 </div>
