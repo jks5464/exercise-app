@@ -19,6 +19,14 @@
             <% end %>  
         <% end %>
         <br>
-        <button type="button" class"btn btn-info btn-sm">Click here to change CSS!</button>
+        <button type="button" class"btn btn-info btn-sm" id="css-toggle">Click here to change CSS!</button>
     </div>
+    
+    <!-- Menu Toggle Script -->
+  <script>
+    $("#css-toggle").click(function(e) {
+      e.preventDefault();
+      $(".btn-primary").toggleClass("change-red");
+    });
+  </script>
 </div>
