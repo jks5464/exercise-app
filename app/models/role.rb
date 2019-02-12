@@ -1,3 +1,3 @@
 class Role < ActiveRecord::Base
-    belongs_to :role_assignment
+    has_many :role_assignment
 end
