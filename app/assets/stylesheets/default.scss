@@ -41,3 +41,8 @@ br {
   border: 5px solid gray;
   margin: 0;
 }
+
+.btn-primary.change-red {
+    background-color: red !important;
+    border-color: red;
+}
