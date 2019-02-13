@@ -13,7 +13,9 @@ class HomepageController < AuthenticationController
   def dashboard
     puts("dashboard showing")
     
-    @goals = current_user.goal
+    @goals = Goal.where(user_id: session[:user_id])
+    @goals = [] if (@goals.nil?)
+
   end
   
   def my_measurement

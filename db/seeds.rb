@@ -44,3 +44,24 @@ exercises.each do |exercise|
     Exercise.create(exercise)
 end
 
+# Development seed data
+if Rails.env.development? then
+    users = [ {"provider" => "none", "uid" => "-1", "name" => "Client_1_id_1", "oauth_token" => "none", "oauth_expires_at" => "January 1, 1753"},
+              {"provider" => "none", "uid" => "-1", "name" => "Client_2_id_2", "oauth_token" => "none", "oauth_expires_at" => "January 1, 1753"},
+              {"provider" => "none", "uid" => "-1", "name" => "Client_3_id_3", "oauth_token" => "none", "oauth_expires_at" => "January 1, 1753"},
+              {"provider" => "none", "uid" => "-1", "name" => "Trainer_1_id_4", "oauth_token" => "none", "oauth_expires_at" => "January 1, 1753"},
+              {"provider" => "none", "uid" => "-1", "name" => "Trainer_2_id_5", "oauth_token" => "none", "oauth_expires_at" => "January 1, 1753"}]
+    
+    users.each do | user |
+        User.create(user)
+    end
+    
+    client_trainer_relations = [ {"client_id" => 1, "trainer_id" => 4},
+                                {"client_id" => 2, "trainer_id" => 4},
+                                {"client_id" => 3, "trainer_id" => 4},
+                                {"client_id" => 1, "trainer_id" => 5}]
+                                
+    client_trainer_relations.each do |relation|
+        ClientTrainerRelation.create(relation)
+    end
+end

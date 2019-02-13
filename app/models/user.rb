@@ -13,4 +13,29 @@ class User < ActiveRecord::Base
       user.save!
     end
   end
+  
+  def clients
+    relations = ClientTrainerRelation.where(trainer_id: self.id)
+    my_clients = []
+    relations.each do | rel |
+      new_client = User.find(rel.client_id)
+      if !new_client.nil? then
+        my_clients.push(new_client)
+      end 
+    end
+    return my_clients
+  end
+  
+  def trainers
+    relations = ClientTrainerRelation.where(client_id: self.id)
+    my_trainers = []
+    relations.each do | rel |
+      new_trainer = User.find(rel.trainer_id)
+      if !new_trainer.nil? then
+        my_trainers.push(new_trainer)
+      end
+    end
+    return my_trainers
+  end
+  
 end

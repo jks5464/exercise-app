@@ -1,7 +1,26 @@
-<script src="/assets/my_workouts.js"></script>
 <div class="container-fluid">
     
     <legend>My Clients</legend>
+    
+    <div>
+        -- My Trainers -- 
+        <% current_user.trainers.each do |trainer| %>
+            <div>
+                <%= trainer.name %>
+            </div>
+        <% end %>
+        ----
+    </div>
+    
+    <div>
+        -- My Clients -- 
+        <% current_user.clients.each do |client| %>
+            <div>
+                <%= client.name %>
+            </div>
+        <% end %>
+        ----
+    </div>
     
     <div>
         <br>
@@ -19,6 +38,14 @@
             <% end %>  
         <% end %>
         <br>
-        <button type="button" class"btn btn-info btn-sm">Click here to change CSS!</button>
+        <button type="button" class"btn btn-info btn-sm" id="css-toggle">Click here to change CSS!</button>
     </div>
+    
+    <!-- Menu Toggle Script -->
+  <script>
+    $("#css-toggle").click(function(e) {
+      e.preventDefault();
+      $(".btn-primary").toggleClass("change-red");
+    });
+  </script>
 </div>
