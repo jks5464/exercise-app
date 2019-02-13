@@ -38,7 +38,7 @@ class WorkoutsController < AuthenticationController
     workout_id = params[:workout_id]
 
     puts("marking complete...")
-    Workout.mark_completed(workout_id, complete)
+    Workout.update_state(workout_id, State.complete)
     puts("done.")
     render json: { status: 200 }
   end
