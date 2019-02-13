@@ -13,7 +13,26 @@ class HomepageController < AuthenticationController
   def dashboard
     puts("dashboard showing")
     
+    @data = Goal.day_by_value(current_user)
+    
+    
     @goals = Goal.where(user_id: session[:user_id])
+    @goal_data = Array.new
+    @goals.each do |g|
+      # byebug
+      goal_values = Array.new
+      current_user.workout.each do | workout |
+        workout.task.each do |task|
+          if task.exercise_id == g.exercise_id then
+            task.exercise_set.each do | exercise_set |
+              goal_values.push(Array.new([exercise_set.created_at.strftime("%B %Y %D"), exercise_set.rep_value]))
+            end
+          end
+        end
+      end
+      # byebug
+      @goal_data.push(goal_values)
+    end
     @goals = [] if (@goals.nil?)
 
   end
