@@ -16,17 +16,9 @@
         <div class="form-group">
           <h1>Saved Workouts</h1>
         </div>
-      </div>
-      
-      <div class="form-group">
-        <div class="row" id="planned-workouts">
-          <div>
-            <h3>Planned Workouts</h3>
-          </div>
-        </div>
         
         <% @workouts.each do |workout| %>
-          <% if !workout.completed %>
+          <% if workout.state == State.saved %>
           <div class="row workout_card" id=<%="#{workout.id}"%> >
             <input class="complete_workout" type="checkbox">
               <span>
@@ -50,6 +42,45 @@
           </div>
           <% end %>
         <% end %>
+      </div>
+      
+      
+      
+      <div class="form-group">
+        <div class="row" id="planned-workouts">
+          <div>
+            <h3>Planned Workouts</h3>
+          </div>
+          
+          <% @workouts.each do |workout| %>
+          <% if workout.state == State.planned %>
+          <div class="row workout_card" id=<%="#{workout.id}"%> >
+            <input class="complete_workout" type="checkbox">
+              <span>
+                <%= workout.name %>
+              </span>
+              
+              <div>
+                <% workout.task.each do |task| %>
+                  <div class="task_card">
+                    <span class='exercise_name'><%= task.exercise.name %> - </span>
+                    <span class='sets_info'><%= task.exercise_set.count %> sets </span>
+                    <% task.exercise_set.each do |set| %>
+                      <div class="task_card">
+                        <span class='reps_info'><%= set[:rep_count] %> reps </span>
+                        <span class='weight_info'>at <%= set[:rep_value] %> </span>
+                        <span class='units_info'><%= set[:rep_unit] %></span>
+                      </div>
+                    <% end %>
+                  </div>
+                <% end %>
+              </div>
+          </div>
+          <% end %>
+        <% end %>
+        </div>
+        
+        
       </div>
       
   </div>

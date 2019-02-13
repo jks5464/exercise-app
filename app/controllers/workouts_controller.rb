@@ -26,7 +26,7 @@ class WorkoutsController < AuthenticationController
     task_card_data = params[:task_card_data]
     user = current_user
     
-    Workout.insert_new_workout(user, workout_name, task_card_data, false, false, false)
+    Workout.insert_new_workout(user, workout_name, task_card_data, State.saved, State.saved, State.saved)
 
     puts("New workout inserted")
     puts("!"*100)

@@ -22,18 +22,18 @@ end
 
 
 
-workouts = [{"name": "Abs", "user_id": "1", "completed": "true", "uid": "0"},
-            {"name": "Legs", "user_id": "0", "completed": "true", "uid": "1"}
+workouts = [{"name": "Abs", "user_id": "1", "state": State.saved, "uid": "0"},
+            {"name": "Legs", "user_id": "0", "state": State.saved, "uid": "1"}
             ]
 
 workouts.each do |workout|
     tmp = Workout.create(workout)
     
-    t_tmp = Task.create("exercise_id": "1", "completed": "true", "workout_id": tmp.id)
-    t_tmp2 = Task.create("exercise_id": "2", "completed": "true", "workout_id": tmp.id)
+    t_tmp = Task.create("exercise_id": "1", "state": State.saved, "workout_id": tmp.id)
+    t_tmp2 = Task.create("exercise_id": "2", "state": State.saved, "workout_id": tmp.id)
     
-    ExerciseSet.create("rep_count": "25", "rep_value": "30", "rep_unit": "lbs", "completed": "true", "task_id": t_tmp.id)
-    ExerciseSet.create("rep_count": "10", "rep_value": "50", "rep_unit": "lbs", "completed": "false", "task_id": t_tmp2.id)
+    ExerciseSet.create("rep_count": "25", "rep_value": "30", "rep_unit": "lbs", "state": State.saved, "task_id": t_tmp.id)
+    ExerciseSet.create("rep_count": "10", "rep_value": "50", "rep_unit": "lbs", "state": State.saved, "task_id": t_tmp2.id)
     
 end
                 
