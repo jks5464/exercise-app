@@ -1,5 +1,6 @@
 FactoryBot.define do
     factory :user do
+        id = 1
         new_user = Faker::Omniauth.google
         uid { Faker::Number.unique.number(5) }
         provider { "google_oauth2" }

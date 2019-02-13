@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
   has_many :workout
   has_many :goal
+  has_many :roles, through: :role_assignments
   
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_initialize.tap do |user|

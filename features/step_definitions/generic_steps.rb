@@ -74,9 +74,24 @@ Given /^(?:|I )am on (.+)$/ do |page_name|
 end
 
 Given /^(?:|I )login and am on (.+)$/ do |page_name|
-  @user = FactoryBot.build(:user)
-  logon(@user.provider, @user.name, @user.uid)
+  user = FactoryBot.build(:user)
+  @user = User.create(provider: user.provider,
+                      uid: user.uid,
+                      name: user.name,
+                      oauth_token: user.oauth_token,
+                      oauth_expires_at: user.oauth_expires_at)
+  logon(user.provider, user.name, user.uid)
   visit path_to(page_name)
+end
+
+Given /^(?:|I )login$/ do
+  user = FactoryBot.build(:user)
+  @user = User.create(provider: user.provider,
+                      uid: user.uid,
+                      name: user.name,
+                      oauth_token: user.oauth_token,
+                      oauth_expires_at: user.oauth_expires_at)
+  logon(user.provider, user.name, user.uid)
 end
 
 Then /^(?:|I )should be on (.+)$/ do |page_name|
@@ -155,7 +170,6 @@ Given /^A user with name "(.*?)" and UID "(.*?)" and auth provider "(.*?)"$/ do 
 end
 
 Given /^There exists a valid exercise with name "(.*?)"$/ do |name|
-  puts("Exercise name:-#{name}-")
   @exercise = FactoryBot.create(:exercise, :name => name)
 end
 
@@ -184,6 +198,22 @@ Given /the following exercises exist/ do |exercise_table|
   end
 end
 
+Given /the following units exist/ do |units_table|
+  units_table.hashes.each do |unit|
+    Unit.create(unit)
+  end
+end
+
+Given /the task has the following sets/ do |sets_table|
+  sets_table.hashes.each do |set|
+    s = ExerciseSet.create(rep_count: set[:rep_count], 
+                       rep_value: set[:rep_value],
+                       rep_unit:  set[:rep_unit],
+                       task_id: @task.id, 
+                       completed: false)
+  end
+end
+
 Given /^I wait for (.*?) second$/ do |seconds|
   sleep seconds.to_i
 end
@@ -200,3 +230,17 @@ Then /^I send keys down, tab to "(.*?)"$/ do |field|
   find(field).native.send_keys(:down)
   find(field).native.send_keys(:tab)
 end
+
+Given /^I have the "(.*?)" workout planned$/ do |workout_name|
+  @workout = Workout.create(name: workout_name, uid: 1, user_id: @user.id, completed: false)
+end
+
+Given /^the workout has the "(.*?)" task$/ do |exercise_name|
+  exercise = Exercise.where(name: exercise_name).first
+  @task = Task.create(exercise_id: exercise.id, workout_id: @workout.id, completed: false)
+end
+
+Given /^I check "(.*?)"$/ do |element|
+  find(:css, element).set(true)
+end
+

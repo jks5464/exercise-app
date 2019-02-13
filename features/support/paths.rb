@@ -53,6 +53,8 @@ module NavigationHelpers
     when /the view exercises page/
       '/view_exercises'
 
+    when /the quick log page/
+      '/quick_log'
 
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
