@@ -25,4 +25,16 @@ class Workout < ActiveRecord::Base
       end
     end
   end
+  
+  def self.clone(user, base_workout_id)
+    base_workout = find(base_workout_id)
+    clone_workout = user.workout.create(name: base_workout.name, uid: 0, state: base_workout.state)
+    base_workout.task.each do |base_task|
+      clone_task = clone_workout.task.create(exercise_id: base_task.exercise_id, state: base_task.state)
+      base_task.exercise_set.each do | base_set |
+        clone_task.exercise_set.create(rep_count: base_set.rep_count, rep_value: base_set.rep_value, rep_unit: base_set.rep_unit, state: base_set.state)
+      end
+    end
+    return clone_workout.id
+  end
 end

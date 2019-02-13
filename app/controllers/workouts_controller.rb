@@ -43,6 +43,33 @@ class WorkoutsController < AuthenticationController
     render json: { status: 200 }
   end
   
+  def process_clone_workout
+    workout_id = params[:workout_id]
+    
+    puts("Cloning a workout")
+    clone_id = Workout.clone(current_user, workout_id)
+    puts("done.")
+    
+    render json: {clone_id: clone_id}
+  end
+  
+  def process_update_workout_state
+    workout_id = params[:workout_id]
+    new_state = params[:state]
+    
+    puts("Updating workout state...")
+    
+    if State.valid_state?(new_state) then
+      Workout.update_state(workout_id, new_state)
+      puts("done.")
+      render json: { status: 200 }
+    else
+      puts("Invalid workout state #{new_state}")
+      render json: { status: 500 }
+    end
+    
+  end
+  
   def search_exercises_json
     @exercises = Exercise.search(params[:term])
     respond_to :json

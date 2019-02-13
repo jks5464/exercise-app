@@ -14,4 +14,8 @@ class State < ActiveRecord::Base
     def State.complete
         @@complete
     end
+    
+    def State.valid_state?(state)
+        return ((state == @@saved) or (state == @@planned) or (state ==  @@complete))
+    end
 end

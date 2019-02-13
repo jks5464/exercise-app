@@ -22,8 +22,6 @@
           <div class="row workout_card" id=<%="#{workout.id}"%> >
               <span>
                 <%= workout.name %>
-              </span>
-              <span>
                 <button type="button" class="btn btn-info btn-sm plan_workout_button">Plan</button>
                 <button type="button" class="btn btn-info btn-sm edit_workout_button"><span class="glyphicon glyphicon-pencil"></span></button>
                 <button type="button" class="btn btn-info btn-sm delete_workout_button"><span class="glyphicon glyphicon-trash"></span></button>
@@ -59,9 +57,11 @@
           <% @workouts.each do |workout| %>
           <% if workout.state == State.planned %>
           <div class="row workout_card" id=<%="#{workout.id}"%> >
-            <input class="complete_workout" type="checkbox">
               <span>
                 <%= workout.name %>
+                <button type="button" class="btn btn-info btn-sm complete_workout_button">Complete</button>
+                <button type="button" class="btn btn-info btn-sm edit_workout_button"><span class="glyphicon glyphicon-pencil"></span></button>
+                <button type="button" class="btn btn-info btn-sm delete_workout_button"><span class="glyphicon glyphicon-trash"></span></button>
               </span>
               
               <div>
