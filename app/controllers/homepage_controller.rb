@@ -12,6 +12,8 @@ class HomepageController < AuthenticationController
   
   def dashboard
     puts("dashboard showing")
+    
+    @goals = current_user.goal
   end
   
   def my_measurement
@@ -28,6 +30,7 @@ class HomepageController < AuthenticationController
   
   def homepage
     puts("go back to the homepage")
+  
   end
   
   def quick_log

@@ -11,7 +11,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190212021001) do
+ActiveRecord::Schema.define(version: 20190212024316) do
+
+  create_table "client_trainer_relations", force: :cascade do |t|
+    t.integer "client_id"
+    t.integer "trainer_id"
+  end
 
   create_table "clients", force: :cascade do |t|
     t.integer "trainer_user_id"

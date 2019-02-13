@@ -1,19 +1,49 @@
+<script src="/assets/graphs.js"></script>
+
+<%= javascript_include_tag "https://www.gstatic.com/charts/loader.js" %>
+<%= javascript_include_tag "//www.google.com/jsapi", "chartkick" %>
+
 <legend>Dashboard</legend>
-<p>my progress</p>
+<div class="hidden"><p>my progress</p></div>
 
 <div class="content">
-  <div class="group">
-    <div class="circular-progress60"></div>
-    <div class="circular-text">Weight</div>
-  </div>
-      
-  <div class="group">
-    <div class="circular-progress85"></div>
-    <div class="circular-text">Body Fat</div>
-  </div>
+
+  <% if @goals.empty? %>
+    <%= "You don't have any goals entered yet." %>
+  <% else %>
+    <% @goals.each do |g| %>
+        <% puts g.value %>
+        <div class="group">
+          <div class="circular-text"><%= g.name %></div>
+          <% if g.value.to_i < 11 %>
+            <div class="circular-progress10"></div>
+          <% elsif g.value.to_i < 21 %>
+            <div class="circular-progress20"></div>
+          <% elsif g.value.to_i < 31 %>
+            <div class="circular-progress30"></div>
+          <% elsif g.value.to_i < 41 %>
+            <div class="circular-progress40"></div>
+          <% elsif g.value.to_i < 51 %>
+            <div class="circular-progress50"></div>
+          <% elsif g.value.to_i < 61 %>
+            <div class="circular-progress60"></div>
+          <% elsif g.value.to_i < 71 %>
+            <div class="circular-progress70"></div>
+          <% elsif g.value.to_i < 81 %>
+            <div class="circular-progress80"></div>
+          <% elsif g.value.to_i < 99 %>
+            <div class="circular-progress90"></div>
+          <% elsif g.value.to_i > 99 %>
+            <div class="circular-progress100"></div>
+          <% end %>
+        </div>
+        <%= 
+=begin
+        area_chart [ { name: "Goal Name", data: @goals.where(user_id: session[:user_id]).sum(:value)}] 
+=end
+%>
+
+    <% end %>
+  <% end %>
   
-  <div class="group">
-    <div class="circular-progress100"></div>
-    <div class="circular-text">Height</div>
-  </div>
 </div>
