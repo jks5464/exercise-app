@@ -7,6 +7,7 @@ class Client < ActiveRecord::Base
     def process_enter_new_measurements(weight, body_fat, height)
         @measurements.push([weight, body_fat, height])
     end
+    
     def add
         @db.weight = @measurements[0]
         @db.body_fat = @measurements[1]

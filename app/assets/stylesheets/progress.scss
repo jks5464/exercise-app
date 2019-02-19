@@ -96,24 +96,42 @@ body {
 .group {
   margin: 10px;
   
-  .circular-progress60 {
+  .circular-progress0 {
+    @include circular-progress(0, #FF70A6);
+  }
+  .circular-progress10 {
     @include circular-progress(10, #FF70A6);
   }
-  .circular-progress73 {
-    @include circular-progress(73, #FF9770);
+  .circular-progress20 {
+    @include circular-progress(20, #FF70A8);
   }
-  .circular-progress75 {
-    @include circular-progress(75, #FF9770);
+  .circular-progress30 {
+    @include circular-progress(30, #FF9770);
   }
-  .circular-progress85 {
-    @include circular-progress(85, #70D6FF);
+  .circular-progress40 {
+    @include circular-progress(40, #FF9770);
+  }
+  .circular-progress50 {
+    @include circular-progress(50, #70D6FF);
+  }
+  .circular-progress60 {
+    @include circular-progress(60, #70D6FF);
+  }
+  .circular-progress70 {
+    @include circular-progress(70, #C8E9A0);
+  }
+  .circular-progress80 {
+    @include circular-progress(80, #C8E9A0);
   }
   .circular-progress90 {
-    @include circular-progress(90, #70D6FF);
+    @include circular-progress(90, #C8E9A0);
   }
   .circular-progress100 {
     @include circular-progress(100, #C8E9A0);
   }
+  
+  
+  
   
   .circular-text {
     text-align: center;

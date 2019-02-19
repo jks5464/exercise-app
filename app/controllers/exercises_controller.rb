@@ -20,12 +20,18 @@ class ExercisesController < ApplicationController
     description = params[:description].strip
     
     if valid_exercises?([name, category, description]) then
-      Exercise.create(user_id: session[:user_id], name: name, category: category, description: description)
+      Exercise.create(user_id: session[:effective_id], name: name, category: category, description: description)
     else
       flash[:error] = "Invalid exercise input"
     end
     
     redirect_to create_workout_path
+  end
+  
+  def process_delete_exercise
+    exercise_id = params[:exercise_id]
+    Exercise.delete_exercise(exercise_id)
+    render json: { status: 200 }
   end
   
   def valid_exercises?(exercises)
