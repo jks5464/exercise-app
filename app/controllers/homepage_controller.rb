@@ -99,6 +99,7 @@ class HomepageController < AuthenticationController
     @exercises = Exercise.all
     @units = Unit.all
   end
+  
     
   
 end

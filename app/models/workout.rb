@@ -1,6 +1,6 @@
 class Workout < ActiveRecord::Base
   belongs_to :user
-  has_many :task
+  has_many :task, :dependent => :destroy
   
   def self.insert_new_workout(user, workout_name, task_card_data, workout_completed, task_completed, sets_completed)
     new_workout = user.workout.create(name: workout_name, uid: 0, completed: workout_completed)
