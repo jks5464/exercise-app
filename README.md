@@ -5,7 +5,7 @@
 
 1. Install chrome. This is required to run cucumber tests
 
-`bash
+`=bash
 sudo curl https://intoli.com/install-google-chrome.sh | sudo bash
 `
 
