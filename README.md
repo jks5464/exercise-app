@@ -5,14 +5,21 @@
 
 1. Install chrome. This is required to run cucumber tests
 
-`bash
+`
 sudo curl https://intoli.com/install-google-chrome.sh | sudo bash
 `
 
 **Production URL: https://exercise-track-app.herokuapp.com/**
-
+1. To reset the production database on heroku
+`
+heroku restart; heroku pg:reset DATABASE --confirm exercise-track-app; heroku run rake db:migrate db:seed
+`
 
 **Development URL: https://steer-exercise-app.herokuapp.com/**
+1. To reset the develop database on heroku
+`
+heroku restart; heroku pg:reset DATABASE --confirm steer-exercise-app; heroku run rake db:migrate db:seed
+`
 
 *Team Members:*
 * Constantina Hug
