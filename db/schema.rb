@@ -79,6 +79,9 @@ ActiveRecord::Schema.define(version: 20190212024316) do
     t.datetime "updated_at", null: false
   end
 
+  add_index "role_assignments", ["role_id"], name: "index_role_assignments_on_role_id"
+  add_index "role_assignments", ["user_id"], name: "index_role_assignments_on_user_id"
+
   create_table "roles", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false

@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  has_many :workout
+  has_many :workout, :dependent => :destroy
   has_many :goal
   has_many :role_assignments
   has_many :roles, through: :role_assignments
