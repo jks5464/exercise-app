@@ -71,36 +71,45 @@ table, td, th {
                   <tr align = "middle">
                     <th>Id</th>
                     <th>Name</th>
-                    <th>Admin or Trainer</th>
+                    <th>Client or Trainer</th>
                     
                   </tr>
                   
-                  <%User.all.each  do |e,i| %>
+                  <%User.all.each  do |u,i| %>
                   <div <% 'id=last_row' if i == (User.all.size - 1) %> >
-                    <form  id = "TrainerOrAdmin">
+                    <form  id = "TrainerOrClient">
                   <tr align = "middle">
-                    <td ><%= e.id%> </td>
-                    <td>  <%= e.name%></td>
+                    <td ><%= u.id%> </td>
+                    <td>  <%= u.name%></td>
                     <td>
-                      <div><input type="radio" name="text" value="Trainer"> Trainer</div>
-                      <div><input type="radio" name="text" value="Admin"> Admin</div>
+                    <select>
+                        <option>client</option>
+                        <option>Trainer</option>
+                        <option>Admin</option>
+                    </select>
                       </td>
                      </form>
                   <% end %>
-                  
                   </tr>
                 </table>
-              <button type="submit" form="TrainerOrAdmin" value="Submit">Submit</button>
+              <button type="submit" form="TrainerOrClient" value="Submit">Submit</button>
 
 <form action="submit" id = "AddClients">
-    <p>
-      Trainers:
-    </p>
+    <div>
+        -- My Trainers -- 
+        <% User.trainers.each do |trainer| %>
+            <div>
+                <%= trainer.name %>
+            </div>
+        <% end %>
+        ----
+    </div>
      <div>
        <table>
          <tr>
-           <% current_user.clients do |t,i| %>
-           <td ><%= t.name%> </td>
+           <% current_user.trainers do |t,i| %>
+           <div <% 'id=last_row' if i == (User.all.size - 1) %> >
+           <td >hello </td>
            <th><button id="myBtn">add clients</button></th>
            <%end%>
          </tr>

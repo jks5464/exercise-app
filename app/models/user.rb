@@ -38,4 +38,14 @@ class User < ActiveRecord::Base
     return my_trainers
   end
   
+  def self.trainers
+    results = []
+    all.each do |user|
+      if user.is_trainer? then
+        results.push_back(user)
+      end
+      return results
+    end
+  end
+  
 end

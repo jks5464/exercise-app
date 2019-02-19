@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   resources :sessions, only: [:create, :destroy]
   get 'splash_screen' => 'splash#splash_screen', :as => 'splash_screen'
   get 'admin' => 'admin#admin', :as => 'admin'
+  post 'process_admin' => 'admin#process_admin', :as => 'process_admin'
   get  'my_measurements' => 'measurements#my_measurements', :as => 'my_measurements'
   get  'enter_my_measurements' => 'measurements#enter_my_measurements', :as => 'enter_my_measurements'
   post 'process_enter_new_measurements' => 'measurements#process_enter_new_measurements', :as => 'process_enter_new_measurements'
