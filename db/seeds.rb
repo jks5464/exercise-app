@@ -45,7 +45,7 @@ exercises.each do |exercise|
 end
 
 # Development seed data
-if Rails.env.development? then
+# if Rails.env.development? then
     users = [ {"provider" => "none", "uid" => "-1", "name" => "Charlie", "oauth_token" => "none", "oauth_expires_at" => "January 1, 1753"},
               {"provider" => "none", "uid" => "-1", "name" => "Timothy", "oauth_token" => "none", "oauth_expires_at" => "January 1, 1753"},
               {"provider" => "none", "uid" => "-1", "name" => "Courtney", "oauth_token" => "none", "oauth_expires_at" => "January 1, 1753"},
@@ -76,7 +76,7 @@ if Rails.env.development? then
         RoleAssignment.create(ra)
     end
 
-end
+# end
 
 roles = [{"name" => "Trainer"},
         {"name"=> "Admin"}]
