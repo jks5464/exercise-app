@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190212024316) do
+ActiveRecord::Schema.define(version: 20190213013446) do
 
   create_table "client_trainer_relations", force: :cascade do |t|
     t.integer "client_id"
@@ -30,7 +30,7 @@ ActiveRecord::Schema.define(version: 20190212024316) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer  "task_id"
-    t.boolean  "completed"
+    t.string   "state"
   end
 
   add_index "exercise_sets", ["task_id"], name: "index_exercise_sets_on_task_id"
@@ -88,12 +88,17 @@ ActiveRecord::Schema.define(version: 20190212024316) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "states", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "tasks", force: :cascade do |t|
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.integer  "exercise_id"
     t.integer  "workout_id"
-    t.boolean  "completed"
+    t.string   "state"
   end
 
   add_index "tasks", ["exercise_id"], name: "index_tasks_on_exercise_id"
@@ -140,7 +145,7 @@ ActiveRecord::Schema.define(version: 20190212024316) do
     t.datetime "updated_at", null: false
     t.string   "uid"
     t.integer  "user_id"
-    t.boolean  "completed"
+    t.string   "state"
   end
 
   add_index "workouts", ["user_id"], name: "index_workouts_on_user_id"
