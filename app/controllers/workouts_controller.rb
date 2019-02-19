@@ -55,7 +55,7 @@ class WorkoutsController < AuthenticationController
     workout_id = params[:workout_id]
     
     puts("Cloning a workout")
-    clone_id = Workout.clone(current_user, workout_id)
+    clone_id = Workout.clone(current_effective_user, workout_id)
     puts("done.")
     
     render json: {clone_id: clone_id}
