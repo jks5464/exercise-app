@@ -28,7 +28,7 @@ class HomepageController < AuthenticationController
         workout.task.each do |task|
           if task.exercise_id == g.exercise_id then
             task.exercise_set.each do | exercise_set |
-              goal_values.push(Array.new([exercise_set.created_at.strftime("%B %Y %D"), exercise_set.rep_value]))
+              goal_values.push(Array.new([exercise_set.created_at.strftime("%D %H:%M"), exercise_set.rep_value]))
             end
           end
         end

@@ -1,21 +1,17 @@
-<%= 
-=begin
-javascript_include_tag "https://www.gstatic.com/charts/loader.js" %>
-<%= javascript_include_tag "//www.google.com/jsapi", "chartkick" 
-=end
-%>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<!--<script type="text/javascript" src="http://code.jquery.com/jquery-1.10.2.js"></script>-->
 
 <legend>Dashboard</legend>
 <div class="hidden"><p>my progress</p></div>
 
 <div class="content">
+  
   <% if @goal_data.empty? %>
       <%= "You don't have any goals entered yet." %>
   <% else %>
     <% @goal_data.each_with_index do |g, i| %>
     
-      <div class="group" style="float: left; padding-right: 3em;">
+      <div class="group" style="float: left; padding-right: 3em; overflow: hidden;">
         <div class="circular-text"><%= @goals[i].name %></div>
         <div class="circular-text">Goal: <%= @goals[i].value %> <%= @goals[i].unit.name %></div>
         <% if @goal_progress[i].to_i < 11 %>
@@ -42,7 +38,7 @@ javascript_include_tag "https://www.gstatic.com/charts/loader.js" %>
         <br>
       </div>
               
-      <div id='<%="chart#{i}"%>'  style="width: auto; height: 600px;"></div>
+      <div id='<%="chart#{i}"%>' style="width: 600px; height: 600px;"></div>
       
       <%= javascript_tag do -%>
         <% puts g.to_json.html_safe %>
@@ -50,19 +46,32 @@ javascript_include_tag "https://www.gstatic.com/charts/loader.js" %>
         google.charts.setOnLoadCallback(drawChart);
       
         function drawChart() {
+        
           var data = JSON.parse('<%= g.to_json.html_safe -%>');
-          data = [['Year/Month', '']].concat(data);
-          data = google.visualization.arrayToDataTable(data);
+          exercise_data = [['', '']].concat(data);
+          data = google.visualization.arrayToDataTable(exercise_data);
+          
           var options = {
-            chart: {
-              title: '<%= @goal_names[i] %>',
-              hAxis: {title: 'Year/Month',  titleTextStyle: {color: '#333'}},
-              vAxis: {minValue: 0}
+    
+
+            title: '<%= @goals[i].name %>',
+            
+            vAxis: {
+              minValue: 0,
+              maxValue: <%= @goals[i].value %> + 10,
+              title: '<%= @goals[i].unit.name %>'
+            },
+            
+            legend: {
+              position:'none'
             }
-          };
+          
+            
+      };
       
-          var chart = new google.visualization.LineChart(document.getElementById('<%="chart#{i}"%>'));
+          var chart = new google.visualization.ComboChart(document.getElementById('<%="chart#{i}"%>'));
           chart.draw(data, options);
+ 
         }
         
       <% end -%>
