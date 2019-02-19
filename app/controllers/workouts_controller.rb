@@ -11,8 +11,8 @@ class WorkoutsController < AuthenticationController
   
   def my_workouts
     puts("Displaying my workouts page")
-    puts("User has id: #{session[:user_id]}")
-    @workouts = current_user.workout
+    puts("User has id: #{current_effective_user.id}")
+    @workouts = current_effective_user.workout
     @workouts = [] if (@workouts.nil?)
   end
   
@@ -24,7 +24,7 @@ class WorkoutsController < AuthenticationController
     puts("Inserting new workout to database...")
     workout_name = params[:workout_name]
     task_card_data = params[:task_card_data]
-    user = current_user
+    user = current_effective_user
     
     Workout.insert_new_workout(user, workout_name, task_card_data, false, false, false)
 
