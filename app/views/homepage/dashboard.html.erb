@@ -14,30 +14,12 @@
       <div class="group" style="float: left; padding-right: 3em; overflow: hidden;">
         <div class="circular-text"><%= @goals[i].name %></div>
         <div class="circular-text">Goal: <%= @goals[i].value %> <%= @goals[i].unit.name %></div>
-        <% if @goal_progress[i].to_i == 0 %>
-          <div class="circular-progress0"></div>
-        <% elsif @goal_progress[i].to_i < 11 %>
-          <div class="circular-progress10"></div>
-        <% elsif @goal_progress[i].to_i < 21 %>
-          <div class="circular-progress20"></div>
-        <% elsif @goal_progress[i].to_i < 31 %>
-          <div class="circular-progress30"></div>
-        <% elsif @goal_progress[i].to_i < 41 %>
-          <div class="circular-progress40"></div>
-        <% elsif @goal_progress[i].to_i < 51 %>
-          <div class="circular-progress50"></div>
-        <% elsif @goal_progress[i].to_i < 61 %>
-          <div class="circular-progress60"></div>
-        <% elsif @goal_progress[i].to_i < 71 %>
-          <div class="circular-progress70"></div>
-        <% elsif @goal_progress[i].to_i < 81 %>
-          <div class="circular-progress80"></div>
-        <% elsif @goal_progress[i].to_i < 99 %>
-          <div class="circular-progress90"></div>
-        <% elsif @goal_progress[i].to_i > 99 %>
-          <div class="circular-progress100"></div>
-        <% end %>
-        <br>
+          <% (1..100).each do |counter| %>
+            <% if @goal_progress[i].to_i == counter %>
+              <div class='circular-progress<%="#{counter}"%>'></div>
+            <% end %>
+          <% end %>
+        
       </div>
               
       <div id='<%="chart#{i}"%>' style="width: 600px; height: 600px;"></div>
