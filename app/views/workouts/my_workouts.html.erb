@@ -16,22 +16,56 @@
         <div class="form-group">
           <h1>Saved Workouts</h1>
         </div>
+        
+        <% @workouts.each do |workout| %>
+          <% if workout.state == State.saved %>
+          <div class="row workout_card" id=<%="#{workout.id}"%> >
+              <span>
+                <%= workout.name %>
+                <button type="button" class="btn btn-info btn-sm plan_workout_button">Plan</button>
+                <button type="button" class="btn btn-info btn-sm edit_workout_button"><span class="glyphicon glyphicon-pencil"></span></button>
+                <button type="button" class="btn btn-info btn-sm delete_workout_button"><span class="glyphicon glyphicon-trash"></span></button>
+              </span>
+              <div>
+                <% workout.task.each do |task| %>
+                  <div class="task_card">
+                    <span class='exercise_name'><%= task.exercise.name %> - </span>
+                    <span class='sets_info'><%= task.exercise_set.count %></span> sets 
+                    <% task.exercise_set.each do |set| %>
+                      <div class="task_card">
+                        <span class="show_form">
+                          <span class='reps_info'><%= set[:rep_count] %></span>  reps 
+                          at <span class='weight_info'><%= set[:rep_value] %></span>
+                           <span class='units_info'><%= set[:rep_unit] %></span>
+                        </span>
+                      </div>
+                    <% end %>
+                  </div>
+                <% end %>
+              </div>
+          </div>
+          <% end %>
+        <% end %>
       </div>
+      
+      
       
       <div class="form-group">
         <div class="row" id="planned-workouts">
           <div>
             <h3>Planned Workouts</h3>
           </div>
-        </div>
-        
-        <% @workouts.each do |workout| %>
-          <% if !workout.completed %>
+          
+          <% @workouts.each do |workout| %>
+          <% if workout.state == State.planned %>
           <div class="row workout_card" id=<%="#{workout.id}"%> >
-            <input class="complete_workout" type="checkbox">
               <span>
                 <%= workout.name %>
+                <button type="button" class="btn btn-info btn-sm complete_workout_button">Complete</button>
+                <button type="button" class="btn btn-info btn-sm edit_workout_button"><span class="glyphicon glyphicon-pencil"></span></button>
+                <button type="button" class="btn btn-info btn-sm delete_workout_button"><span class="glyphicon glyphicon-trash"></span></button>
               </span>
+              
               <div>
                 <% workout.task.each do |task| %>
                   <div class="task_card">
@@ -50,6 +84,9 @@
           </div>
           <% end %>
         <% end %>
+        </div>
+        
+        
       </div>
       
   </div>

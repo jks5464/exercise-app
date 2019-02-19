@@ -26,7 +26,7 @@ class WorkoutsController < AuthenticationController
     task_card_data = params[:task_card_data]
     user = current_effective_user
     
-    Workout.insert_new_workout(user, workout_name, task_card_data, false, false, false)
+    Workout.insert_new_workout(user, workout_name, task_card_data, State.saved, State.saved, State.saved)
 
     puts("New workout inserted")
     puts("!"*100)
@@ -34,13 +34,48 @@ class WorkoutsController < AuthenticationController
   end
   
   def process_complete_workout
-    complete = params[:complete]
     workout_id = params[:workout_id]
 
-    puts("marking complete...")
-    Workout.mark_completed(workout_id, complete)
+    puts("Marking workout #{workout_id} as complete...")
+    Workout.update_state(workout_id, State.complete)
     puts("done.")
     render json: { status: 200 }
+  end
+  
+  def process_delete_workout
+    workout_id = params[:workout_id]
+    
+    puts("Deleting workout #{workout_id}...")
+    Workout.delete_workout(workout_id)
+    puts("done.")
+    render json: {status: 200}
+  end
+  
+  def process_clone_workout
+    workout_id = params[:workout_id]
+    
+    puts("Cloning a workout")
+    clone_id = Workout.clone(current_user, workout_id)
+    puts("done.")
+    
+    render json: {clone_id: clone_id}
+  end
+  
+  def process_update_workout_state
+    workout_id = params[:workout_id]
+    new_state = params[:state]
+    
+    puts("Updating workout state...")
+    
+    if State.valid_state?(new_state) then
+      Workout.update_state(workout_id, new_state)
+      puts("done.")
+      render json: { status: 200 }
+    else
+      puts("Invalid workout state #{new_state}")
+      render json: { status: 500 }
+    end
+    
   end
   
   def search_exercises_json

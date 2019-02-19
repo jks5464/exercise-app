@@ -90,7 +90,7 @@ class HomepageController < AuthenticationController
     user = current_effective_user
     workout_name = "Workout_" + current_effective_user.id.to_s + "_" + Time.now.to_s
     task_card_data = params[:task_card_data]
-    Workout.insert_new_workout(user, workout_name, task_card_data, true, true, true)
+    Workout.insert_new_workout(user, workout_name, task_card_data, State.complete, State.complete, State.complete)
     head :ok, content_type: "text/html"
   end
   

@@ -41,7 +41,7 @@
               <th>Rep Unit</th>
             </tr>
             <% @workouts.reverse_each do |workout, i| %>
-              <% if workout.completed %>
+              <% if workout.state == State.complete %>
                 <% workout.task.each do | task | %>
                 <tr>
                   <td><%= task.exercise.name %></td>
