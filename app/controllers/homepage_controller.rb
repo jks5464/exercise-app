@@ -12,7 +12,6 @@ class HomepageController < AuthenticationController
   
   def dashboard
     puts("dashboard showing")
-    
     @goals = Goal.where(user_id: session[:user_id])
     @goals = [] if (@goals.nil?)
     
@@ -61,6 +60,7 @@ class HomepageController < AuthenticationController
     @exercises = Exercise.all
     @units = Unit.all
   end
+  
     
   
 end

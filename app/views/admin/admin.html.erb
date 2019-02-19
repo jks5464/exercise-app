@@ -59,6 +59,7 @@ table, td, th {
 <div class = "admin">
     <p>
       Admin Dashboard:
+  
     </p>
           
               <table >
@@ -73,40 +74,53 @@ table, td, th {
                     <th>Admin or Trainer</th>
                     
                   </tr>
-                  <% for i in 1..3 do %>
+                  
+                  <%User.all.each  do |e,i| %>
+                  <div <% 'id=last_row' if i == (User.all.size - 1) %> >
+                    <form  id = "TrainerOrAdmin">
                   <tr align = "middle">
-                    <td >1 </td>
-                    <td> Hirva </td>
-                    <td><form action="submit"><div><input type="radio" name="text" value="Trainer"> Trainer</div><div><input type="radio" name="text" value="Admin"> Admin</div></form></td>
-                  </tr>
+                    <td ><%= e.id%> </td>
+                    <td>  <%= e.name%></td>
+                    <td>
+                      <div><input type="radio" name="text" value="Trainer"> Trainer</div>
+                      <div><input type="radio" name="text" value="Admin"> Admin</div>
+                      </td>
+                     </form>
                   <% end %>
+                  
+                  </tr>
                 </table>
-               
-            <%= submit_tag 'submit' %>
-            
+              <button type="submit" form="TrainerOrAdmin" value="Submit">Submit</button>
+
+<form action="submit" id = "AddClients">
     <p>
       Trainers:
     </p>
-    
      <div>
        <table>
          <tr>
-           <th> Hirva </th>
+           <% current_user.clients do |t,i| %>
+           <td ><%= t.name%> </td>
            <th><button id="myBtn">add clients</button></th>
+           <%end%>
          </tr>
        </table>
       </div>
+  </form>
   
 <div id="myModal" class="modal">
   <div class="modal-content">
       <span class="close">&times;</span>
       <h2>List of all clients:</h2>
-      <p>Hirva</p>
-      <p>Hirva</p>
+      <% current_user.clients.each do |e,i| %>
+      <div <% 'id=last_row' if i == (current_user.clients.size - 1) %> >
+      <p><%= e.name %></p>
+      
   </div>
 </div>
 
 </div>
+<%end%>
 <script>
 // Get the modal
 var modal = document.getElementById('myModal');

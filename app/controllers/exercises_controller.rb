@@ -28,6 +28,12 @@ class ExercisesController < ApplicationController
     redirect_to create_workout_path
   end
   
+  def process_delete_exercise
+    exercise_id = params[:exercise_id]
+    Exercise.delete_exercise(exercise_id)
+    render json: { status: 200 }
+  end
+  
   def valid_exercises?(exercises)
 
     exercises.each_with_index do |value, index|
