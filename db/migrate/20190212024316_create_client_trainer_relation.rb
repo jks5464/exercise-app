@@ -5,7 +5,7 @@ class CreateClientTrainerRelation < ActiveRecord::Migration
       t.references :trainer, references: :user
     end
     
-    add_foreign_key :client_trainer_relations, :users, column: :client
-    add_foreign_key :client_trainer_relations, :users, column: :trainer
+    # add_foreign_key :client_trainer_relations, :users, column: :client
+    # add_foreign_key :client_trainer_relations, :users, column: :trainer
   end
 end
