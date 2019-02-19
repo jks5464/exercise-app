@@ -1,6 +1,6 @@
 class Workout < ActiveRecord::Base
   belongs_to :user
-  has_many :task
+  has_many :task, :dependent => :destroy
   
   def self.insert_new_workout(user, workout_name, task_card_data, workout_state, task_state, sets_state)
     new_workout = user.workout.create(name: workout_name, uid: 0, state: workout_state)
@@ -36,5 +36,10 @@ class Workout < ActiveRecord::Base
       end
     end
     return clone_workout.id
+  end
+  
+  def self.delete_workout(workout_id)
+    workout = find(workout_id)
+    workout.destroy
   end
 end

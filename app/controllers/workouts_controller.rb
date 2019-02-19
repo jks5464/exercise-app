@@ -36,10 +36,19 @@ class WorkoutsController < AuthenticationController
   def process_complete_workout
     workout_id = params[:workout_id]
 
-    puts("marking complete...")
+    puts("Marking workout #{workout_id} as complete...")
     Workout.update_state(workout_id, State.complete)
     puts("done.")
     render json: { status: 200 }
+  end
+  
+  def process_delete_workout
+    workout_id = params[:workout_id]
+    
+    puts("Deleting workout #{workout_id}...")
+    Workout.delete_workout(workout_id)
+    puts("done.")
+    render json: {status: 200}
   end
   
   def process_clone_workout

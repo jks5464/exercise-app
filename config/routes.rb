@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   post 'process_create_workout' => 'workouts#process_create_workout', :as => 'process_create_workout'
   post 'process_new_quick_log' => 'homepage#process_new_quick_log', :as => 'process_new_quick_log'
   post 'process_complete_workout' => 'workouts#process_complete_workout', :as => 'process_complete_workout'
+  post 'process_delete_workout' => 'workouts#process_delete_workout', :as => 'process_delete_workout'
   post 'process_clone_workout' => 'workouts#process_clone_workout', :as => 'process_clone_workout'
   post 'process_update_workout_state' => 'workouts#process_update_workout_state', :as => 'process_update_workout_state'
  
