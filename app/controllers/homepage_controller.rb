@@ -9,13 +9,50 @@ class HomepageController < AuthenticationController
     puts("showing the progress")
   end
 
-  
   def dashboard
     puts("dashboard showing")
     
-    @goals = Goal.where(user_id: session[:effective_id])
-    @goals = [] if (@goals.nil?)
+    @data = Goal.day_by_value(current_effective_user)
     
+    @goals = Goal.where(user_id: session[:effective_id])
+    @goal_data = Array.new
+    @goal_names = Array.new
+    @goal_progress = Array.new
+    @goals.each do |g|
+      # byebug
+      goal_values = Array.new
+      current_effective_user.workout.each do | workout |
+        workout.task.each do |task|
+          if task.exercise_id == g.exercise_id then
+            task.exercise_set.each do | exercise_set |
+              goal_values.push(Array.new([exercise_set.created_at.strftime("%D %H:%M"), exercise_set.rep_value]))
+            end
+          end
+        end
+      end
+
+
+    @goals = [] if (@goals.nil?)
+
+      rep_values = goal_values.map(&:last)
+      @progress = (rep_values.max.to_f/g.value.to_f)*100.to_f
+      
+      # byebug
+      puts "GOAL NAME: "
+      puts g.name
+      @goal_data.push(goal_values)
+      @goal_progress.push(@progress.to_i)
+      
+      puts "GOAL DATA: "
+      puts "#{@goal_data}"
+      puts "END GOAL DATA"
+      
+      puts "PROGRESS: "
+      puts "#{@goal_progress}"
+      puts "END GOAL PROGRESS"
+    end
+    @goals = [] if (@goals.nil?)
+
   end
   
   def my_measurement
@@ -32,6 +69,7 @@ class HomepageController < AuthenticationController
   
   def homepage
     puts("go back to the homepage")
+  
   end
   
   def quick_log
