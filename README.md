@@ -20,7 +20,7 @@ heroku restart -a exercise-track-app; heroku pg:reset DATABASE --confirm exercis
 1. To reset the develop database on heroku
 
 `
-heroku restart -a steer-exercise-app; heroku pg:reset DATABASE --confirm steer-exercise-app steer-exercise-app; heroku run rake db:migrate db:seed steer-exercise-app
+heroku restart -a steer-exercise-app; heroku pg:reset DATABASE --confirm steer-exercise-app -a steer-exercise-app; heroku run rake db:migrate db:seed -a steer-exercise-app
 `
 
 *Team Members:*
