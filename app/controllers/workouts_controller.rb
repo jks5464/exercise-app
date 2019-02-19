@@ -34,7 +34,6 @@ class WorkoutsController < AuthenticationController
   end
   
   def process_complete_workout
-    complete = params[:complete]
     workout_id = params[:workout_id]
 
     puts("marking complete...")
