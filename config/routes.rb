@@ -24,7 +24,9 @@ Rails.application.routes.draw do
   get  'dashboard' => 'homepage#dashboard', :as => 'dashboard'
   get 'my_goals' => 'goals#my_goals', :as => 'my_goals'
   get 'my_clients' => 'clients#my_clients', :as => 'my_clients'
-  
+  post 'set_effective_id' => 'sessions#set_effective_id', :as => 'set_effective_id'
+  get 'unset_effective_id' => 'sessions#unset_effective_id', :as => 'unset_effective_id'
+
   get 'my_workouts' => 'workouts#my_workouts', :as => 'my_workouts'
   get 'create_workout' => 'workouts#create_workout', :as => 'create_workout'
   
