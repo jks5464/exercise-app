@@ -12,6 +12,10 @@ class HomepageController < AuthenticationController
   
   def dashboard
     puts("dashboard showing")
+    
+    @goals = Goal.where(user_id: session[:effective_id])
+    @goals = [] if (@goals.nil?)
+    
   end
   
   def my_measurement
@@ -36,17 +40,17 @@ class HomepageController < AuthenticationController
     @exercises = [] if (@exercises.nil?)
     
     puts("Displaying user's workouts...")
-    @current_user = current_user()
+    @current_effective_user = current_effective_user()
     
-    @workouts = @current_user.workout
+    @workouts = @current_effective_user.workout
     @workouts = [] if (@workouts.nil?)
   end
   
   def process_new_quick_log
     puts("Creating new quick log...")
     puts("="*100)
-    user = current_user
-    workout_name = "Workout_" + current_user.id.to_s + "_" + Time.now.to_s
+    user = current_effective_user
+    workout_name = "Workout_" + current_effective_user.id.to_s + "_" + Time.now.to_s
     task_card_data = params[:task_card_data]
     Workout.insert_new_workout(user, workout_name, task_card_data, true, true, true)
     head :ok, content_type: "text/html"
