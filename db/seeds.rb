@@ -22,18 +22,18 @@ end
 
 
 
-workouts = [{"name": "Abs", "user_id": "1", "completed": "true", "uid": "0"},
-            {"name": "Legs", "user_id": "0", "completed": "true", "uid": "1"}
+workouts = [{"name": "Abs", "user_id": "1", "state": State.saved, "uid": "0"},
+            {"name": "Legs", "user_id": "0", "state": State.saved, "uid": "1"}
             ]
 
 workouts.each do |workout|
     tmp = Workout.create(workout)
     
-    t_tmp = Task.create("exercise_id": "1", "completed": "true", "workout_id": tmp.id)
-    t_tmp2 = Task.create("exercise_id": "2", "completed": "true", "workout_id": tmp.id)
+    t_tmp = Task.create("exercise_id": "1", "state": State.saved, "workout_id": tmp.id)
+    t_tmp2 = Task.create("exercise_id": "2", "state": State.saved, "workout_id": tmp.id)
     
-    ExerciseSet.create("rep_count": "25", "rep_value": "30", "rep_unit": "lbs", "completed": "true", "task_id": t_tmp.id)
-    ExerciseSet.create("rep_count": "10", "rep_value": "50", "rep_unit": "lbs", "completed": "false", "task_id": t_tmp2.id)
+    ExerciseSet.create("rep_count": "25", "rep_value": "30", "rep_unit": "lbs", "state": State.saved, "task_id": t_tmp.id)
+    ExerciseSet.create("rep_count": "10", "rep_value": "50", "rep_unit": "lbs", "state": State.saved, "task_id": t_tmp2.id)
     
 end
                 
@@ -45,23 +45,42 @@ exercises.each do |exercise|
 end
 
 # Development seed data
-if Rails.env.development? then
-    users = [ {"provider" => "none", "uid" => "-1", "name" => "Client_1_id_1", "oauth_token" => "none", "oauth_expires_at" => "January 1, 1753"},
-              {"provider" => "none", "uid" => "-1", "name" => "Client_2_id_2", "oauth_token" => "none", "oauth_expires_at" => "January 1, 1753"},
-              {"provider" => "none", "uid" => "-1", "name" => "Client_3_id_3", "oauth_token" => "none", "oauth_expires_at" => "January 1, 1753"},
-              {"provider" => "none", "uid" => "-1", "name" => "Trainer_1_id_4", "oauth_token" => "none", "oauth_expires_at" => "January 1, 1753"},
-              {"provider" => "none", "uid" => "-1", "name" => "Trainer_2_id_5", "oauth_token" => "none", "oauth_expires_at" => "January 1, 1753"}]
+# if Rails.env.development? then
+    users = [ {"provider" => "none", "uid" => "-1", "name" => "Charlie", "oauth_token" => "none", "oauth_expires_at" => "January 1, 1753"},
+              {"provider" => "none", "uid" => "-1", "name" => "Timothy", "oauth_token" => "none", "oauth_expires_at" => "January 1, 1753"},
+              {"provider" => "none", "uid" => "-1", "name" => "Courtney", "oauth_token" => "none", "oauth_expires_at" => "January 1, 1753"},
+              {"provider" => "none", "uid" => "-1", "name" => "Cassandra", "oauth_token" => "none", "oauth_expires_at" => "January 1, 1753"},
+              {"provider" => "none", "uid" => "-1", "name" => "Tayik", "oauth_token" => "none", "oauth_expires_at" => "January 1, 1753"}]
     
     users.each do | user |
         User.create(user)
     end
     
-    client_trainer_relations = [ {"client_id" => 1, "trainer_id" => 4},
-                                {"client_id" => 2, "trainer_id" => 4},
-                                {"client_id" => 3, "trainer_id" => 4},
-                                {"client_id" => 1, "trainer_id" => 5}]
+    client_trainer_relations = [ {"client_id" => 1, "trainer_id" => 2},
+                                {"client_id" => 4, "trainer_id" => 2},
+                                {"client_id" => 3, "trainer_id" => 2},
+                                {"client_id" => 1, "trainer_id" => 5},
+                                # Below is setting up example client relationships to me (first user to log in after resetting and seeding the db)
+                                {"client_id" => 1, "trainer_id" => 6},
+                                {"client_id" => 3, "trainer_id" => 6},
+                                {"client_id" => 4, "trainer_id" => 6},]
                                 
     client_trainer_relations.each do |relation|
         ClientTrainerRelation.create(relation)
     end
+    
+    role_assignments = [{"user_id" => 2, "role_id" => 1},
+                    {"user_id" => 5, "role_id" => 1},
+                    {"user_id" => 6, "role_id" => 1}]
+    role_assignments.each do |ra|
+        RoleAssignment.create(ra)
+    end
+
+# end
+
+roles = [{"name" => "Trainer"},
+        {"name"=> "Admin"}]
+roles.each do |role|
+    Role.create(role)
 end
+    

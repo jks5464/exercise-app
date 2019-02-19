@@ -19,13 +19,19 @@ Rails.application.routes.draw do
   post 'process_create_workout' => 'workouts#process_create_workout', :as => 'process_create_workout'
   post 'process_new_quick_log' => 'homepage#process_new_quick_log', :as => 'process_new_quick_log'
   post 'process_complete_workout' => 'workouts#process_complete_workout', :as => 'process_complete_workout'
+  post 'process_delete_workout' => 'workouts#process_delete_workout', :as => 'process_delete_workout'
+  post 'process_clone_workout' => 'workouts#process_clone_workout', :as => 'process_clone_workout'
+  post 'process_update_workout_state' => 'workouts#process_update_workout_state', :as => 'process_update_workout_state'
+ 
   post 'process_delete_exercise' => 'exercises#process_delete_exercise', :as => 'process_delete_exercise'
   
   
   get  'dashboard' => 'homepage#dashboard', :as => 'dashboard'
   get 'my_goals' => 'goals#my_goals', :as => 'my_goals'
   get 'my_clients' => 'clients#my_clients', :as => 'my_clients'
-  
+  post 'set_effective_id' => 'sessions#set_effective_id', :as => 'set_effective_id'
+  get 'unset_effective_id' => 'sessions#unset_effective_id', :as => 'unset_effective_id'
+
   get 'my_workouts' => 'workouts#my_workouts', :as => 'my_workouts'
   get 'create_workout' => 'workouts#create_workout', :as => 'create_workout'
   

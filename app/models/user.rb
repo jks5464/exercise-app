@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
   has_many :workout, :dependent => :destroy
   has_many :goal
+  has_many :role_assignments
   has_many :roles, through: :role_assignments
   
   def self.from_omniauth(auth)
@@ -38,6 +39,16 @@ class User < ActiveRecord::Base
     return my_trainers
   end
   
+  def is_trainer?
+    roles = self.roles
+    roles.each do | role |
+      if role.name == "Trainer" then
+        return true
+      end
+    end
+    return false
+  end
+
   def self.trainers
     results = []
     all.each do |user|
@@ -49,3 +60,6 @@ class User < ActiveRecord::Base
   end
   
 end
+
+
+  
