@@ -8,16 +8,22 @@ Rails.application.routes.draw do
   get 'auth/failure', to: redirect('/')
   get 'signout', to: 'sessions#destroy', as: 'signout'
   
-
+  
   resources :sessions, only: [:create, :destroy]
   get 'splash_screen' => 'splash#splash_screen', :as => 'splash_screen'
+  get 'admin' => 'admin#admin', :as => 'admin'
   get  'my_measurements' => 'measurements#my_measurements', :as => 'my_measurements'
   get  'enter_my_measurements' => 'measurements#enter_my_measurements', :as => 'enter_my_measurements'
   post 'process_enter_new_measurements' => 'measurements#process_enter_new_measurements', :as => 'process_enter_new_measurements'
   post 'process_create_workout' => 'workouts#process_create_workout', :as => 'process_create_workout'
   post 'process_new_quick_log' => 'homepage#process_new_quick_log', :as => 'process_new_quick_log'
   post 'process_complete_workout' => 'workouts#process_complete_workout', :as => 'process_complete_workout'
+  post 'process_delete_workout' => 'workouts#process_delete_workout', :as => 'process_delete_workout'
+  post 'process_clone_workout' => 'workouts#process_clone_workout', :as => 'process_clone_workout'
+  post 'process_update_workout_state' => 'workouts#process_update_workout_state', :as => 'process_update_workout_state'
  
+  post 'process_delete_exercise' => 'exercises#process_delete_exercise', :as => 'process_delete_exercise'
+  
   
   get  'dashboard' => 'homepage#dashboard', :as => 'dashboard'
   get 'my_goals' => 'goals#my_goals', :as => 'my_goals'
@@ -40,8 +46,10 @@ Rails.application.routes.draw do
   get 'units_json' => 'workouts#units_json', :as => 'units_json'
   
   
+  
  # root 'homepage#dashboard'
  root 'splash#splash_screen'
+ #root 'admin#admin'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

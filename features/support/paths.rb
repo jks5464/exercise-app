@@ -25,8 +25,8 @@ module NavigationHelpers
     when /the enter measurements page/
       '/enter_my_measurements'
       
-    when /the dashboard page/
-      '/dashboard'
+   when /the dashboard page/
+     '/dashboard'
       
     when /the my goals page/
       '/my_goals'
