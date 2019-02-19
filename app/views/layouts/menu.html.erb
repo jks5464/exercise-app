@@ -5,7 +5,7 @@
   
       <ul class="sidebar-nav">
           <li class="sidebar-brand" style="padding-bottom: 3em;">
-              <h1>My Exercise Tracker</h1>
+              <a href="/dashboard"><h1>My Exercise Tracker</h1> </a>
           </li>
           <li>
             <form style="padding: 0px; margin: 0px; margin-top: 40px;" action="/my_goals" accept-charset="UTF-8" method="get"><input name="utf8" type="hidden" value="✓">
@@ -22,11 +22,14 @@
                 <input class="btn-primary" style="float: left; width: 250px;" type="submit" type="submit" name="commit" value="My Workouts">
               </form>
           </li>
-          <li>
-            <form style="margin: 0px; margin-top: 20px; margin: 0px;" action="/my_clients" accept-charset="UTF-8" method="get"><input name="utf8" type="hidden" value="✓">
-                <input class="btn-primary" style="float: left; width: 250px;" type="submit" type="submit" name="commit" value="My Clients">
-              </form>
-          </li>
+          <% if current_effective_user_is_trainer? then %>
+            <li>
+              
+              <form style="margin: 0px; margin-top: 20px; margin: 0px;" action="/my_clients" accept-charset="UTF-8" method="get"><input name="utf8" type="hidden" value="✓">
+                  <input class="btn-primary" style="float: left; width: 250px;" type="submit" type="submit" name="commit" value="My Clients">
+                </form>
+            </li>
+          <% end %>
           <li>
             <form style="margin: 0px; margin-top: 20px; margin: 0px;" action="/quick_log" accept-charset="UTF-8" method="get"><input name="utf8" type="hidden" value="✓">
               <input class="btn-primary" style="float: left; width: 250px;" type="submit" type="submit" name="commit" value="Log Exercise">
@@ -41,9 +44,12 @@
           
           <li class="sidebar-logout" style="text-align: center; margin-top:">
             <div class="login">
-              <% if current_user %>
-                  Signed in as <strong><%= current_user.name %></strong>!
-                  <a style="text-align: center;" id="sign_out" href="/signout">Sign out</a>
+              <% if current_effective_user %>
+                  Signed in as <strong><%= current_effective_user.name %></strong>!
+                  <% if current_effective_user_logged_in_as_client? %>
+                    <a style="text-align: center;" id="client_sign_out" href="/unset_effective_id">Client Sign Out</a>
+                  <% end %>
+                  <a style="text-align: center;" id="sign_out" href="/signout">Sign Out</a>
               <% else %>
                   <a id="sign_in" href="/auth/google_oath2">Sign in with Google</a>
               <% end %>

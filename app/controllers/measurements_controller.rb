@@ -29,8 +29,8 @@ class MeasurementsController < AuthenticationController
 
   def my_measurements
     puts("Displaying my measurements page")
-    puts("User has id: #{session[:user_id]}")
-    @measurements = Measurement.where(user_id: session[:user_id])
+    puts("User has id: #{session[:effective_id]}")
+    @measurements = Measurement.where(user_id: session[:effective_id])
     @measurements = [] if (@measurements.nil?)
   end
   
@@ -45,7 +45,7 @@ class MeasurementsController < AuthenticationController
     height = params[:height]
     
     if valid_measurements?([weight, body_fat, height]) then
-      Measurement.create(user_id: session[:user_id], height: height, weight: weight, body_fat: body_fat)  
+      Measurement.create(user_id: session[:effective_id], height: height, weight: weight, body_fat: body_fat)  
     else
       flash[:error] = "Invalid measurements"
     end

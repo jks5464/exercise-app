@@ -1,19 +1,33 @@
 <legend>Dashboard</legend>
-<p>my progress</p>
+<p><%= current_effective_user.name %>'s progress</p>
 
 <div class="content">
   <div class="group">
-    <div class="circular-progress60"></div>
+    <div class="circular-progress" style="background: linear-gradient(90deg, #e0e0e0 50%, transparent 50%, transparent),
+ linear-gradient(270deg, #ff70a6 50%, #e0e0e0 50%, #e0e0e0);"></div>
     <div class="circular-text">Weight</div>
   </div>
       
   <div class="group">
-    <div class="circular-progress85"></div>
+    <div class="circular-progress" style="background: linear-gradient(90deg, #e0e0e0 50%, transparent 50%, transparent),
+ linear-gradient(126deg, #ff70a6 50%, #e0e0e0 50%, #e0e0e0);"></div>
     <div class="circular-text">Body Fat</div>
   </div>
   
-  <div class="group">
-    <div class="circular-progress100"></div>
-    <div class="circular-text">Height</div>
-  </div>
 </div>
+
+<% if @goals.empty? %>
+  <%= "You don't have any goals entered yet." %>
+<% else %>
+  <% @goals.each_with_index do |g, i| %>
+    <label>Goal: </label>
+    <label><%= g.name %></label></br>
+    <label style="float: left; padding-right: 1em;">0 <%= g.unit.name %></label>
+    <label style="float: right; padding-left: 1em;"><%= g.value %> <%= g.unit.name %></label>
+    <div class="progress">
+      <div class="progress-bar" style="width: <%= g.value %>%;">
+        <%= g.value %> %
+      </div>
+    </div>
+  <% end %>
+<% end %>
