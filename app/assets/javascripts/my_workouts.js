@@ -10,6 +10,7 @@ $(function() {
       }
     });
   }
+  
   // setup complete buttons for planned workouts
   $("#planned-workouts").on('click', '.complete_workout_button', function() {
     
@@ -80,6 +81,10 @@ $(function() {
     });
   });
   
-  
+  // setup edit buttons for saved workouts
+  $("#planned-workouts").on('click', '.edit_workout_button', function() {
+    $(this).parent().parent().find(".show_form").css('display', 'none');
+    $(this).parent().parent().find(".edit_form").css('display', 'inline-block');
+  });
   
 });

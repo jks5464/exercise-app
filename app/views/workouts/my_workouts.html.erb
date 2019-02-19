@@ -30,12 +30,14 @@
                 <% workout.task.each do |task| %>
                   <div class="task_card">
                     <span class='exercise_name'><%= task.exercise.name %> - </span>
-                    <span class='sets_info'><%= task.exercise_set.count %> sets </span>
+                    <span class='sets_info'><%= task.exercise_set.count %></span> sets 
                     <% task.exercise_set.each do |set| %>
                       <div class="task_card">
-                        <span class='reps_info'><%= set[:rep_count] %> reps </span>
-                        <span class='weight_info'>at <%= set[:rep_value] %> </span>
-                        <span class='units_info'><%= set[:rep_unit] %></span>
+                        <span class="show_form">
+                          <span class='reps_info'><%= set[:rep_count] %></span>  reps 
+                          at <span class='weight_info'><%= set[:rep_value] %></span>
+                           <span class='units_info'><%= set[:rep_unit] %></span>
+                        </span>
                       </div>
                     <% end %>
                   </div>
