@@ -11,4 +11,5 @@ class Goal < ActiveRecord::Base
         end
         return values
     end
+
 end
