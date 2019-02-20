@@ -30,4 +30,9 @@
         <% end %>  
   <% end %>
 </div>
-<input class="btn btn-primary" type="submit" name="commit" value="Click here to create an exercise">
+<div class="form-group">
+  <%= form_tag create_exercise_path, :method => :get do %>
+  Don't see the exercise you're looking for? Add one below<br>
+  <input class="btn btn-primary" type="submit" name="commit" value="Click here to create an exercise">
+</div>
+<% end %>
