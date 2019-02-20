@@ -1,9 +1,13 @@
 <script src="/assets/view_exercises.js"></script>
 <div class="exercises">
-  <p>
-    View All Exercises:
-  </p>
+  <legend>View All Exercises</legend
   
+  <span class="hide_when_editing" id="edit-exercises">
+    <button  class="btn btn-info btn-sm"><span class="glyphicon glyphicon-pencil"></span></button>
+  </span>
+  <span class="show_when_editing" id="done-editing" hidden>
+    <button class="btn btn-info btn-sm" hidden><span class="glyphicon glyphicon-ok"></span></button>
+  </span>
   <% if @exercises.empty? %>
       <%= "No exercises have been created yet." %>
   <% else %>
@@ -12,7 +16,13 @@
            <table id= "table">
               <tr>
                 <td><%= e.name%></td>
-                <td><button type="button" name="button1" class = "delete_button" id="<%=e.id%>"value="delete"/>Delete</td>
+                <% if current_effective_user.can_delete_exercise?(e) %>
+                    <td class="show_when_editing" hidden>
+                      <button type="button" name="button1" class="delete_button btn btn-info btn-sm" id="<%=e.id%>"value="delete">
+                        <span class="glyphicon glyphicon-trash"></span>
+                      </button>
+                    </td>
+                <% end %>
               </tr>
             </table>
 
