@@ -1,8 +1,6 @@
 <script src="/assets/view_exercises.js"></script>
 <div class="exercises">
-  <p>
-    View All Exercises:
-  </p>
+  <legend>View All Exercises</legend>
   
   <% if @exercises.empty? %>
       <%= "No exercises have been created yet." %>
@@ -20,4 +18,4 @@
         <% end %>  
   <% end %>
 </div>
-<%= link_to 'Create New Exercise', create_exercise_path %>
+<input class="btn btn-primary" type="submit" name="commit" value="Click here to create an exercise">

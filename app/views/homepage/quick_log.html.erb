@@ -6,7 +6,7 @@
   <div class="row">
     
     <div class="form-group">
-      <legend>Logging History:</legend>
+      <legend>Logging History</legend>
       <% if @exercises.empty? %>
           <b><%= "No exercises have been created yet." %></b>
           <%= form_tag create_exercise_path, :method => :get do %>
@@ -30,7 +30,7 @@
     
     <div class="form-group">
       <% if @workouts.empty? %>
-        The history of completed exercises/workouts will be here<br />
+        Here will be the history of completed exercises/workouts<br />
       <% else %>
         <table class="table">
             <tr>
@@ -41,7 +41,7 @@
               <th>Rep Unit</th>
             </tr>
             <% @workouts.reverse_each do |workout, i| %>
-              <% if workout.state == State.complete %>
+              <% if workout.completed %>
                 <% workout.task.each do | task | %>
                 <tr>
                   <td><%= task.exercise.name %></td>
