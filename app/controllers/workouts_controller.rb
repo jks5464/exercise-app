@@ -55,10 +55,10 @@ class WorkoutsController < AuthenticationController
     workout_id = params[:workout_id]
     
     puts("Cloning a workout")
-    clone_id = Workout.clone(current_effective_user, workout_id)
+    clone_id, clone_task_id_hash, clone_set_id_hash = Workout.clone(current_effective_user, workout_id)
     puts("done.")
     
-    render json: {clone_id: clone_id}
+    render json: {clone_id: clone_id, clone_task_id_hash: clone_task_id_hash, clone_set_id_hash: clone_set_id_hash}
   end
   
   def process_update_workout_state
@@ -76,6 +76,20 @@ class WorkoutsController < AuthenticationController
       render json: { status: 500 }
     end
     
+  end
+  
+  def process_update_exercise_set
+    exercise_set_id = params[:exercise_set_id]
+    rep_count = params[:rep_count]
+    rep_value = params[:rep_value]
+    
+    puts("Updating exercise set with id: #{exercise_set_id}")
+    puts("\t new rep count: #{rep_count}")
+    puts("\t new rep value: #{rep_value}")
+    ExerciseSet.update_exercise_set(exercise_set_id, rep_count, rep_value)
+    puts("done.")
+    
+    render json: { status: 200 }
   end
   
   def search_exercises_json
