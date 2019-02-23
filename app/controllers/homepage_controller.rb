@@ -9,6 +9,7 @@ class HomepageController < AuthenticationController
     puts("showing the progress")
   end
 
+
   def dashboard
     puts("dashboard showing")
     
@@ -23,9 +24,13 @@ class HomepageController < AuthenticationController
       goal_values = Array.new
       current_effective_user.workout.each do | workout |
         workout.task.each do |task|
+          puts "G unit name: "
+          puts g.unit.name
           if task.exercise_id == g.exercise_id then
             task.exercise_set.each do | exercise_set |
-              goal_values.push(Array.new([exercise_set.created_at.strftime("%D %H:%M"), exercise_set.rep_value]))
+              if exercise_set.rep_unit == g.unit.name then
+                goal_values.push(Array.new([exercise_set.created_at.strftime("%D %H:%M"), exercise_set.rep_value]))
+              end
             end
           end
         end

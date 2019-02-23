@@ -13,15 +13,16 @@
             <%= submit_tag 'Click here to create an exercise' %>
           <% end %>
       <% else %>
+
         <div class="form-group">
-          <div class="form-group row" style="margin-left: auto; margin-right: auto;">
-            <a class="btn btn-primary" id="add">Log a new exercise</a>
-          </div>
-        </div>
-        <div class="form-group">
+
           <%= form_tag create_exercise_path, :method => :get do %>
-            Don't see the exercise you're looking for? Add one below<br>
-            <input class="btn btn-primary" type="submit" name="commit" value="Click here to create an exercise">
+            <div class="form-group row" style="margin-left: auto; margin-right: auto;">
+              <a class="btn btn-primary" id="add">Log a New Exercise</a>
+            </div>
+            
+            <label for="commit">Don't see the exercise you're looking for?<br>
+            <input class="btn btn-secondary" type="submit" name="commit" value="Create a New Exercise">
         </div>
         <% end %>
       <% end %>
@@ -38,7 +39,6 @@
               <th>Set Count</th>
               <th>Rep Count</th>
               <th>Rep Value</th>
-              <th>Rep Unit</th>
             </tr>
             <% @workouts.reverse_each do |workout, i| %>
               <% if workout.state == State.complete %>
@@ -47,8 +47,7 @@
                   <td><%= task.exercise.name %></td>
                   <td><%= task.exercise_set.count %></td>
                   <td><%= task.exercise_set[0].rep_count %></td>
-                  <td><%= task.exercise_set[0].rep_value %></td>
-                  <td><%= task.exercise_set[0].rep_unit %></td>
+                  <td><%= task.exercise_set[0].rep_value %> <%= task.exercise_set[0].rep_unit %></td>
                 </tr>
                 <% end %>
               <% end %>
@@ -86,4 +85,6 @@
       
     </fieldset>
   </form>
+  
+
 </div>
