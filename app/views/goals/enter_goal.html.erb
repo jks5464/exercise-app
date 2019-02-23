@@ -34,7 +34,6 @@
             <select class="form-control" name="exercise" id="exercise" onchange="changeUnits()">
               <%= @exercises.each do |exercise| %>
                 <option id="exercise_option" value="<%= exercise.name %>"><%=exercise.name%></option>
-                 <!--store category here?-->
               <% end %>
               
             </select>
@@ -53,10 +52,12 @@
           
           <div class="col-sm-1" style="padding: 0em;">
             <select class="form-control" name="unit" id="unit">
-              <!--<%= @units.each do |unit| %>-->
-              <!--  <option value="<%= unit.name %>"><%= unit.name %></option>-->
+              <!-- blank options included to make tests work, might want to update this later -->
+              <option class="hidden" value=""></option>
+              <%= @units.each do |unit| %>
+                <option class="hidden" value="<%= unit.name %>"><%= unit.name %></option>
                 
-              <!--<% end %>-->
+              <% end %>
             </select>
           </div>
           

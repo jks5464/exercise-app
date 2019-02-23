@@ -69,7 +69,7 @@ class GoalsController < AuthenticationController
     
     # user.workouts.exercise.tasks.exercise_sets
   end
-  
+    
   def enter_goal_create
     puts("entering new goal into database")
     user_id = session[:effective_id]
