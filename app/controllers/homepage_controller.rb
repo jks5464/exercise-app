@@ -36,28 +36,16 @@ class HomepageController < AuthenticationController
         end
       end
 
-
-    @goals = [] if (@goals.nil?)
-
-      rep_values = goal_values.map(&:last)
-      @progress = (rep_values.max.to_f/g.value.to_f)*100.to_f
-      
-      # byebug
-      puts "GOAL NAME: "
-      puts g.name
-      @goal_data.push(goal_values)
-      @goal_progress.push(@progress.to_i)
-      
-      puts "GOAL DATA: "
-      puts "#{@goal_data}"
-      puts "END GOAL DATA"
-      
-      puts "PROGRESS: "
-      puts "#{@goal_progress}"
-      puts "END GOAL PROGRESS"
+      @goals = [] if (@goals.nil?)
+  
+        rep_values = goal_values.map(&:last)
+        @progress = (rep_values.max.to_f/g.value.to_f)*100.to_f
+        
+        @goal_data.push(goal_values)
+        @goal_progress.push(@progress.to_i)
     end
+      
     @goals = [] if (@goals.nil?)
-
   end
   
   def my_measurement

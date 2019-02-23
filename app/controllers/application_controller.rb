@@ -38,5 +38,5 @@ class ApplicationController < ActionController::Base
     return (self.current_effective_user_logged_in_as_client? or 
             current_effective_user.is_trainer?)
   end
-  
+ 
 end
