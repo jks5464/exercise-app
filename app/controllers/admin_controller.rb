@@ -17,7 +17,7 @@ class AdminController < ApplicationController
   def process_delete_client
     trainer_id = params[:trainer_id]
     client_id = params[:client_id]
-    ClientTrainerRelation.delete_client(client_id)
+    ClientTrainerRelation.delete_client_trainer_relationship(client_id, trainer_id)
     
     render json: { status: 200 }
 
