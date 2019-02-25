@@ -24,6 +24,7 @@ Rails.application.routes.draw do
   post 'process_update_exercise_set' => 'workouts#process_update_exercise_set', :as => 'process_update_exercise_set'
  
   post 'process_delete_exercise' => 'exercises#process_delete_exercise', :as => 'process_delete_exercise'
+  post 'process_delete_client' => 'admin#process_delete_client', :as => 'process_delete_client'
   
   
   get  'dashboard' => 'homepage#dashboard', :as => 'dashboard'
