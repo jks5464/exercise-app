@@ -4,7 +4,7 @@ class SessionsController < ApplicationController
     session[:user_id] = user.id
     session[:effective_id] = user.id
     
-    if(user.name.to_s == 'GirlScout Cookie') then
+    if (user.id == 1) or (Rails.env.development? and user.id == 6) then
       redirect_to admin_path
     else
       redirect_to dashboard_path
