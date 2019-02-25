@@ -25,7 +25,7 @@ Rails.application.routes.draw do
  
   post 'process_delete_exercise' => 'exercises#process_delete_exercise', :as => 'process_delete_exercise'
   post 'process_delete_client' => 'admin#process_delete_client', :as => 'process_delete_client'
-  
+  post 'process_add_client' => 'admin_process_add_client', :as => 'process_add_client'
   
   get  'dashboard' => 'homepage#dashboard', :as => 'dashboard'
   get 'my_goals' => 'goals#my_goals', :as => 'my_goals'
