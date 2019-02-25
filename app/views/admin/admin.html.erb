@@ -59,14 +59,12 @@ table, td, th {
 <div class = "admin">
     <p>
       Admin Dashboard:
-  
     </p>
           
-              <table >
+              <table>
                   <tr align = "middle">
                     <th colspan = "2">User</th>
                     <th colspan = "2">Roles</th>
-                 
                   </tr>
                   <tr align = "middle">
                     <th>Id</th>
@@ -75,7 +73,7 @@ table, td, th {
                     
                   </tr>
                   
-                  <%User.all.each  do |e,i| %>
+                  <% User.all.each  do |e,i| %>
                   <div <% 'id=last_row' if i == (User.all.size - 1) %> >
                     <form  id = "TrainerOrAdmin">
                   <tr align = "middle">

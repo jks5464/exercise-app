@@ -6,7 +6,8 @@ Feature: User Login
 
 @omniauth_test
 Scenario: Zac Test Log In
-  Given A user with name "Zac Test" and UID "1" and auth provider "google_oauth2"
+  Given an admin user exists
+  And A user with name "Zac Test" and UID "2" and auth provider "google_oauth2"
   And I am on the splash screen page
   And I login using "google_oauth2" as the user
   Then I should see "Signed in as Zac Test!" within "div.login"
@@ -15,7 +16,8 @@ Scenario: Zac Test Log In
   
 @omniauth_test
 Scenario: Constantina Test Log In
-  Given A user with name "Constantina Test" and UID "2" and auth provider "google_oauth2"
+  Given an admin user exists
+  And A user with name "Constantina Test" and UID "3" and auth provider "google_oauth2"
   And I am on the splash screen page
   And I login using "google_oauth2" as the user
   Then I should see "Signed in as Constantina Test!" within "div.login"

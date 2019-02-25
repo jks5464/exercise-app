@@ -16,4 +16,17 @@ class Exercise < ActiveRecord::Base
     exercise = find(exercise_id)
     exercise.destroy
   end
+  
+  def get_active_users
+    active_users = Set.new
+    self.task.each do | task |
+      active_users.add(task.workout.user)
+    end
+    
+    self.goal.each do | goal |
+      active_users.add(goal.user)
+    end
+    
+    return active_users
+  end
 end

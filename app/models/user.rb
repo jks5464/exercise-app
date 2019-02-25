@@ -49,4 +49,18 @@ class User < ActiveRecord::Base
     return false
   end
   
+  def is_admin?
+    roles = self.roles
+    return (roles.include?("Admin") or (self.id == 1) or (Rails.env.development? and self.id == 6))
+  end
+  
+  def can_delete_exercise?(exercise)
+    active_exercise_users = exercise.get_active_users
+    return (
+           (self.is_admin?) or 
+           (active_exercise_users.size == 0) or 
+           (active_exercise_users.size == 1 and active_exercise_users.include?(self))
+           )
+  end
+  
 end

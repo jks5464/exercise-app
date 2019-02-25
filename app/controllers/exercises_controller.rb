@@ -31,6 +31,7 @@ class ExercisesController < ApplicationController
   def process_delete_exercise
     exercise_id = params[:exercise_id]
     Exercise.delete_exercise(exercise_id)
+    
     render json: { status: 200 }
   end
   
