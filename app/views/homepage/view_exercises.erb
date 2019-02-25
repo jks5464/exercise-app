@@ -1,3 +1,4 @@
+<script src="/assets/view_exercises.js"></script>
 <div class="exercises">
   <legend>View All Exercises</legend>
   
@@ -9,11 +10,9 @@
            <table id= "table">
               <tr>
                 <td><%= e.name%></td>
-                <!--<td><input id="button2" type="submit" name="button2" onclick="myFunction2();" value="delete"/></td>-->
-                
+                <td><button type="button" name="button1" class = "delete_button" id="<%=e.id%>"value="delete"/>Delete</td>
               </tr>
             </table>
-          
         <script>
        
         function myFunction2(){
@@ -24,8 +23,6 @@
         };
         
         </script>
-
-       
         <% end %>  
   <% end %>
 </div>

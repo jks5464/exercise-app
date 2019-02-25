@@ -210,7 +210,7 @@ Given /the task has the following sets/ do |sets_table|
                        rep_value: set[:rep_value],
                        rep_unit:  set[:rep_unit],
                        task_id: @task.id, 
-                       completed: false)
+                       state: State.saved)
   end
 end
 
@@ -232,12 +232,12 @@ Then /^I send keys down, tab to "(.*?)"$/ do |field|
 end
 
 Given /^I have the "(.*?)" workout planned$/ do |workout_name|
-  @workout = Workout.create(name: workout_name, uid: 1, user_id: @user.id, completed: false)
+  @workout = Workout.create(name: workout_name, uid: 1, user_id: @user.id, state: State.saved)
 end
 
 Given /^the workout has the "(.*?)" task$/ do |exercise_name|
   exercise = Exercise.where(name: exercise_name).first
-  @task = Task.create(exercise_id: exercise.id, workout_id: @workout.id, completed: false)
+  @task = Task.create(exercise_id: exercise.id, workout_id: @workout.id, state: State.saved)
 end
 
 Given /^I check "(.*?)"$/ do |element|

@@ -1,244 +1,421 @@
 /** ============================
  ** variable
  ** ============================ */
+$circular-margin: 10px;
+$break-small: 320px;
+$break-large: 1100px;
+
 /** ============================
  ** function circular-progress
  ** ============================ */
+@function circular-progress($maxPercent, $percent, $color-bar, $color-back) {
+  $increment: 360 / $maxPercent;
+  $half: round($maxPercent / 2);
+  $background-image: '';
+  @if $percent < $half {
+    $nextdeg: 90deg + ($increment * $percent);
+    $background-image: 'linear-gradient(90deg, #{$color-back} 50%, transparent 50%, transparent),
+ linear-gradient(#{$nextdeg}, #{$color-bar} 50%, #{$color-back} 50%, #{$color-back})';
+
+  }
+  @else {
+    $nextdeg: -90deg + ($increment * ($percent - $half));
+    $background-image: 'linear-gradient(#{$nextdeg}, #{$color-bar} 50%, transparent 50%, transparent),
+ linear-gradient(270deg, #{$color-bar} 50%, #{$color-back} 50%, #{$color-back})';
+
+  }
+  @return unquote($background-image);
+}
+
+
 /** ============================
  ** Mixins Circular Progress
  ** ============================ */
+@mixin circular-progress($percent-num, $color1:"#03A9F4") {
+  //circular-progress function
+  //circular-progress($maxPercent, $percent, $color-bar, $color-back);
+  // background: circular-progress(100, $percent-num, #03A9F4, #E0E0E0);
+  background: circular-progress(100, $percent-num, $color1, #E0E0E0);
+  border-radius: 50%;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+  height: 200px;
+  margin: 2em auto;
+  position: relative;
+  min-width: 200px;
+  margin: $circular-margin;
+  transition: all .3s linear;
+  &::before {
+    background-color: #FAFAFA;
+    border-radius: 50%;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+    color: rgba(black, .54);
+    content: '#{$percent-num}%';
+    font-size: 72px;
+    font-weight: bold;
+    height: 100%;
+    left: 0;
+    line-height: 200px;
+    position: absolute;
+    text-align: center;
+    top: 0;
+    transform: scale(.87);
+    width: 100%;
+  }
+  &:hover {
+    box-shadow: 0 0 100px 1px rgba(255, 214, 112, 0.35);
+  }
+}
+
 body {
-  background-color: #eee;
+  background-color: #EEE;
   font-family: Roboto;
   display: flex;
   flex-direction: column;
   margin: 0;
 }
+
 .header {
   display: flex;
   justify-content: center;
+  .title {
+    color: #5d5d5d;
+    text-align: center;
+    font-weight: normal;
+  }
 }
-.header .title {
-  color: #5d5d5d;
-  text-align: center;
-  font-weight: normal;
-}
+
 .content {
   display: flex;
   flex-flow: row wrap;
   justify-content: center;
-}
-@media screen and (min-width: 1100px) {
-  .content {
+  @media screen and (min-width: $break-large) {
     justify-content: space-around;
   }
 }
+
 .group {
   margin: 10px;
+  
+  .circular-progress0 {
+    @include circular-progress(0, #FF70A6);
+  }
+  .circular-progress1 {
+    @include circular-progress(1, #FF70A6);
+  }
+  .circular-progress2 {
+    @include circular-progress(2, #FF70A6);
+  }
+  .circular-progress3 {
+    @include circular-progress(3, #FF70A6);
+  }
+  .circular-progress4 {
+    @include circular-progress(4, #FF70A6);
+  }
+  .circular-progress5 {
+    @include circular-progress(5, #FF70A6);
+  }
+  .circular-progress6 {
+    @include circular-progress(6, #FF70A6);
+  }
+  .circular-progress7 {
+    @include circular-progress(7, #FF70A6);
+  }
+  .circular-progress8 {
+    @include circular-progress(8, #FF70A6);
+  }
+  .circular-progress9 {
+    @include circular-progress(9, #FF70A6);
+  }
+  .circular-progress10 {
+    @include circular-progress(10, #FF70A6);
+  }
+  .circular-progress11 {
+    @include circular-progress(11, #FF70A6);
+  }
+  .circular-progress12 {
+    @include circular-progress(12, #FF70A6);
+  }
+  .circular-progress13 {
+    @include circular-progress(13, #FF70A6);
+  }
+  .circular-progress14 {
+    @include circular-progress(14, #FF70A6);
+  }
+  .circular-progress15 {
+    @include circular-progress(15, #FF70A6);
+  }
+  .circular-progress16 {
+    @include circular-progress(16, #FF70A6);
+  }
+  .circular-progress17 {
+    @include circular-progress(17, #FF70A6);
+  }
+  .circular-progress18 {
+    @include circular-progress(18, #FF70A6);
+  }
+  .circular-progress19 {
+    @include circular-progress(19, #FF70A6);
+  }
+  .circular-progress20 {
+    @include circular-progress(20, #FF70A8);
+  }
+  .circular-progress21 {
+    @include circular-progress(21, #FF70A8);
+  }
+  .circular-progress22 {
+    @include circular-progress(22, #FF70A8);
+  }
+  .circular-progress23 {
+    @include circular-progress(23, #FF70A8);
+  }
+  .circular-progress24 {
+    @include circular-progress(24, #FF70A8);
+  }
+  .circular-progress25 {
+    @include circular-progress(25, #FF70A8);
+  }
+  .circular-progress26 {
+    @include circular-progress(26, #FF70A8);
+  }
+  .circular-progress27 {
+    @include circular-progress(27, #FF70A8);
+  }
+  .circular-progress28 {
+    @include circular-progress(28, #FF70A8);
+  }
+  .circular-progress29 {
+    @include circular-progress(29, #FF70A8);
+  }
+  .circular-progress30 {
+    @include circular-progress(30, #FF9770);
+  }
+  .circular-progress31 {
+    @include circular-progress(31, #FF9770);
+  }
+  .circular-progress32 {
+    @include circular-progress(32, #FF9770);
+  }
+  .circular-progress33 {
+    @include circular-progress(33, #FF9770);
+  }
+  .circular-progress34 {
+    @include circular-progress(34, #FF9770);
+  }
+  .circular-progress35 {
+    @include circular-progress(35, #FF9770);
+  }
+  .circular-progress36 {
+    @include circular-progress(36, #FF9770);
+  }
+  .circular-progress37 {
+    @include circular-progress(37, #FF9770);
+  }
+  .circular-progress38 {
+    @include circular-progress(38, #FF9770);
+  }
+  .circular-progress39 {
+    @include circular-progress(39, #FF9770);
+  }
+  .circular-progress40 {
+    @include circular-progress(40, #FF9770);
+  }
+  .circular-progress41 {
+    @include circular-progress(41, #FF9770);
+  }
+  .circular-progress42 {
+    @include circular-progress(42, #FF9770);
+  }
+  .circular-progress43 {
+    @include circular-progress(43, #FF9770);
+  }
+  .circular-progress44 {
+    @include circular-progress(44, #FF9770);
+  }
+  .circular-progress45 {
+    @include circular-progress(45, #FF9770);
+  }
+  .circular-progress46 {
+    @include circular-progress(46, #FF9770);
+  }
+  .circular-progress47 {
+    @include circular-progress(47, #FF9770);
+  }
+  .circular-progress48 {
+    @include circular-progress(48, #FF9770);
+  }
+  .circular-progress49 {
+    @include circular-progress(49, #FF9770);
+  }
+  .circular-progress50 {
+    @include circular-progress(50, #70D6FF);
+  }
+  .circular-progress51 {
+    @include circular-progress(51, #70D6FF);
+  }
+  .circular-progress52 {
+    @include circular-progress(52, #70D6FF);
+  }
+  .circular-progress53 {
+    @include circular-progress(53, #70D6FF);
+  }
+  .circular-progress54 {
+    @include circular-progress(54, #70D6FF);
+  }
+  .circular-progress55 {
+    @include circular-progress(55, #70D6FF);
+  }
+  .circular-progress56 {
+    @include circular-progress(56, #70D6FF);
+  }
+  .circular-progress57 {
+    @include circular-progress(57, #70D6FF);
+  }
+  .circular-progress58 {
+    @include circular-progress(58, #70D6FF);
+  }
+  .circular-progress59 {
+    @include circular-progress(59, #70D6FF);
+  }
+  .circular-progress60 {
+    @include circular-progress(60, #70D6FF);
+  }
+  .circular-progress61 {
+    @include circular-progress(61, #70D6FF);
+  }
+  .circular-progress62 {
+    @include circular-progress(62, #70D6FF);
+  }
+  .circular-progress63 {
+    @include circular-progress(63, #70D6FF);
+  }
+  .circular-progress64 {
+    @include circular-progress(64, #70D6FF);
+  }
+  .circular-progress65 {
+    @include circular-progress(65, #70D6FF);
+  }
+  .circular-progress66 {
+    @include circular-progress(66, #70D6FF);
+  }
+  .circular-progress67 {
+    @include circular-progress(67, #70D6FF);
+  }
+  .circular-progress68 {
+    @include circular-progress(68, #70D6FF);
+  }
+  .circular-progress69 {
+    @include circular-progress(69, #70D6FF);
+  }
+  .circular-progress70 {
+    @include circular-progress(70, #C8E9A0);
+  }
+  .circular-progress71 {
+    @include circular-progress(71, #70D6FF);
+  }
+  .circular-progress72 {
+    @include circular-progress(72, #70D6FF);
+  }
+  .circular-progress73 {
+    @include circular-progress(73, #70D6FF);
+  }
+  .circular-progress74 {
+    @include circular-progress(74, #70D6FF);
+  }
+  .circular-progress75 {
+    @include circular-progress(75, #70D6FF);
+  }
+  .circular-progress76 {
+    @include circular-progress(76, #70D6FF);
+  }
+  .circular-progress77 {
+    @include circular-progress(77, #70D6FF);
+  }
+  .circular-progress78 {
+    @include circular-progress(78, #70D6FF);
+  }
+  .circular-progress79 {
+    @include circular-progress(79, #70D6FF);
+  }
+  .circular-progress80 {
+    @include circular-progress(80, #C8E9A0);
+  }
+  .circular-progress81 {
+    @include circular-progress(81, #70D6FF);
+  }
+  .circular-progress82 {
+    @include circular-progress(82, #70D6FF);
+  }
+  .circular-progress83 {
+    @include circular-progress(83, #70D6FF);
+  }
+  .circular-progress84 {
+    @include circular-progress(84, #70D6FF);
+  }
+  .circular-progress85 {
+    @include circular-progress(85, #70D6FF);
+  }
+  .circular-progress86 {
+    @include circular-progress(86, #70D6FF);
+  }
+  .circular-progress87 {
+    @include circular-progress(87, #70D6FF);
+  }
+  .circular-progress88 {
+    @include circular-progress(88, #70D6FF);
+  }
+  .circular-progress89 {
+    @include circular-progress(89, #70D6FF);
+  }
+  .circular-progress90 {
+    @include circular-progress(90, #C8E9A0);
+  }
+  .circular-progress91 {
+    @include circular-progress(91, #70D6FF);
+  }
+  .circular-progress92 {
+    @include circular-progress(92, #70D6FF);
+  }
+  .circular-progress93 {
+    @include circular-progress(93, #70D6FF);
+  }
+  .circular-progress94 {
+    @include circular-progress(94, #70D6FF);
+  }
+  .circular-progress95 {
+    @include circular-progress(95, #70D6FF);
+  }
+  .circular-progress96 {
+    @include circular-progress(96, #70D6FF);
+  }
+  .circular-progress97 {
+    @include circular-progress(97, #70D6FF);
+  }
+  .circular-progress98 {
+    @include circular-progress(98, #70D6FF);
+  }
+  .circular-progress99 {
+    @include circular-progress(99, #70D6FF);
+  }
+  .circular-progress100 {
+    @include circular-progress(100, #C8E9A0);
+  }
+  
+  
+  
+  
+  .circular-text {
+    text-align: center;
+    color: rgba(black, .6);
+    font-size: 14px;
+    font-weight: bold;
+    letter-spacing: 1px;
+  }
 }
-.group .circular-progress60 {
-  background: linear-gradient(90deg, #e0e0e0 50%, transparent 50%, transparent),
- linear-gradient(126deg, #ff70a6 50%, #e0e0e0 50%, #e0e0e0);
-  border-radius: 50%;
-  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
-  height: 200px;
-  margin: 2em auto;
-  position: relative;
-  min-width: 200px;
-  margin: 10px;
-  transition: all 0.3s linear;
-}
-.group .circular-progress60::before {
-  background-color: #fafafa;
-  border-radius: 50%;
-  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
-  color: rgba(0, 0, 0, .54);
-  content: "10%";
-  font-size: 72px;
-  font-weight: bold;
-  height: 100%;
-  left: 0;
-  line-height: 200px;
-  position: absolute;
-  text-align: center;
-  top: 0;
-  transform: scale(0.87);
-  width: 100%;
-}
-.group .circular-progress60:hover {
-  box-shadow: 0 0 100px 1px rgba(255, 214, 112, 0.35);
-}
-.group .circular-progress73 {
-  background: linear-gradient(-7.2deg, #ff9770 50%, transparent 50%, transparent),
- linear-gradient(270deg, #ff9770 50%, #e0e0e0 50%, #e0e0e0);
-  border-radius: 50%;
-  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
-  height: 200px;
-  margin: 2em auto;
-  position: relative;
-  min-width: 200px;
-  margin: 10px;
-  transition: all 0.3s linear;
-}
-.group .circular-progress73::before {
-  background-color: #fafafa;
-  border-radius: 50%;
-  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
-  color: rgba(0, 0, 0, .54);
-  content: "73%";
-  font-size: 72px;
-  font-weight: bold;
-  height: 100%;
-  left: 0;
-  line-height: 200px;
-  position: absolute;
-  text-align: center;
-  top: 0;
-  transform: scale(0.87);
-  width: 100%;
-}
-.group .circular-progress73:hover {
-  box-shadow: 0 0 100px 1px rgba(255, 214, 112, 0.35);
-}
-.group .circular-progress75 {
-  background: linear-gradient(0deg, #ff9770 50%, transparent 50%, transparent),
- linear-gradient(270deg, #ff9770 50%, #e0e0e0 50%, #e0e0e0);
-  border-radius: 50%;
-  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
-  height: 200px;
-  margin: 2em auto;
-  position: relative;
-  min-width: 200px;
-  margin: 10px;
-  transition: all 0.3s linear;
-}
-.group .circular-progress75::before {
-  background-color: #fafafa;
-  border-radius: 50%;
-  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
-  color: rgba(0, 0, 0, .54);
-  content: "75%";
-  font-size: 72px;
-  font-weight: bold;
-  height: 100%;
-  left: 0;
-  line-height: 200px;
-  position: absolute;
-  text-align: center;
-  top: 0;
-  transform: scale(0.87);
-  width: 100%;
-}
-.group .circular-progress75:hover {
-  box-shadow: 0 0 100px 1px rgba(255, 214, 112, 0.35);
-}
-.group .circular-progress85 {
-  background: linear-gradient(36deg, #70d6ff 50%, transparent 50%, transparent),
- linear-gradient(270deg, #70d6ff 50%, #e0e0e0 50%, #e0e0e0);
-  border-radius: 50%;
-  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
-  height: 200px;
-  margin: 2em auto;
-  position: relative;
-  min-width: 200px;
-  margin: 10px;
-  transition: all 0.3s linear;
-}
-.group .circular-progress85::before {
-  background-color: #fafafa;
-  border-radius: 50%;
-  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
-  color: rgba(0, 0, 0, .54);
-  content: "85%";
-  font-size: 72px;
-  font-weight: bold;
-  height: 100%;
-  left: 0;
-  line-height: 200px;
-  position: absolute;
-  text-align: center;
-  top: 0;
-  transform: scale(0.87);
-  width: 100%;
-}
-.group .circular-progress85:hover {
-  box-shadow: 0 0 100px 1px rgba(255, 214, 112, 0.35);
-}
-.group .circular-progress90 {
-  background: linear-gradient(54deg, #70d6ff 50%, transparent 50%, transparent),
- linear-gradient(270deg, #70d6ff 50%, #e0e0e0 50%, #e0e0e0);
-  border-radius: 50%;
-  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
-  height: 200px;
-  margin: 2em auto;
-  position: relative;
-  min-width: 200px;
-  margin: 10px;
-  transition: all 0.3s linear;
-}
-.group .circular-progress90::before {
-  background-color: #fafafa;
-  border-radius: 50%;
-  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
-  color: rgba(0, 0, 0, .54);
-  content: "90%";
-  font-size: 72px;
-  font-weight: bold;
-  height: 100%;
-  left: 0;
-  line-height: 200px;
-  position: absolute;
-  text-align: center;
-  top: 0;
-  transform: scale(0.87);
-  width: 100%;
-}
-.group .circular-progress90:hover {
-  box-shadow: 0 0 100px 1px rgba(255, 214, 112, 0.35);
-}
-.group .circular-progress100 {
-  background: linear-gradient(90deg, #c8e9a0 50%, transparent 50%, transparent),
- linear-gradient(270deg, #c8e9a0 50%, #e0e0e0 50%, #e0e0e0);
-  border-radius: 50%;
-  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
-  height: 200px;
-  margin: 2em auto;
-  position: relative;
-  min-width: 200px;
-  margin: 10px;
-  transition: all 0.3s linear;
-}
-.group .circular-progress100::before {
-  background-color: #fafafa;
-  border-radius: 50%;
-  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
-  color: rgba(0, 0, 0, .54);
-  content: "100%";
-  font-size: 72px;
-  font-weight: bold;
-  height: 100%;
-  left: 0;
-  line-height: 200px;
-  position: absolute;
-  text-align: center;
-  top: 0;
-  transform: scale(0.87);
-  width: 100%;
-}
-.group .circular-progress100:hover {
-  box-shadow: 0 0 100px 1px rgba(255, 214, 112, 0.35);
-}
-.group .circular-text {
-  text-align: center;
-  color: rgba(0, 0, 0, .6);
-  font-size: 14px;
-  font-weight: bold;
-  letter-spacing: 1px;
-}
+
 .twitter {
-  background-color: #fafafa;
+  background-color: #FAFAFA;
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
-  color: rgba(0, 0, 0, .6);
+  color: rgba(black, .6);
   display: block;
   height: 36px;
   line-height: 36px;
@@ -247,14 +424,16 @@ body {
   width: 140px;
   border-radius: 2px;
   margin: 1em auto;
-  transition: box-shadow 0.3s linear;
+  transition: box-shadow .3s linear;
+  &:hover {
+    box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15);
+  }
 }
-.twitter:hover {
-  box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15);
-}
+
 #footer {
   margin-top: 30px;
 }
+
 @keyframes turning_cw {
   0% {
     transform: rotate(0deg);
@@ -263,7 +442,6 @@ body {
     transform: rotate(360deg);
   }
 }
-
 
 // sidebar
 /*!
@@ -286,10 +464,6 @@ body {
 
 #wrapper.toggled {
   padding-left: 250px;
-}
-
-#sidebar-wrapper.color-change {
-  background: red;
 }
 
 #sidebar-wrapper {

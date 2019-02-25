@@ -12,44 +12,109 @@
         <% end %>
       </div>
     
-      <div class="row" id="saved-workouts">
-        <div class="form-group">
-          <h1>Saved Workouts</h1>
-        </div>
-      </div>
-      
-      <div class="form-group">
-        <div class="row" id="planned-workouts">
-          <div>
-            <h3>Planned Workouts</h3>
+      <div id="all-workouts">
+        <div class="row" id="saved-workouts">
+          <div class="form-group">
+            <h1>Saved Workouts</h1>
           </div>
-        </div>
-        
-        <% @workouts.each do |workout| %>
-          <% if !workout.completed %>
-          <div class="row workout_card" id=<%="#{workout.id}"%> >
-            <input class="complete_workout" type="checkbox">
+          
+          <% @workouts.each do |workout| %>
+            <% if workout.state == State.saved %>
+            <div class="row workout_card" id=<%="#{workout.id}"%> >
               <span>
                 <%= workout.name %>
+                <span class="show_form">
+                  <button type="button" class="btn btn-info btn-sm plan_workout_button">Plan</button>
+                  <button type="button" class="btn btn-info btn-sm edit_workout_button"><span class="glyphicon glyphicon-pencil"></span></button>
+                  <button type="button" class="btn btn-info btn-sm delete_workout_button"><span class="glyphicon glyphicon-trash"></span></button>
+                </span>
+                
+                <span class="edit_form" hidden>
+                  <button type="button" class="btn btn-info btn-sm done_button"><span class="glyphicon glyphicon-ok"></span></button>
+                </span>
+                
               </span>
+                
               <div>
                 <% workout.task.each do |task| %>
-                  <div class="task_card">
+                  <div class="task_card" id="<%= task.id %>">
                     <span class='exercise_name'><%= task.exercise.name %> - </span>
-                    <span class='sets_info'><%= task.exercise_set.count %> sets </span>
+                    <span class='sets_info'><%= task.exercise_set.count %></span> sets 
                     <% task.exercise_set.each do |set| %>
-                      <div class="task_card">
-                        <span class='reps_info'><%= set[:rep_count] %> reps </span>
-                        <span class='weight_info'>at <%= set[:rep_value] %> </span>
+                      <div class="set_card" id="<%= set.id %>">
+                        <span class="show_form">
+                          <span class='rep_count_info'><%= set[:rep_count] %></span>  reps 
+                          at <span class='rep_value_info'><%= set[:rep_value] %></span>
+                        </span>
+                        
+                        <span class="edit_form" hidden>
+                          <label for="rep_count_edit"></label><input name="rep_count_edit" class="rep_count_edit" type="number" min="1" value="<%= set[:rep_count] %>"> reps </input>
+                          <label for="rep_value_edit"></label>at <input name="rep_value_edit" class="rep_value_edit" type="number" min="1" value="<%= set[:rep_value] %>"></input>
+                        </span>
+                        
                         <span class='units_info'><%= set[:rep_unit] %></span>
                       </div>
                     <% end %>
                   </div>
                 <% end %>
               </div>
-          </div>
+            </div>
+            <% end %>
           <% end %>
-        <% end %>
+        </div>
+        
+        
+        
+        <div class="form-group">
+          <div class="row" id="planned-workouts">
+            <div>
+              <h1>Planned Workouts</h1>
+            </div>
+            
+            <% @workouts.each do |workout| %>
+            <% if workout.state == State.planned %>
+            <div class="row workout_card" id=<%="#{workout.id}"%> >
+                <span>
+                  <%= workout.name %>
+                  <span class="show_form">
+                    <button type="button" class="btn btn-info btn-sm complete_workout_button">Complete</button>
+                    <button type="button" class="btn btn-info btn-sm edit_workout_button"><span class="glyphicon glyphicon-pencil"></span></button>
+                    <button type="button" class="btn btn-info btn-sm delete_workout_button"><span class="glyphicon glyphicon-trash"></span></button>
+                  </span>
+                  
+                  <span class="edit_form" hidden>
+                    <button type="button" class="btn btn-info btn-sm done_button"><span class="glyphicon glyphicon-ok"></span></button>
+                  </span>
+                </span>
+                
+                <div>
+                  <% workout.task.each do |task| %>
+                    <div class="task_card" id="<%= task.id %>">
+                      <span class='exercise_name'><%= task.exercise.name %> - </span>
+                      <span class='sets_info'><%= task.exercise_set.count %> sets </span>
+                      <% task.exercise_set.each do |set| %>
+                        <div class="set_card" id="<%= set.id %>">
+                          <span class="show_form">
+                            <span class='rep_count_info'><%= set[:rep_count] %></span> reps at 
+                            <span class='rep_value_info'><%= set[:rep_value] %></span>
+                          </span>
+                          
+                          <span class="edit_form" hidden>
+                            <label for="rep_count_edit"></label><input name="rep_count_edit" class="rep_count_edit" type="number" min="1" value="<%= set[:rep_count] %>"> reps </input>
+                            <label for="rep_value_edit"></label>at <input name="rep_value_edit" class="rep_value_edit" type="number" min="1" value="<%= set[:rep_value] %>"></input>
+                          </span>
+                          
+                          <span class='units_info'><%= set[:rep_unit] %></span>
+                        </div>
+                      <% end %>
+                    </div>
+                  <% end %>
+                </div>
+            </div>
+            <% end %>
+          <% end %>
+          </div>
+        </div>
       </div>
       
   </div>

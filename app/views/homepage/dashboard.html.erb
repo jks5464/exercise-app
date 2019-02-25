@@ -1,22 +1,69 @@
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<!--<script type="text/javascript" src="http://code.jquery.com/jquery-1.10.2.js"></script>-->
+
 <legend>Dashboard</legend>
 <p><%= current_effective_user.name %>'s progress</p>
 
 <div class="content">
-  <div class="group">
-    <div class="circular-progress" style="background: linear-gradient(90deg, #e0e0e0 50%, transparent 50%, transparent),
- linear-gradient(270deg, #ff70a6 50%, #e0e0e0 50%, #e0e0e0);"></div>
-    <div class="circular-text">Weight</div>
-  </div>
-      
-  <div class="group">
-    <div class="circular-progress" style="background: linear-gradient(90deg, #e0e0e0 50%, transparent 50%, transparent),
- linear-gradient(126deg, #ff70a6 50%, #e0e0e0 50%, #e0e0e0);"></div>
-    <div class="circular-text">Body Fat</div>
-  </div>
   
+  <% if @goal_data.empty? %>
+      <%= "You don't have any goals entered yet." %>
+  <% else %>
+    <% @goal_data.each_with_index do |g, i| %>
+    
+      <div class="group" style="float: left; padding-right: 3em; overflow: hidden;">
+        <div class="circular-text"><%= @goals[i].name %></div>
+        <div class="circular-text">Goal: <%= @goals[i].value %> <%= @goals[i].unit.name %></div>
+          <% (1..100).each do |counter| %>
+            <% if @goal_progress[i].to_i == counter %>
+              <div class='circular-progress<%="#{counter}"%>'></div>
+            <% end %>
+          <% end %>
+        
+      </div>
+              
+      <div id='<%="chart#{i}"%>' style="width: 600px; height: 600px;"></div>
+      
+      <%= javascript_tag do -%>
+        <% puts g.to_json.html_safe %>
+        google.charts.load('current', {'packages':['corechart']});
+        google.charts.setOnLoadCallback(drawChart);
+      
+        function drawChart() {
+        
+          var data = JSON.parse('<%= g.to_json.html_safe -%>');
+          data = [['Date', 'Value']].concat(data);
+          data = google.visualization.arrayToDataTable(data);
+          
+          var options = {
+
+            title: '<%= @goals[i].name %>',
+            
+            vAxis: {
+              minValue: 0,
+              maxValue: <%= @goals[i].value.to_f %> + 10,
+              title: '<%= @goals[i].unit.name %>'
+            },
+            
+            legend: {
+              position:'none'
+            }
+          
+      };
+      
+          var chart = new google.visualization.ComboChart(document.getElementById('<%="chart#{i}"%>'));
+          chart.draw(data, options);
+ 
+        }
+        
+      <% end -%>
+    <% end %>
+  <% end %>
 </div>
 
-<% if @goals.empty? %>
+<% 
+=begin
+  if @goals.empty? %>
   <%= "You don't have any goals entered yet." %>
 <% else %>
   <% @goals.each_with_index do |g, i| %>
@@ -30,4 +77,6 @@
       </div>
     </div>
   <% end %>
-<% end %>
+<% end 
+=end 
+%>
