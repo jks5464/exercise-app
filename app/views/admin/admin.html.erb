@@ -1,5 +1,27 @@
 <script src="/assets/admin.js"></script>
 
+<!-- hidden popup form when admin adds a new client to a trainer's client list -->
+<div id="dialog-form" title="Add Client">
+  <form>
+    <fieldset>
+      <div class="client-search">
+        <label for="client-search-txt">
+          Client Name
+        </label>
+        <input name="client-search-txt" type="text" id="client-search-txt">
+        <div class="results" id="client-search-results">
+          
+        </div>
+      </div>
+      
+      <div id="selected-clients">
+      
+      </div>
+      
+    </fieldset>
+  </form>
+</div>
+
 <div class = "admin">
   <p>
     Admin Dashboard:
@@ -38,10 +60,10 @@
   </p>
   <div>
     <% @trainers.each do | trainer | %>
-      <div class="trainer_card">
+      <div class="trainer_card" id="<%= trainer.id %>">
         <span class="trainer_name_info"><%= trainer.name %></span>'s Client List
         <% if trainer.clients.empty? %>
-          <div class="empty_client_list">
+          <div class="client_card">
             Client List is empty
           </div>
         <% else %>
