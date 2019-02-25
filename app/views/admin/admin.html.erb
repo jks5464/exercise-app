@@ -99,7 +99,7 @@ table, td, th {
      <div>
        <table>
          <tr>
-           <% current_user.clients do |t,i| %>
+           <% @trainers.each_with_index do |t,i| %>
            <td ><%= t.name%> </td>
            <th><button id="myBtn">add clients</button></th>
            <%end%>
