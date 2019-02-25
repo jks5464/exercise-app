@@ -4,7 +4,7 @@ class SessionsController < ApplicationController
     session[:user_id] = user.id
     session[:effective_id] = user.id
     
-    if(user.name.to_s == 'GirlScout Cookie') then
+    if(user.name.to_s == 'Constantina Hug') then
       redirect_to admin_path
     else
       redirect_to dashboard_path
