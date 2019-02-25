@@ -12,6 +12,17 @@ $(function() {
         }
     });
   });
+  
+  $("#edit-exercises").click(function() {
+    $(".show_when_editing").css("display", "inline-block");
+    $(".hide_when_editing").css("display", "none");
+    });
+    
+  
+  $("#done-editing").click(function() {
+    $(".show_when_editing").css("display", "none");
+    $(".hide_when_editing").css("display", "inline-block");
+    });
 });
 
 
