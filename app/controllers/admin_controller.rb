@@ -18,6 +18,9 @@ class AdminController < ApplicationController
     trainer_id = params[:trainer_id]
     client_id = params[:client_id]
     ClientTrainerRelation.delete_client(client_id)
+    
+    render json: { status: 200 }
+
   end
 
 end
