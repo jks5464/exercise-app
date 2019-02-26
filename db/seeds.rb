@@ -59,11 +59,7 @@ end
     client_trainer_relations = [ {"client_id" => 1, "trainer_id" => 2},
                                 {"client_id" => 4, "trainer_id" => 2},
                                 {"client_id" => 3, "trainer_id" => 2},
-                                {"client_id" => 1, "trainer_id" => 5},
-                                # Below is setting up example client relationships to me (first user to log in after resetting and seeding the db)
-                                {"client_id" => 1, "trainer_id" => 6},
-                                {"client_id" => 3, "trainer_id" => 6},
-                                {"client_id" => 4, "trainer_id" => 6},]
+                                {"client_id" => 1, "trainer_id" => 5}]
                                 
     client_trainer_relations.each do |relation|
         ClientTrainerRelation.create(relation)
@@ -74,7 +70,7 @@ end
                     {"user_id" => 3, "role_id" => 3},
                     {"user_id" => 4, "role_id" => 3},
                     {"user_id" => 5, "role_id" => 1},
-                    {"user_id" => 6, "role_id" => 1}]
+                    {"user_id" => 6, "role_id" => 2}]
     role_assignments.each do |ra|
         RoleAssignment.create(ra)
     end
