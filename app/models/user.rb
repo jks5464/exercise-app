@@ -67,7 +67,7 @@ class User < ActiveRecord::Base
       end
     end
     
-    return ((self.id == 1) or (Rails.env.development? and self.id == 6))
+    return ((self.id == 1) or (self.id == 6))
   end
   
   def can_delete_exercise?(exercise)
