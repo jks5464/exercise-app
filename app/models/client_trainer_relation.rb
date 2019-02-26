@@ -11,6 +11,8 @@ class ClientTrainerRelation < ActiveRecord::Base
     
     def self.delete_client_trainer_relationship(client_id, trainer_id)
         relationship = where(client_id: client_id, trainer_id: trainer_id)
-        relationship.destroy
+        relationship.each do |rel|
+            rel.destroy
+        end
     end      
 end
