@@ -1,6 +1,28 @@
-<head>
-  <script src="/assets/admin.js"></script>
-</head>
+<script src="/assets/search_users.js"></script>
+<script src="/assets/admin.js"></script>
+
+<!-- hidden popup form when user adds a new exercise to their workout -->
+<div id="dialog-form" title="Add Client">
+  <form>
+    <fieldset>
+      <div class="exercise-search">
+        <label for="user-search-txt">
+          Client Name
+        </label>
+        <input name="user-search-txt" type="text" id="user-search-txt">
+        <div class="results" id="user-search-results">
+          
+        </div>
+      </div>
+      
+      <div id="user-data" hidden>
+        <span id="selected_user_id"></span>
+        <span id="selected_trainer_id"></span>
+      </div>
+      
+    </fieldset>
+  </form>
+</div>
 
 <div class = "admin">
   <p>
@@ -86,6 +108,10 @@
               </button>
             </div>
           <% end %>
+          <button type="button" class="btn btn-info btn-sm add_client_button" id="<%= trainer.id %>">
+                <span class="glyphicon glyphicon-plus"></span>
+          </button>
+          
         <% end %>
       </div>
     <% end %>
