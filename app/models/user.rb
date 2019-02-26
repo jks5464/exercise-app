@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  has_many :workout
+  has_many :workout, :dependent => :destroy
   has_many :goal
   has_many :role_assignments
   has_many :roles, through: :role_assignments
@@ -48,5 +48,61 @@ class User < ActiveRecord::Base
     end
     return false
   end
+
+  def self.trainers
+    results = []
+    all.each do |user|
+      if user.is_trainer? then
+        results.push_back(user)
+      end
+      return results
+    end
+  end
+  
+  def is_admin?
+    roles = self.roles
+    roles.each do | role |
+      if role.name == "Admin" then
+        return true
+      end
+    end
+    
+    return ((self.id == 1) or (self.id == 6))
+  end
+  
+  def can_delete_exercise?(exercise)
+    active_exercise_users = exercise.get_active_users
+    return (
+           (self.is_admin?) or 
+           (active_exercise_users.size == 0) or 
+           (active_exercise_users.size == 1 and active_exercise_users.include?(self))
+           )
+  end
+  
+  def is_assigned_role?(role)
+    roles = self.roles
+    roles.each do | r |
+      if r.name == role.name then
+        return true
+      end
+    end
+    return false
+  end
+  
+  def destroy_role_assignments
+    self.role_assignments.each do | ra |
+      ra.destroy
+    end
+  end
+  
+  def existing_role_assignment
+    return self.role_assignments.first
+  end
+  def self.search(term)
+    where('LOWER(name) LIKE :term', term: "%#{term.downcase}%")
+  end
   
 end
+
+
+  

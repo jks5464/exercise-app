@@ -166,7 +166,7 @@ end
 Given /^A user with name "(.*?)" and UID "(.*?)" and auth provider "(.*?)"$/ do |username, uid, provider|
   provider.downcase!
   provider = 'google_oauth2' if provider.eql?('google')
-  @user = FactoryBot.build(:user, :name => username, :uid => uid, :provider => provider)
+  @user = FactoryBot.create(:user, :name => username, :uid => uid, :provider => provider)
 end
 
 Given /^There exists a valid exercise with name "(.*?)"$/ do |name|
@@ -210,7 +210,7 @@ Given /the task has the following sets/ do |sets_table|
                        rep_value: set[:rep_value],
                        rep_unit:  set[:rep_unit],
                        task_id: @task.id, 
-                       completed: false)
+                       state: State.saved)
   end
 end
 
@@ -232,15 +232,19 @@ Then /^I send keys down, tab to "(.*?)"$/ do |field|
 end
 
 Given /^I have the "(.*?)" workout planned$/ do |workout_name|
-  @workout = Workout.create(name: workout_name, uid: 1, user_id: @user.id, completed: false)
+  @workout = Workout.create(name: workout_name, uid: 1, user_id: @user.id, state: State.saved)
 end
 
 Given /^the workout has the "(.*?)" task$/ do |exercise_name|
   exercise = Exercise.where(name: exercise_name).first
-  @task = Task.create(exercise_id: exercise.id, workout_id: @workout.id, completed: false)
+  @task = Task.create(exercise_id: exercise.id, workout_id: @workout.id, state: State.saved)
 end
 
 Given /^I check "(.*?)"$/ do |element|
   find(:css, element).set(true)
 end
 
+Given /^an admin user exists$/ do
+  provider = 'google_oauth2'
+  @admin = FactoryBot.create(:user, :name => "admin", :uid => "1", :provider => provider)
+end
