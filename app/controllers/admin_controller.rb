@@ -1,4 +1,4 @@
-class AdminController < ApplicationController
+class AdminController < AuthenticationController
   def admin
       puts("displaying admin page")
       
@@ -30,6 +30,11 @@ class AdminController < ApplicationController
     
     render json: { status: 200 }
 
+  end
+  
+  def search_users_json
+    @users = User.search(params[:term])
+    respond_to :json
   end
 
 end

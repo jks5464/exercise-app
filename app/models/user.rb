@@ -69,4 +69,8 @@ class User < ActiveRecord::Base
            )
   end
   
+  def self.search(term)
+    where('LOWER(name) LIKE :term', term: "%#{term.downcase}%")
+  end
+  
 end
