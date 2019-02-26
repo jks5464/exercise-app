@@ -69,7 +69,10 @@ end
         ClientTrainerRelation.create(relation)
     end
     
-    role_assignments = [{"user_id" => 2, "role_id" => 1},
+    role_assignments = [{"user_id" => 1, "role_id" => 3},
+                    {"user_id" => 2, "role_id" => 1},
+                    {"user_id" => 3, "role_id" => 3},
+                    {"user_id" => 4, "role_id" => 3},
                     {"user_id" => 5, "role_id" => 1},
                     {"user_id" => 6, "role_id" => 1}]
     role_assignments.each do |ra|
@@ -79,7 +82,8 @@ end
 # end
 
 roles = [{"name" => "Trainer"},
-        {"name"=> "Admin"}]
+        {"name"=> "Admin"},
+        {"name" => "Client"}]
 roles.each do |role|
     Role.create(role)
 end

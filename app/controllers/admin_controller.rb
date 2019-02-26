@@ -1,6 +1,7 @@
 class AdminController < AuthenticationController
   def admin
       puts("displaying admin page")
+     @roles = Role.all
       
       @trainers = []
       @users = User.all
@@ -30,6 +31,12 @@ class AdminController < AuthenticationController
     
     render json: { status: 200 }
 
+  end
+  
+  def process_admin
+    user_role_data = params[:user_role_data]
+    RoleAssignment.update_roles(user_role_data)
+    render json: { status:200}
   end
   
   def search_users_json

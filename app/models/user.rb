@@ -48,6 +48,16 @@ class User < ActiveRecord::Base
     end
     return false
   end
+
+  def self.trainers
+    results = []
+    all.each do |user|
+      if user.is_trainer? then
+        results.push_back(user)
+      end
+      return results
+    end
+  end
   
   def is_admin?
     roles = self.roles
@@ -69,8 +79,30 @@ class User < ActiveRecord::Base
            )
   end
   
+  def is_assigned_role?(role)
+    roles = self.roles
+    roles.each do | r |
+      if r.name == role.name then
+        return true
+      end
+    end
+    return false
+  end
+  
+  def destroy_role_assignments
+    self.role_assignments.each do | ra |
+      ra.destroy
+    end
+  end
+  
+  def existing_role_assignment
+    return self.role_assignments.first
+  end
   def self.search(term)
     where('LOWER(name) LIKE :term', term: "%#{term.downcase}%")
   end
   
 end
+
+
+  

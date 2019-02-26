@@ -28,33 +28,39 @@
   <p>
     Admin Dashboard:
   </p>
-          
   <table>
     <tr align = "middle">
       <th colspan = "2">User</th>
       <th colspan = "2">Roles</th>
     </tr>
+    
     <tr align = "middle">
       <th>Id</th>
       <th>Name</th>
-      <th>Admin or Trainer</th>
+      <th>Client/Trainer/Admin</th>
     </tr>
-    
-    <% User.all.each  do |e,i| %>
-      <div <% 'id=last_row' if i == (User.all.size - 1) %> >
-        <form  id = "TrainerOrAdmin">
-          <tr align = "middle">
-            <td><%= e.id %></td>
-            <td><%= e.name %></td>
-            <td>
-              <div><input type="radio" name="text" value="Trainer"> Trainer</div>
-              <div><input type="radio" name="text" value="Admin"> Admin</div>
-            </td>
-          </tr>
-        </form>
+      
+    <%User.all.each do |u| %>
+      <tr align = "middle" class="user_info">
+        <td class = "id"><%= u.id%> </td>
+        <td class = "name">  <%= u.name%></td>
+        <td>
+          <select class = "roles">
+            <% @roles.all.reverse_each do | role | %>
+              <% if u.is_assigned_role?(role) %>
+                <option id = <%= role.id%> selected> <%=role.name%></option>
+              <% else %>
+                <option id = <%= role.id%>> <%=role.name%></option>
+              <% end %>
+            <% end %>
+          </select>
+        </td>
+      </tr>
     <% end %>
+      
   </table>
-  <button type="submit" form="TrainerOrAdmin" value="Submit">Submit</button>
+  
+  <button id = "TOC">Submit</button>
 
   <!-- Display all trainers and their respective client lists -->
   <p>
@@ -77,11 +83,10 @@
               </button>
             </div>
           <% end %>
-          <button type="button" class="btn btn-info btn-sm add_client_button" id="<%= trainer.id %>">
+        <% end %>
+        <button type="button" class="btn btn-info btn-sm add_client_button" id="<%= trainer.id %>">
                 <span class="glyphicon glyphicon-plus"></span>
           </button>
-          
-        <% end %>
       </div>
     <% end %>
   </div>
