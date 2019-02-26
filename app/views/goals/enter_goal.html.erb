@@ -1,3 +1,5 @@
+<script> function changeUnits(cardio_or_strength) {} </script>
+
 <div class="container-fluid">
   
   <fieldset>
@@ -28,10 +30,12 @@
           <label for="exercise" class="col-sm-2" style="padding-top: 8px; padding-bottom: 8px; text-align: right;">Exercise:</label>
           
           <div class="col-sm-4" style="padding: 0em; padding-right: 5px;">
-            <select class="form-control" name="exercise">
+          
+            <select class="form-control" name="exercise" id="exercise" onchange="changeUnits()">
               <%= @exercises.each do |exercise| %>
-                <option value="<%= exercise.name %>"><%=exercise.name%></option>
+                <option id="exercise_option" value="<%= exercise.name %>"><%=exercise.name%></option>
               <% end %>
+              
             </select>
           </div>
         </div>
@@ -47,9 +51,12 @@
           <label for="unit" class="col-sm-1" style="padding-top: 8px; padding-bottom: 8px; text-align: right; text-align: right;">Unit:</label>
           
           <div class="col-sm-1" style="padding: 0em;">
-            <select class="form-control" name="unit">
+            <select class="form-control" name="unit" id="unit">
+              <!-- blank options included to make tests work, might want to update this later -->
+              <option class="hidden" value=""></option>
               <%= @units.each do |unit| %>
-                <option value="<%= unit.name %>"><%= unit.name %></option>
+                <option class="hidden" value="<%= unit.name %>"><%= unit.name %></option>
+                
               <% end %>
             </select>
           </div>
@@ -75,3 +82,54 @@
   
 
 <% end %>
+
+
+<script>
+
+function changeUnits() {
+
+  // almost done -> exercise cat not storing yet
+  var cardio_units = [
+    <% @units.each do |unit| %>
+      <% if unit.category == "Cardio" %>
+        "<%= unit.name %>",
+      <% end %>
+    <% end %>
+  ];
+  
+  var strength_units = [
+    <% @units.each do |unit| %>
+      <% if unit.category == "Strength" %>
+        "<%= unit.name %>",
+      <% end %>
+    <% end %>
+  ];
+  
+  document.getElementById('unit').options.length = 0; // resets options to empty list before populating
+  exercise_select = document.getElementById('exercise');
+  unit_select = document.getElementById('unit');
+  
+  var selected_exercise = exercise_select.options[exercise_select.selectedIndex].value; // gets selected exercise string
+  console.log("selected exercise: " + selected_exercise);
+  <% @exercises.each do |exercise| %>
+    if (selected_exercise == "<%= exercise.name %>") {
+      if ("<%= exercise.category %>" == "Cardio") {
+        for (var i = 0; i < cardio_units.length; i++) {
+          var option = document.createElement('option');
+          option.value = cardio_units[i];
+          option.text = cardio_units[i];
+          unit_select.appendChild(option);
+        }
+      }
+      else if ("<%= exercise.category %>" == "Strength") {
+        for (var i = 0; i < strength_units.length; i++) {
+          var option = document.createElement('option');
+          option.value = strength_units[i];
+          option.text = strength_units[i];
+          unit_select.appendChild(option);
+        }
+      }
+    }
+  <% end %>
+};
+</script>

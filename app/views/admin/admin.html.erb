@@ -1,151 +1,95 @@
+<script src="/assets/search_users.js"></script>
+<script src="/assets/admin.js"></script>
 
-
-
-<head>
-<style>
-table {
-  border-collapse: collapse;
-  width : 50%;
-}
-
-table, td, th {
-  border: 1px solid black;
-  align: "middle"
-}
-<meta name="viewport" , initial-scale=1">
-/* Popup container - can be anything you want */
-.popup {
-  position: relative;
-  display: inline-block;
-  cursor: pointer;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-
-}
-
-/* The actual popup */
-.popup .popuptext {
-  visibility: hidden;
-  width: 160px;
-  background-color: #555;
-  color: #fff;
-  text-align: center;
-  border-radius: 6px;
-  padding: 8px 0;
-  position: absolute;
-  z-index: 1;
-  bottom: 125%;
-  left: 50%;
-  margin-left: -80px;
-}
-
-/* Popup arrow */
-.popup .popuptext::after {
-  content: "";
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  margin-left: -5px;
-  border-width: 5px;
-  border-style: solid;
-  border-color: 25px solid black;
-}
-
-</style>
-</head>
+<!-- hidden popup form when user adds a new exercise to their workout -->
+<div id="dialog-form" title="Add Client">
+  <form>
+    <fieldset>
+      <div class="exercise-search">
+        <label for="user-search-txt">
+          Client Name
+        </label>
+        <input name="user-search-txt" type="text" id="user-search-txt">
+        <div class="results" id="user-search-results">
+          
+        </div>
+      </div>
+      
+      <div id="user-data" hidden>
+        <span id="selected_user_id"></span>
+        <span id="selected_trainer_id"></span>
+      </div>
+      
+    </fieldset>
+  </form>
+</div>
 
 <div class = "admin">
-    <p>
-      Admin Dashboard:
-  
-    </p>
-          
-              <table >
-                  <tr align = "middle">
-                    <th colspan = "2">User</th>
-                    <th colspan = "2">Roles</th>
-                 
-                  </tr>
-                  <tr align = "middle">
-                    <th>Id</th>
-                    <th>Name</th>
-                    <th>Admin or Trainer</th>
-                    
-                  </tr>
-                  
-                  <%User.all.each  do |e,i| %>
-                  <div <% 'id=last_row' if i == (User.all.size - 1) %> >
-                    <form  id = "TrainerOrAdmin">
-                  <tr align = "middle">
-                    <td ><%= e.id%> </td>
-                    <td>  <%= e.name%></td>
-                    <td>
-                      <div><input type="radio" name="text" value="Trainer"> Trainer</div>
-                      <div><input type="radio" name="text" value="Admin"> Admin</div>
-                      </td>
-                     </form>
-                  <% end %>
-                  
-                  </tr>
-                </table>
-              <button type="submit" form="TrainerOrAdmin" value="Submit">Submit</button>
-
-<form action="submit" id = "AddClients">
-    <p>
-      Trainers:
-    </p>
-     <div>
-       <table>
-         <tr>
-           <% current_user.clients do |t,i| %>
-           <td ><%= t.name%> </td>
-           <th><button id="myBtn">add clients</button></th>
-           <%end%>
-         </tr>
-       </table>
-      </div>
-  </form>
-  
-<div id="myModal" class="modal">
-  <div class="modal-content">
-      <span class="close">&times;</span>
-      <h2>List of all clients:</h2>
-      <% current_user.clients.each do |e,i| %>
-      <div <% 'id=last_row' if i == (current_user.clients.size - 1) %> >
-      <p><%= e.name %></p>
+  <p>
+    Admin Dashboard:
+  </p>
+  <table>
+    <tr align = "middle">
+      <th colspan = "2">User</th>
+      <th colspan = "2">Roles</th>
+    </tr>
+    
+    <tr align = "middle">
+      <th>Id</th>
+      <th>Name</th>
+      <th>Client/Trainer/Admin</th>
+    </tr>
       
+    <%User.all.each do |u| %>
+      <tr align = "middle" class="user_info">
+        <td class = "id"><%= u.id%> </td>
+        <td class = "name">  <%= u.name%></td>
+        <td>
+          <select class = "roles">
+            <% @roles.all.reverse_each do | role | %>
+              <% if u.is_assigned_role?(role) %>
+                <option id = <%= role.id%> selected> <%=role.name%></option>
+              <% else %>
+                <option id = <%= role.id%>> <%=role.name%></option>
+              <% end %>
+            <% end %>
+          </select>
+        </td>
+      </tr>
+    <% end %>
+      
+  </table>
+  
+  <button id = "TOC">Submit</button>
+
+  <!-- Display all trainers and their respective client lists -->
+  <p>
+    Trainers:
+  </p>
+  <div>
+    <% @trainers.each do | trainer | %>
+      <div class="trainer_card" id="<%= trainer.id %>">
+        <span class="trainer_name_info"><%= trainer.name %></span>'s Client List
+        <% if trainer.clients.empty? %>
+          <div class="client_card">
+            Client List is empty
+          </div>
+        <% else %>
+          <% trainer.clients.each do | client | %>
+            <div class="client_card" id="<%= client.id %>">
+              <span> <%= client.name %> </span>
+              <button type="button" class="btn btn-info btn-sm delete_client_button">
+                <span class="glyphicon glyphicon-trash"></span>
+              </button>
+            </div>
+          <% end %>
+        <% end %>
+        <button type="button" class="btn btn-info btn-sm add_client_button" id="<%= trainer.id %>">
+                <span class="glyphicon glyphicon-plus"></span>
+          </button>
+      </div>
+    <% end %>
   </div>
-</div>
 
 </div>
-<%end%>
-<script>
-// Get the modal
-var modal = document.getElementById('myModal');
-
-// Get the button that opens the modal
-var btn = document.getElementById("myBtn");
-
-// Get the <span> element that closes the modal
-var span = document.getElementsByClassName("close")[0];
-
-// When the user clicks the button, open the modal 
-btn.onclick = function() {
-  modal.style.display = "block";
-}
-
-// When the user clicks on <span> (x), close the modal
-span.onclick = function() {
-  modal.style.display = "none";
-}
-
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-  if (event.target == modal) {
-    modal.style.display = "none";
-  }
-}
-</script>
 

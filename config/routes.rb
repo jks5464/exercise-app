@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   resources :sessions, only: [:create, :destroy]
   get 'splash_screen' => 'splash#splash_screen', :as => 'splash_screen'
   get 'admin' => 'admin#admin', :as => 'admin'
+  post 'process_admin' => 'admin#process_admin', :as => 'process_admin'
   get  'my_measurements' => 'measurements#my_measurements', :as => 'my_measurements'
   get  'enter_my_measurements' => 'measurements#enter_my_measurements', :as => 'enter_my_measurements'
   post 'process_enter_new_measurements' => 'measurements#process_enter_new_measurements', :as => 'process_enter_new_measurements'
@@ -21,9 +22,11 @@ Rails.application.routes.draw do
   post 'process_delete_workout' => 'workouts#process_delete_workout', :as => 'process_delete_workout'
   post 'process_clone_workout' => 'workouts#process_clone_workout', :as => 'process_clone_workout'
   post 'process_update_workout_state' => 'workouts#process_update_workout_state', :as => 'process_update_workout_state'
+  post 'process_update_exercise_set' => 'workouts#process_update_exercise_set', :as => 'process_update_exercise_set'
  
   post 'process_delete_exercise' => 'exercises#process_delete_exercise', :as => 'process_delete_exercise'
-  
+  post 'process_delete_client' => 'admin#process_delete_client', :as => 'process_delete_client'
+  post 'process_add_client' => 'admin#process_add_client', :as => 'process_add_client'
   
   get  'dashboard' => 'homepage#dashboard', :as => 'dashboard'
   get 'my_goals' => 'goals#my_goals', :as => 'my_goals'
@@ -43,6 +46,7 @@ Rails.application.routes.draw do
   post 'enter_quick_log' => 'homepage#enter_quick_log', :as => 'enter_quick_log'
   get 'view_exercises' => 'homepage#view_exercises', :as => 'view_exercises'
   get 'search_exercises_json' => 'workouts#search_exercises_json', :as => 'search_exercises_json'
+  get 'search_users_json' => 'admin#search_users_json', :as => 'search_users_json'
   get 'units_json' => 'workouts#units_json', :as => 'units_json'
   
   
