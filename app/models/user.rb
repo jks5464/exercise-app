@@ -69,7 +69,7 @@ class User < ActiveRecord::Base
       end
     end
     
-    return ((self.id == 1))
+    return false
   end
   
   def can_delete_exercise?(exercise)
