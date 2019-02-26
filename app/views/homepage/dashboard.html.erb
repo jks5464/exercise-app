@@ -17,6 +17,8 @@
           <% (1..100).each do |counter| %>
             <% if @goal_progress[i].to_i > 100 %>
               <div class='circular-progress100'></div>
+            <% else if @goal_progress[i].to_i < 0 %>
+              <div class='circular-progress0'></div>
             <% else if @goal_progress[i].to_i == counter %>
               <div class='circular-progress<%="#{counter}"%>'></div>
             <% end %>
