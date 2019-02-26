@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
   helper_method :current_user
   helper_method :current_effective_user
   helper_method :current_effective_user_is_trainer?
+  helper_method :current_effective_user_is_admin?
   helper_method :current_effective_user_logged_in_as_client?
 
   
@@ -38,5 +39,12 @@ class ApplicationController < ActionController::Base
     return (self.current_effective_user_logged_in_as_client? or 
             current_effective_user.is_trainer?)
   end
- 
+  
+  def current_effective_user_is_admin?
+    if current_effective_user.nil? then
+      return false
+    end
+    
+    return (current_effective_user.is_admin?)
+  end
 end

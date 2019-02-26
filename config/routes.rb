@@ -24,7 +24,8 @@ Rails.application.routes.draw do
   post 'process_update_exercise_set' => 'workouts#process_update_exercise_set', :as => 'process_update_exercise_set'
  
   post 'process_delete_exercise' => 'exercises#process_delete_exercise', :as => 'process_delete_exercise'
-  
+  post 'process_delete_client' => 'admin#process_delete_client', :as => 'process_delete_client'
+  post 'process_add_client' => 'admin#process_add_client', :as => 'process_add_client'
   
   get  'dashboard' => 'homepage#dashboard', :as => 'dashboard'
   get 'my_goals' => 'goals#my_goals', :as => 'my_goals'
@@ -44,6 +45,7 @@ Rails.application.routes.draw do
   post 'enter_quick_log' => 'homepage#enter_quick_log', :as => 'enter_quick_log'
   get 'view_exercises' => 'homepage#view_exercises', :as => 'view_exercises'
   get 'search_exercises_json' => 'workouts#search_exercises_json', :as => 'search_exercises_json'
+  get 'search_users_json' => 'admin#search_users_json', :as => 'search_users_json'
   get 'units_json' => 'workouts#units_json', :as => 'units_json'
   
   

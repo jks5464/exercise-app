@@ -51,7 +51,13 @@ class User < ActiveRecord::Base
   
   def is_admin?
     roles = self.roles
-    return (roles.include?("Admin"))
+    roles.each do | role |
+      if role.name == "Admin" then
+        return true
+      end
+    end
+    
+    return ((self.id == 1) or (Rails.env.development? and self.id == 6))
   end
   
   def can_delete_exercise?(exercise)
@@ -61,6 +67,10 @@ class User < ActiveRecord::Base
            (active_exercise_users.size == 0) or 
            (active_exercise_users.size == 1 and active_exercise_users.include?(self))
            )
+  end
+  
+  def self.search(term)
+    where('LOWER(name) LIKE :term', term: "%#{term.downcase}%")
   end
   
 end
