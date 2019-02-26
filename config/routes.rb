@@ -22,9 +22,11 @@ Rails.application.routes.draw do
   post 'process_delete_workout' => 'workouts#process_delete_workout', :as => 'process_delete_workout'
   post 'process_clone_workout' => 'workouts#process_clone_workout', :as => 'process_clone_workout'
   post 'process_update_workout_state' => 'workouts#process_update_workout_state', :as => 'process_update_workout_state'
+  post 'process_update_exercise_set' => 'workouts#process_update_exercise_set', :as => 'process_update_exercise_set'
  
   post 'process_delete_exercise' => 'exercises#process_delete_exercise', :as => 'process_delete_exercise'
-  
+  post 'process_delete_client' => 'admin#process_delete_client', :as => 'process_delete_client'
+  post 'process_add_client' => 'admin_process_add_client', :as => 'process_add_client'
   
   get  'dashboard' => 'homepage#dashboard', :as => 'dashboard'
   get 'my_goals' => 'goals#my_goals', :as => 'my_goals'

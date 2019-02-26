@@ -166,7 +166,7 @@ end
 Given /^A user with name "(.*?)" and UID "(.*?)" and auth provider "(.*?)"$/ do |username, uid, provider|
   provider.downcase!
   provider = 'google_oauth2' if provider.eql?('google')
-  @user = FactoryBot.build(:user, :name => username, :uid => uid, :provider => provider)
+  @user = FactoryBot.create(:user, :name => username, :uid => uid, :provider => provider)
 end
 
 Given /^There exists a valid exercise with name "(.*?)"$/ do |name|
@@ -244,3 +244,7 @@ Given /^I check "(.*?)"$/ do |element|
   find(:css, element).set(true)
 end
 
+Given /^an admin user exists$/ do
+  provider = 'google_oauth2'
+  @admin = FactoryBot.create(:user, :name => "admin", :uid => "1", :provider => provider)
+end
