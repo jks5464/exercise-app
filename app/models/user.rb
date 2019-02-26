@@ -73,6 +73,26 @@ class User < ActiveRecord::Base
            )
   end
   
+  def is_assigned_role?(role)
+    roles = self.roles
+    roles.each do | r |
+      if r.name == role.name then
+        return true
+      end
+    end
+    return false
+  end
+  
+  def destroy_role_assignments
+    self.role_assignments.each do | ra |
+      ra.destroy
+    end
+  end
+  
+  def existing_role_assignment
+    return self.role_assignments.first
+  end
+  
 end
 
 

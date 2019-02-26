@@ -6,38 +6,39 @@
   <p>
     Admin Dashboard:
   </p>
-  <table >
-      <tr align = "middle">
-        <th colspan = "2">User</th>
-        <th colspan = "2">Roles</th>
-     
-      </tr>
-      <tr align = "middle">
-        <th>Id</th>
-        <th>Name</th>
-        <th>Client or Trainer</th>
-        
-      </tr>
+  <table>
+    <tr align = "middle">
+      <th colspan = "2">User</th>
+      <th colspan = "2">Roles</th>
+    </tr>
+    
+    <tr align = "middle">
+      <th>Id</th>
+      <th>Name</th>
+      <th>Client or Trainer</th>
+    </tr>
       
-      <%User.all.each do |u| %>
-        <form  id = "TrainerOrClient">
+    <%User.all.each do |u| %>
       <tr align = "middle" class="user_info">
         <td class = "id"><%= u.id%> </td>
         <td class = "name">  <%= u.name%></td>
         <td>
-          
-        <select class = "roles">
+          <select class = "roles">
             <% @roles.all.reverse_each do | role | %>
-              <option id = <%= role.id%>> <%=role.name%></option>  
+              <% if u.is_assigned_role?(role) %>
+                <option id = <%= role.id%> selected> <%=role.name%></option>
+              <% else %>
+                <option id = <%= role.id%>> <%=role.name%></option>
+              <% end %>
             <% end %>
-        </select>
-        
-          </td>
-         </form>
-      <% end %>
+          </select>
+        </td>
       </tr>
-    </table>
-  <button type="submit" form="TrainerOrClient" value="Submit" id = "TOC">Submit</button>
+    <% end %>
+      
+  </table>
+  
+  <button id = "TOC">Submit</button>
 
   <form action="submit" id = "AddClients">
      

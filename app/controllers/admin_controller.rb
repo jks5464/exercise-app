@@ -1,5 +1,4 @@
 class AdminController < ApplicationController
-  before_action :admin_user
   
   def admin
       puts("displaying admin page")
@@ -33,12 +32,6 @@ class AdminController < ApplicationController
     
     render json: { status: 200 }
 
-  end
-  
-  def admin_user
-    if !(current_user.name == "GirlScout Cookie")
-      redirect_to '/dashboard'
-    end
   end
   
   def process_admin
