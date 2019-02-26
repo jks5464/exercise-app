@@ -79,7 +79,8 @@ end
 # end
 
 roles = [{"name" => "Trainer"},
-        {"name"=> "Admin"}]
+        {"name"=> "Admin"},
+        {"name" => "Client"}]
 roles.each do |role|
     Role.create(role)
 end

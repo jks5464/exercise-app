@@ -2,6 +2,7 @@
 
 
 <head>
+  <script src="/assets/admin.js"></script>
 <style>
 table {
   border-collapse: collapse;
@@ -61,7 +62,6 @@ table, td, th {
       Admin Dashboard:
   
     </p>
-          
               <table >
                   <tr align = "middle">
                     <th colspan = "2">User</th>
@@ -75,24 +75,25 @@ table, td, th {
                     
                   </tr>
                   
-                  <%User.all.each  do |u,i| %>
-                  <div <% 'id=last_row' if i == (User.all.size - 1) %> >
+                  <%User.all.each do |u| %>
                     <form  id = "TrainerOrClient">
-                  <tr align = "middle">
-                    <td ><%= u.id%> </td>
-                    <td>  <%= u.name%></td>
+                  <tr align = "middle" class="user_info">
+                    <td class = "id"><%= u.id%> </td>
+                    <td class = "name">  <%= u.name%></td>
                     <td>
-                    <select>
-                        <option>client</option>
-                        <option>Trainer</option>
-                        <option>Admin</option>
+                      
+                    <select class = "roles">
+                        <% @roles.all.reverse_each do | role | %>
+                          <option id = <%= role.id%>> <%=role.name%></option>  
+                        <% end %>
                     </select>
+                    
                       </td>
                      </form>
                   <% end %>
                   </tr>
                 </table>
-              <button type="submit" form="TrainerOrClient" value="Submit">Submit</button>
+              <button type="submit" form="TrainerOrClient" value="Submit" id = "TOC">Submit</button>
 
 <form action="submit" id = "AddClients">
     <div>
