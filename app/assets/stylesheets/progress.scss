@@ -72,6 +72,7 @@ body {
   display: flex;
   flex-direction: column;
   margin: 0;
+  // overflow: hidden;
 }
 
 .header {
@@ -84,17 +85,49 @@ body {
   }
 }
 
-.content {
+.circle_and_graph {
+  min-width: 430px;
   display: flex;
   flex-flow: row wrap;
   justify-content: center;
   @media screen and (min-width: $break-large) {
     justify-content: space-around;
   }
+  margin: 20px;
+  padding: 5px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  overflow: hidden;
+  
+  // border-width: 11px;
+  // border-style: ridge;
+  // border-color: #1C6EA4;
+  // border-radius: 7px;
+  
+  -webkit-box-shadow: inset 0px 0px 39px -13px rgba(0,0,0,0.85);
+  -moz-box-shadow: inset 0px 0px 39px -13px rgba(0,0,0,0.85);
+  box-shadow: inset 0px 0px 39px -13px rgba(0,0,0,0.85);
 }
 
-.group {
-  margin: 10px;
+.error_msg {
+  @media screen and (min-width: $break-large) {
+    margin-top: 10px;
+  }
+  text-align: center;
+  width: 400px;
+}
+
+.divider {
+  width: 1px;
+  margin: 6px 0;
+  background: gray;
+  @media all and (max-width: 1000px) {
+    display: none;
+  }
+}
+
+.progress_circle_layout {
+  float: left;
   
   .circular-progress0 {
     @include circular-progress(0, #FF70A6);
@@ -451,15 +484,15 @@ body {
  */
 
 body {
-  overflow-x: hidden;
+  overflow-x: scroll;
 }
 
 #wrapper {
   padding-left: 0;
-  //-webkit-transition: all 0.5s ease;
-  //-moz-transition: all 0.5s ease;
-  //-o-transition: all 0.5s ease;
-  //transition: all 0.5s ease;
+  // -webkit-transition: all 0.5s ease;
+  // -moz-transition: all 0.5s ease;
+  // -o-transition: all 0.5s ease;
+  // transition: all 0.5s ease;
 }
 
 #wrapper.toggled {
@@ -475,10 +508,10 @@ body {
   margin-left: -250px;
   overflow-y: auto;
   background: #000;
-  //-webkit-transition: all 0.5s ease;
-  //-moz-transition: all 0.5s ease;
-  //-o-transition: all 0.5s ease;
-  //transition: all 0.5s ease;
+  // -webkit-transition: all 0.5s ease;
+  // -moz-transition: all 0.5s ease;
+  // -o-transition: all 0.5s ease;
+  // transition: all 0.5s ease;
 }
 
 #wrapper.toggled #sidebar-wrapper {
@@ -522,9 +555,7 @@ body {
   padding-right: 1em;
 }
 
-.sidebar-nav li h1 {
-  display: block;
-  text-decoration: none;
+.sidebar-nav li a h1 {
   color: #ffffff;
   text-align: center;
   width: 250px;
@@ -566,28 +597,30 @@ body {
   margin-top: 200px;
 }
 
-@media(min-width:1304px) {
-  #wrapper {
-    padding-left: 0;
-  }
-  #wrapper.toggled {
-    padding-left: 250px;
-  }
-  #sidebar-wrapper {
-    width: 0;
-  }
-  #wrapper.toggled #sidebar-wrapper {
-    width: 250px;
-  }
-  #page-content-wrapper {
-    padding: 20px;
-    position: relative;
-  }
-  #wrapper.toggled #page-content-wrapper {
-    position: relative;
-    margin-right: 0;
-  }
-  #sidebar-nav li h1 {
-    width: 250px;
-  }
+@media(min-width:768px) {
+    #wrapper {
+        padding-left: 250px;
+    }
+
+    #wrapper.toggled {
+        padding-left: 0;
+    }
+
+    #sidebar-wrapper {
+        width: 250px;
+    }
+
+    #wrapper.toggled #sidebar-wrapper {
+        width: 0;
+    }
+
+    #page-content-wrapper {
+        padding: 20px;
+        position: relative;
+    }
+
+    #wrapper.toggled #page-content-wrapper {
+        position: relative;
+        margin-right: 0;
+    }
 }
