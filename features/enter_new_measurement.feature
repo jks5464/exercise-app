@@ -20,9 +20,9 @@ Scenario: I enter in new measurements
   And I enter "6" into "height"
   And I press "Submit Record"
   Then I should be on the my measurements page
-  And I should see "130" within "tr#last_row"
-  And I should see "20" within "tr#last_row"
-  And I should see "6" within "tr#last_row"
+  And I should see "130"
+  And I should see "20"
+  And I should see "6"
   
 @omniauth_test  
 Scenario: I enter in invalid measurements
