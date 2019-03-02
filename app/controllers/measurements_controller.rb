@@ -73,4 +73,12 @@ class MeasurementsController < AuthenticationController
     
     render json: { status: status, message: message }
   end
+  
+  def process_delete_measurement
+    measurement_id = params[:measurement_id]
+    
+    Measurement.delete_measurement(measurement_id)
+    
+    render json: { status: 200 }
+  end
 end

@@ -26,6 +26,7 @@ Rails.application.routes.draw do
   get  'enter_my_measurements' => 'measurements#enter_my_measurements', :as => 'enter_my_measurements'
   post 'process_enter_new_measurements' => 'measurements#process_enter_new_measurements', :as => 'process_enter_new_measurements'
   post 'process_update_measurements' => 'measurements#process_update_measurements', :as => 'process_update_measurements'
+  post 'process_delete_measurement' => 'measurements#process_delete_measurement', :as => 'process_delete_measurement'
   
   # Workouts Controller
   get 'create_exercise' => 'workouts#create_exercise', :as => 'create_exercise'

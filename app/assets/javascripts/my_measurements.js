@@ -1,6 +1,9 @@
 $(function() {
   $(".edit_button").click(function() {
     $(".show_when_editing").css("display", "inline-block");
+    $("table").each(function() {
+      $(this).find(".show_when_editing").css("display", "table-cell");
+    })
     $(".hide_when_editing").css("display", "none");
   });
     
@@ -35,6 +38,25 @@ $(function() {
       }
     });
   });
+  
+  $(".delete_button").click(function() {
+    var result = confirm("Are you sure?");
+    if (result) {
+      var measurement_row = $(this).parent().parent();
+      var measurement_id = measurement_row.attr("id");
+      
+      measurement_row.remove();
+      
+      $.ajax({
+        type:"POST",
+        beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
+        url:"/process_delete_measurement",
+        data: {
+         "measurement_id" : measurement_id
+        }
+      });    
+    }
+  })
 });
 
 

@@ -17,6 +17,7 @@
               <th>Body Fat</th> 
               <th>Height</th>
               <th>Date</th>
+              <th class="show_when_editing" hidden></th>
             </tr>
               
             <% @measurements.each_with_index do |m, i| %>
@@ -49,6 +50,12 @@
                 </td>
                 
                 <td><%= m.updated_at.strftime("%B %d, %Y at %H:%M") %></td>
+                
+                <td class="show_when_editing" hidden> 
+                  <button type="button" class="btn btn-info btn-sm delete_button">
+                    <span class="glyphicon glyphicon-trash"></span>
+                  </button>
+                </td>
               </tr>
             <% end %> 
           </table>
