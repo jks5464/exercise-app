@@ -57,6 +57,7 @@ Rails.application.routes.draw do
   get 'enter_goal' => 'goals#enter_goal', :as => 'enter_goal'
   post 'enter_goal' => 'goals#enter_goal_create', :as => 'enter_goal_create'
   post 'process_delete_goal' => 'goals#process_delete_goal', :as => 'process_delete_goal'
+  post 'process_update_goals' => 'goals#process_update_goals', :as => 'process_update_goals'
   
   # Client Controller
   get 'my_clients' => 'clients#my_clients', :as => 'my_clients'
