@@ -1,3 +1,6 @@
+<script src="/assets/my_goals.js"></script>
+
+
 <div class="container-fluid">
     
     <div class="goals">
@@ -16,17 +19,19 @@
                         <th>Description</th>
                         <th>Exercise</th>
                         <th>Goal</th>
-                        <th>Timeline</th>
-                        <th>Progress</th>
+                        <th class="show_when_editing" hidden></th>
                     </tr>
                     <% @goals.each_with_index do |g, i| %>
-                        <tr <%= 'id=last_row' if i == (@goals.size - 1) %> >
+                        <tr id="<%= g.id %>" >
                             <td><%= g.name %></td>
                             <td><%= g.description %></td>
                             <td><%= g.exercise.name %></td>
                             <td><%= g.value %> <%= g.unit.name %></td>
-                            <td></td>
-                            <td></td>
+                            <td class="show_when_editing" hidden> 
+                              <button type="button" class="btn btn-info btn-sm delete_button">
+                                <span class="glyphicon glyphicon-trash"></span>
+                              </button>
+                            </td>
                         </tr>
                     <% end %>    
                 </table>
@@ -39,5 +44,18 @@
             <% end %>
         </div>
         
+        <div>
+            <span class="hide_when_editing">
+              <button type="button" class="btn btn-info btn-sm edit_button">
+                <span class="glyphicon glyphicon-pencil"></span>
+              </button>
+            </span>
+            
+            <span class="show_when_editing" hidden>
+              <button class="btn btn-info btn-sm done_editing_button">
+                <span class="glyphicon glyphicon-ok"></span>
+              </button>
+            </span>
+        </div>
     </div>
  </div>

@@ -88,4 +88,12 @@ class GoalsController < AuthenticationController
       redirect_to enter_goal_path
     end
   end
+  
+  def process_delete_goal
+    goal_id = params[:goal_id]
+    
+    Goal.delete_goal(goal_id)
+    
+    render json: { status: 200 }
+  end
 end
