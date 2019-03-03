@@ -35,6 +35,19 @@ class ExercisesController < ApplicationController
     render json: { status: 200 }
   end
   
+  def process_update_exercises
+    new_exercises = params[:new_exercises]
+    
+    new_exercises.each do | i, e |
+      exercise = Exercise.find(e["exercise_id"])
+      exercise.update(name: e["name"],
+                  category: e["category"],
+                  description: e["description"])
+    end
+    
+    render json: { status: 200 }
+  end
+  
   def valid_exercises?(exercises)
 
     exercises.each_with_index do |value, index|

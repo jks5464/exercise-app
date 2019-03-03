@@ -51,6 +51,7 @@ Rails.application.routes.draw do
   # Exercises Controller
   post 'process_create_exercise' => 'exercises#process_create_exercise', :as => 'process_create_exercise'
   post 'process_delete_exercise' => 'exercises#process_delete_exercise', :as => 'process_delete_exercise'
+  post 'process_update_exercises' => 'exercises#process_update_exercises', :as => 'process_update_exercises'
   
   # Goals Controller
   get 'my_goals' => 'goals#my_goals', :as => 'my_goals'

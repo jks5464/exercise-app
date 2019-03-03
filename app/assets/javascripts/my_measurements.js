@@ -3,7 +3,7 @@ $(function() {
     $(".show_when_editing").css("display", "inline-block");
     $("table").each(function() {
       $(this).find(".show_when_editing").css("display", "table-cell");
-    })
+    });
     $(".hide_when_editing").css("display", "none");
   });
     
