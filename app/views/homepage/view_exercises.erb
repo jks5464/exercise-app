@@ -21,8 +21,12 @@
                 <%= e.name %>
               </span>
               
+              
               <span class="show_when_editing">
-                <input name="name_edit" class="name_edit" type="text" value="<%= e.name %>"></input>
+                <input name="name_edit" class="name_edit" type="text" value="<%= e.name %>"
+                  <% if !current_effective_user.can_delete_exercise?(e) %> disabled <% end %>>
+                </input>
+                
               </span>
             </td>
             
@@ -31,12 +35,14 @@
                 <%= e.category %>
               </span>
               
+              
               <span class="show_when_editing">
-                <select class="category_edit">
-                  <option val="Strength" <% if e.category == "Strength" %> selected <% end %> >Strength</option>
-                  <option val="Cardio" <% if e.category == "Cardio" %> selected <% end %> >Cardio</option>
-                </select>
+                  <select class="category_edit" <% if !current_effective_user.can_delete_exercise?(e) %> disabled <% end %>>
+                    <option val="Strength" <% if e.category == "Strength" %> selected <% end %> >Strength</option>
+                    <option val="Cardio" <% if e.category == "Cardio" %> selected <% end %> >Cardio</option>
+                  </select>
               </span>
+              
             </td>
             
             <td>
@@ -44,8 +50,10 @@
                 <%= e.description %>
               </span>
               
+              
               <span class="show_when_editing">
-                <input name="description_edit" class="description_edit" type="text" value="<%= e.description %>"></input>
+                  <input name="description_edit" class="description_edit" type="text" value="<%= e.description %>"
+                  <% if !current_effective_user.can_delete_exercise?(e) %> disabled <% end %>></input>
               </span>
             </td>
             

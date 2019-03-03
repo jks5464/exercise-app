@@ -19,6 +19,7 @@ class ExercisesController < ApplicationController
     category = params[:category].strip
     description = params[:description].strip
     
+    
     if valid_exercises?([name, category, description]) then
       Exercise.create(user_id: session[:effective_id], name: name, category: category, description: description)
     else
