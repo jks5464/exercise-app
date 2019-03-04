@@ -19,6 +19,7 @@ class ExercisesController < ApplicationController
     category = params[:category].strip
     description = params[:description].strip
     
+    
     if valid_exercises?([name, category, description]) then
       Exercise.create(user_id: session[:effective_id], name: name, category: category, description: description)
     else
@@ -31,6 +32,19 @@ class ExercisesController < ApplicationController
   def process_delete_exercise
     exercise_id = params[:exercise_id]
     Exercise.delete_exercise(exercise_id)
+    
+    render json: { status: 200 }
+  end
+  
+  def process_update_exercises
+    new_exercises = params[:new_exercises]
+    
+    new_exercises.each do | i, e |
+      exercise = Exercise.find(e["exercise_id"])
+      exercise.update(name: e["name"],
+                  category: e["category"],
+                  description: e["description"])
+    end
     
     render json: { status: 200 }
   end
