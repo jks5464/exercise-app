@@ -514,6 +514,18 @@ body {
   // transition: all 0.5s ease;
 }
 
+#menu-toggle {
+  background-image:url('/assets/forward.png');
+  background-repeat: norepeat;
+  width:25px;
+  height:25px;
+  margin-bottom: 2em;
+}
+
+#wrapper.toggled #menu-toggle {
+  background-image:url('/assets/back.png');
+}
+
 #wrapper.toggled #sidebar-wrapper {
   width: 250px;
 }
@@ -612,6 +624,14 @@ body {
 
     #wrapper.toggled #sidebar-wrapper {
         width: 0;
+    }
+    
+    #menu-toggle {
+      background-image:url('/assets/back.png');
+    }
+    
+    #wrapper.toggled #menu-toggle {
+      background-image: url('/assets/forward.png');
     }
 
     #page-content-wrapper {

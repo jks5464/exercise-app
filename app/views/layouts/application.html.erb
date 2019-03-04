@@ -27,6 +27,9 @@
   
   <!-- Content Placeholder -->
   <div id="page-content-wrapper">
+    
+    <button id="menu-toggle"></button>
+      
     <div class="container-fluid">
     
       <%= yield %>
@@ -36,5 +39,13 @@
       
     </div>
   </div>
+  
+  <!-- Menu Toggle Script -->
+  <script>
+    $("#menu-toggle").click(function(e) {
+      e.preventDefault();
+      $("#wrapper").toggleClass("toggled");
+    });
+  </script>
 
 </html>
