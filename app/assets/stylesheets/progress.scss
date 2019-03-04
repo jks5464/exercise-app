@@ -500,7 +500,7 @@ body {
 }
 
 #sidebar-wrapper {
-  z-index: 1000;
+  z-index: 50;
   position: fixed;
   left: 250px;
   width: 0;
@@ -519,11 +519,15 @@ body {
   background-repeat: norepeat;
   width:25px;
   height:25px;
-  margin-bottom: 2em;
+  z-index: 2000;
+  position: fixed;
+  left: 245px;
+  top: 500px;
 }
 
 #wrapper.toggled #menu-toggle {
   background-image:url('/assets/back.png');
+  left: -5px;
 }
 
 #wrapper.toggled #sidebar-wrapper {
@@ -628,10 +632,12 @@ body {
     
     #menu-toggle {
       background-image:url('/assets/back.png');
+      left: 230px;
     }
     
     #wrapper.toggled #menu-toggle {
       background-image: url('/assets/forward.png');
+      left: -5px;
     }
 
     #page-content-wrapper {

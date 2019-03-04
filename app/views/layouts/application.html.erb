@@ -6,7 +6,7 @@
   <meta name="description" content="CSCE 431 Project">
   <meta name="keywords" content="HTML,CSS,JavaScript">
   <meta name="author" content="N. Cluck, C. Hug, H. Shah, Z. Steer">
-  <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -30,12 +30,14 @@
 
   <% unless current_page?(root_path) %>
     <%= render :template => 'layouts/menu' %>
+    
+    <div class="container" style="height: 100%; width: 100%; overflow-y: hidden; position: absolute;">
+      <button class="btn btn-primary" id="menu-toggle"></button>
+    </div>
   <% end %>
   
   <!-- Content Placeholder -->
   <div id="page-content-wrapper">
-    
-    <button id="menu-toggle"></button>
       
     <div class="container-fluid">
     
