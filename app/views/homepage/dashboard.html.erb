@@ -13,7 +13,7 @@
       <div class="progress_circle_layout">
         
         <div class="circular-text"><%= @goals[i].name %></div>
-        <div class="circular-text">Goal: <%= @goals[i].value %> <%= @goals[i].unit.name %></div>
+        <div class="circular-text">Goal: <%= @goals[i].exercise.name %>, <%= @goals[i].value %> <%= @goals[i].unit.name %></div>
         <% (1..100).each do |counter| %>
           <% if @goal_progress[i].to_i > 100 %>
             <div class='circular-progress100'></div>

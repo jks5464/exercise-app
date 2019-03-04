@@ -19,6 +19,7 @@ class HomepageController < AuthenticationController
     @goal_data = Array.new
     @goal_names = Array.new
     @goal_progress = Array.new
+    new_rep_value = 0
     @goals.each do |g|
       # byebug
       goal_values = Array.new
@@ -30,6 +31,40 @@ class HomepageController < AuthenticationController
             task.exercise_set.each do | exercise_set |
               if exercise_set.rep_unit == g.unit.name then
                 goal_values.push(Array.new([exercise_set.created_at.strftime("%D %H:%M"), exercise_set.rep_value]))
+              elsif g.unit.category == "Cardio" then
+              
+              
+                # check with all cardio units
+                # if goal is meters, check for miles/etc
+                # if goal is seconds, check for hours/etc
+                
+                # strength
+
+                
+                #         {"name": "lbs", "category": "Strength"},
+                # {"name": "kgs", "category": "Strength"},
+                # {"name": "meters", "category": "Cardio"},
+                # {"name": "miles", "category": "Cardio"},
+                # {"name": "minutes", "category": "Cardio"},
+                # {"name": "hours", "category": "Cardio"},
+                # {"name": "seconds", "category": "Cardio"}
+        
+                goal_values.push(Array.new([exercise_set.created_at.strftime("%D %H:%M"), new_rep_value]))
+         
+              elsif g.unit.category == "Strength" then
+                             
+                if g.unit.name == "lbs" then
+                  # 1 kg -> 2.20462 lb
+                  if exercise_set.rep_unit == "kgs" then
+                    new_rep_value = exercise_set.rep_value * 2.20462
+                  end
+                elsif g.unit.name == "kgs" then
+                  # 1 lb -> 0.453592 kg
+                  if exercise_set.rep_unit == "lbs" then
+                    new_rep_value = exercise_set.rep_value * 0.453592
+                  end
+                end
+                goal_values.push(Array.new([exercise_set.created_at.strftime("%D %H:%M"), new_rep_value]))
               end
             end
           end
@@ -52,7 +87,6 @@ class HomepageController < AuthenticationController
       @goal_progress.push(@progress.to_i)
         
     end
-      
     @goals = [] if (@goals.nil?)
   end
   
