@@ -1,71 +1,69 @@
-<div id="wrapper">
+<!-- Sidebar -->
+<div id="sidebar-wrapper">
 
-  <!-- Sidebar -->
-  <div id="sidebar-wrapper">
-
-    <ul class="sidebar-nav">
-        <li class="sidebar-brand">
-            <a href="/dashboard"><h1>My Exercise Tracker</h1></a>
-        </li>
-        <li>
-          <form style="padding: 0px; margin: 0px; margin-top: 40px;" action="/my_goals" accept-charset="UTF-8" method="get"><input name="utf8" type="hidden" value="✓">
-            <input class="btn-primary" style="float: left; width: 250px;" type="submit" name="commit" value="My Goals">
+  <ul class="sidebar-nav">
+      <li class="sidebar-brand">
+          <a href="/dashboard"><h1 >My Exercise Tracker</h1></a>
+      </li>
+      <li>
+        <form style="padding: 0px; margin: 0px; margin-top: 40px;" action="/my_goals" accept-charset="UTF-8" method="get"><input name="utf8" type="hidden" value="✓">
+          <input class="btn-primary" style="float: left; width: 250px;" type="submit" name="commit" value="My Goals">
+        </form>
+      </li>
+      <li>
+        <form style="margin: 0px; margin-top: 20px; width: 250px;"  action="/my_measurements" accept-charset="UTF-8" method="get"><input name="utf8" type="hidden" value="✓">
+          <input class="btn-primary" style="float: left; width: 250px;" type="submit" name="commit" value="My Measurements">
+        </form>
+      </li>
+      <li>
+          <form style="margin: 0px; margin-top: 20px; width: 250px;"  action="/my_workouts" accept-charset="UTF-8" method="get"><input name="utf8" type="hidden" value="✓">
+            <input class="btn-primary" style="float: left; width: 250px;" type="submit" type="submit" name="commit" value="My Workouts">
           </form>
-        </li>
+      </li>
+      <% if current_effective_user_is_trainer? then %>
         <li>
-          <form style="margin: 0px; margin-top: 20px; width: 250px;"  action="/my_measurements" accept-charset="UTF-8" method="get"><input name="utf8" type="hidden" value="✓">
-            <input class="btn-primary" style="float: left; width: 250px;" type="submit" name="commit" value="My Measurements">
-          </form>
-        </li>
-        <li>
-            <form style="margin: 0px; margin-top: 20px; width: 250px;"  action="/my_workouts" accept-charset="UTF-8" method="get"><input name="utf8" type="hidden" value="✓">
-              <input class="btn-primary" style="float: left; width: 250px;" type="submit" type="submit" name="commit" value="My Workouts">
+          
+          <form style="margin: 0px; margin-top: 20px; margin: 0px;" action="/my_clients" accept-charset="UTF-8" method="get"><input name="utf8" type="hidden" value="✓">
+              <input class="btn-primary" style="float: left; width: 250px;" type="submit" type="submit" name="commit" value="My Clients">
             </form>
         </li>
-        <% if current_effective_user_is_trainer? then %>
-          <li>
-            
-            <form style="margin: 0px; margin-top: 20px; margin: 0px;" action="/my_clients" accept-charset="UTF-8" method="get"><input name="utf8" type="hidden" value="✓">
-                <input class="btn-primary" style="float: left; width: 250px;" type="submit" type="submit" name="commit" value="My Clients">
-              </form>
-          </li>
-        <% end %>
+      <% end %>
+      <li>
+        <form style="margin: 0px; margin-top: 20px; margin: 0px;" action="/quick_log" accept-charset="UTF-8" method="get"><input name="utf8" type="hidden" value="✓">
+          <input class="btn-primary" style="float: left; width: 250px;" type="submit" type="submit" name="commit" value="Log Exercise">
+        </form>
+      </li>
+      
+      <li>
+        <form style="margin: 0px; margin-top: 20px; margin: 0px;" action="/view_exercises" accept-charset="UTF-8" method="get"><input name="utf8" type="hidden" value="✓">
+            <input class="btn-primary" style="float: left; width: 250px;" type="submit" type="submit" name="commit" value="View All Exercises">
+        </form>
+      </li>
+      
+      <% if current_effective_user_is_admin? then %>
         <li>
-          <form style="margin: 0px; margin-top: 20px; margin: 0px;" action="/quick_log" accept-charset="UTF-8" method="get"><input name="utf8" type="hidden" value="✓">
-            <input class="btn-primary" style="float: left; width: 250px;" type="submit" type="submit" name="commit" value="Log Exercise">
-          </form>
+          
+          <form style="margin: 0px; margin-top: 20px; margin: 0px;" action="/admin" accept-charset="UTF-8" method="get"><input name="utf8" type="hidden" value="✓">
+              <input class="btn-primary" style="float: left; width: 250px;" type="submit" type="submit" name="commit" value="Admin">
+            </form>
         </li>
-        
-        <li>
-          <form style="margin: 0px; margin-top: 20px; margin: 0px;" action="/view_exercises" accept-charset="UTF-8" method="get"><input name="utf8" type="hidden" value="✓">
-              <input class="btn-primary" style="float: left; width: 250px;" type="submit" type="submit" name="commit" value="View All Exercises">
-          </form>
-        </li>
-        
-        <% if current_effective_user_is_admin? then %>
-          <li>
-            
-            <form style="margin: 0px; margin-top: 20px; margin: 0px;" action="/admin" accept-charset="UTF-8" method="get"><input name="utf8" type="hidden" value="✓">
-                <input class="btn-primary" style="float: left; width: 250px;" type="submit" type="submit" name="commit" value="Admin">
-              </form>
-          </li>
-        <% end %>
-        
-        <li class="sidebar-logout" style="text-align: center; margin-top:">
-          <div class="login">
-            <% if current_effective_user %>
-                Signed in as <strong><%= current_effective_user.name %></strong>!
-                <% if current_effective_user_logged_in_as_client? %>
-                  <a style="text-align: center;" id="client_sign_out" href="/unset_effective_id">Client Sign Out</a>
-                <% end %>
-                <a style="text-align: center;" id="sign_out" href="/signout">Sign Out</a>
-            <% else %>
-                <a id="sign_in" href="/auth/google_oath2">Sign in with Google</a>
-            <% end %>
-          </div>
-        </li>
-        
-    </ul>
-    
-  </div>
-  <!-- /#sidebar-wrapper -->
+      <% end %>
+      
+      <li class="sidebar-logout" style="text-align: center; margin-top:">
+        <div class="login">
+          <% if current_effective_user %>
+              Signed in as <strong><%= current_effective_user.name %></strong>!
+              <% if current_effective_user_logged_in_as_client? %>
+                <a style="text-align: center;" id="client_sign_out" href="/unset_effective_id">Client Sign Out</a>
+              <% end %>
+              <a style="text-align: center;" id="sign_out" href="/signout">Sign Out</a>
+          <% else %>
+              <a id="sign_in" href="/auth/google_oath2">Sign in with Google</a>
+          <% end %>
+        </div>
+      </li>
+      
+  </ul>
+  
+</div>
+<!-- /#sidebar-wrapper -->
