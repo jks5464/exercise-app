@@ -19,51 +19,54 @@
     
   </head>
 
-  <!-- Flash Error -->
-  <div>
-    <div id="flash_error">
-      <% if flash[:error] %>
-        <%= flash[:error] %>
-      <% end %>
-    </div>
-  </div>
-
-  <% unless current_page?(root_path) %>
-    <%= render :template => 'layouts/menu' %>
+  <div class="wrapper">
     
-    <div class="container" style="height: 100%; width: 100%; overflow-y: hidden; position: absolute;">
-      <button class="btn btn-primary" id="menu-toggle"></button>
+    <!-- Flash Error -->
+    <div>
+      <div id="flash_error">
+        <% if flash[:error] %>
+          <%= flash[:error] %>
+        <% end %>
+      </div>
     </div>
-  <% end %>
   
-  <!-- Content Placeholder -->
-  <div id="page-content-wrapper">
+    <% unless current_page?(root_path) %>
+      <%= render :template => 'layouts/menu' %>
       
-    <div class="container-fluid">
+      <div class="container" style="height: 100%; width: 100%; overflow-y: hidden; position: absolute;">
+        <button class="btn btn-primary" id="menu-toggle"></button>
+      </div>
+    <% end %>
     
-      <%= yield %>
-      <% unless current_page?(root_path) %>
-        <%= render :template => 'homepage/template' %>
-      <% end %>
+    <!-- Content Placeholder -->
+    <div id="page-content-wrapper">
+        
+      <div class="container-fluid">
       
+        <%= yield %>
+        <% unless current_page?(root_path) %>
+          <%= render :template => 'homepage/template' %>
+        <% end %>
+        
+      </div>
     </div>
+    
+    <!-- Menu Toggle Script -->
+    <script>
+      $(document).ready(function () {
+        if ($(window).width() < 640) {
+          $("#wrapper").classList.remove("toggled");
+        }
+        else {
+          $("#wrapper").classList.add("toggled");
+        }
+      });
+    
+      $("#menu-toggle").click(function(e) {
+        //e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+      });
+    </script>
+  
   </div>
-  
-  <!-- Menu Toggle Script -->
-  <script>
-    $(document).ready(function () {
-      if ($(window).width() < 640) {
-        $("#wrapper").classList.remove("toggled");
-      }
-      else {
-        $("#wrapper").classList.add("toggled");
-      }
-    });
-  
-    $("#menu-toggle").click(function(e) {
-      //e.preventDefault();
-      $("#wrapper").toggleClass("toggled");
-    });
-  </script>
-
 </html>
