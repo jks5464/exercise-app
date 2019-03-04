@@ -51,8 +51,17 @@
   
   <!-- Menu Toggle Script -->
   <script>
+    $(document).ready(function () {
+      if ($(window).width() < 640) {
+        $("#wrapper").classList.remove("toggled");
+      }
+      else {
+        $("#wrapper").classList.add("toggled");
+      }
+    });
+  
     $("#menu-toggle").click(function(e) {
-      e.preventDefault();
+      //e.preventDefault();
       $("#wrapper").toggleClass("toggled");
     });
   </script>

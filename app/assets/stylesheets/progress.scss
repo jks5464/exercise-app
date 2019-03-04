@@ -521,13 +521,13 @@ body {
   height:25px;
   z-index: 2000;
   position: fixed;
-  left: 245px;
+  left: -5px;
   top: 500px;
 }
 
 #wrapper.toggled #menu-toggle {
   background-image:url('/assets/back.png');
-  left: -5px;
+  left: 230px;
 }
 
 #wrapper.toggled #sidebar-wrapper {
