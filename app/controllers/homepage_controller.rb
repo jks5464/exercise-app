@@ -77,13 +77,6 @@ class HomepageController < AuthenticationController
       @progress = (rep_values.max.to_f/g.value.to_f)*100.to_f
       
       @goal_data.push(goal_values)
-      puts "GOAL DATA: "
-      puts @goal_data
-      puts "REP VALUES: "
-      puts rep_values
-      puts "GOAL VALUES: "
-      puts @goal_values
-      
       @goal_progress.push(@progress.to_i)
         
     end
