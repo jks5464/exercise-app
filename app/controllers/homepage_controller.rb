@@ -25,30 +25,61 @@ class HomepageController < AuthenticationController
       goal_values = Array.new
       current_effective_user.workout.each do | workout |
         workout.task.each do |task|
-          puts "G unit name: "
-          puts g.unit.name
+          # puts "G unit name: "
+          # puts g.unit.name
           if task.exercise_id == g.exercise_id then
             task.exercise_set.each do | exercise_set |
               if exercise_set.rep_unit == g.unit.name then
                 goal_values.push(Array.new([exercise_set.created_at.strftime("%D %H:%M"), exercise_set.rep_value]))
               elsif g.unit.category == "Cardio" then
               
-              
-                # check with all cardio units
-                # if goal is meters, check for miles/etc
-                # if goal is seconds, check for hours/etc
-                
-                # strength
-
-                
-                #         {"name": "lbs", "category": "Strength"},
-                # {"name": "kgs", "category": "Strength"},
                 # {"name": "meters", "category": "Cardio"},
                 # {"name": "miles", "category": "Cardio"},
                 # {"name": "minutes", "category": "Cardio"},
                 # {"name": "hours", "category": "Cardio"},
                 # {"name": "seconds", "category": "Cardio"}
-        
+                
+                if g.unit.name == "meters" then
+                  # 1 miles -> 1609.34 meters
+                  if exercise_set.rep_unit == "miles" then
+                    new_rep_value = exercise_set.rep_value * 1609.34
+                  end
+                elsif g.unit.name == "miles" then
+                  # 1 meter -> 0.000621371 miles
+                  if exercise_set.rep_unit == "meters" then
+                    new_rep_value = exercise_set.rep_value * 0.0006
+                  end
+                end
+                
+                if g.unit.name == "hours" then
+                  # 1 minute -> 0.0166667 hours
+                  if exercise_set.rep_unit == "minutes" then
+                    new_rep_value = exercise_set.rep_value * 0.017
+                  end
+                  # 1 second -> 0.000277778 hours
+                  if exercise_set.rep_unit == "seconds" then
+                    new_rep_value = exercise_set.rep_value * 0.0003
+                  end
+                elsif g.unit.name == "minutes" then
+                  # 1 hour -> 60 minutes
+                  if exercise_set.rep_unit == "hours" then
+                    new_rep_value = exercise_set.rep_value * 60
+                  end
+                  # 1 second -> 0.0166667 minutes
+                  if exercise_set.rep_unit == "seconds" then
+                    new_rep_value = exercise_set.rep_value * 0.017
+                  end
+                elsif g.unit.name == "seconds" then
+                  # 1 hour -> 3600 seconds
+                  if exercise_set.rep_unit == "hours" then
+                    new_rep_value = exercise_set.rep_value * 3600
+                  end
+                  # 1 minute -> 60 seconds
+                  if exercise_set.rep_unit == "minutes" then
+                    new_rep_value = exercise_set.rep_value * 60
+                  end
+                end
+                
                 goal_values.push(Array.new([exercise_set.created_at.strftime("%D %H:%M"), new_rep_value]))
          
               elsif g.unit.category == "Strength" then
