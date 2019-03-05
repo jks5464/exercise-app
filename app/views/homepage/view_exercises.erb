@@ -7,17 +7,19 @@
     <%= "No exercises have been created yet." %>
   <% else %>
     <table class="table" id= "exercises_table">
-      <th>Name</th>
-      <th>Category</th>
-      <th>Description</th>
-      <th>
-        <span class="hide_when_editing" id="edit-exercises">
-          <button  class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-pencil"></span></button>
-        </span>
-        <span class="show_when_editing" id="done-editing" hidden>
-          <button class="btn btn-primary btn-sm" hidden><span class="glyphicon glyphicon-ok"></span></button>
-        </span>        
-      </th>
+      <thead style="background-color: #003366; color: white;">
+        <th>Name</th>
+        <th>Category</th>
+        <th>Description</th>
+        <th>
+          <span class="hide_when_editing" id="edit-exercises">
+            <button  class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-pencil"></span></button>
+          </span>
+          <span class="show_when_editing" id="done-editing" hidden>
+            <button class="btn btn-primary btn-sm" hidden><span class="glyphicon glyphicon-ok"></span></button>
+          </span>        
+        </th>
+      </thead>
       <% @exercises.each_with_index do |e, i| %>
         <div>
           <tr class="exercise_row" id="<%= e.id %>">

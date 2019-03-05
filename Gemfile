@@ -24,6 +24,7 @@ gem 'jquery-rails'
 
 # for bootstrap and css
 gem "bootstrap-sass", ">= 3.4.1"
+gem 'bootstrap', '~> 4.3.1'
 gem 'autoprefixer-rails'
 gem 'mini_racer'
 gem 'turbolinks'

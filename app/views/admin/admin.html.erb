@@ -25,20 +25,24 @@
 </div>
 
 <div class = "admin">
-  <p>
-    Admin Dashboard:
-  </p>
-  <table>
-    <tr align = "middle">
-      <th colspan = "2">User</th>
-      <th colspan = "2">Roles</th>
-    </tr>
+  <legend>
+    Admin Dashboard
+  </legend>
+  <table class="table">
+    <thead style="background-color: #003366; color: white;">
+      <tr>
+        <th colspan = "2">User</th>
+        <th colspan = "2">Roles</th>
+      </tr>
+    </thead>
     
-    <tr align = "middle">
-      <th>Id</th>
-      <th>Name</th>
-      <th>Client/Trainer/Admin</th>
-    </tr>
+    <thead style="background-color: #087CA7; color: white;">
+      <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Client/Trainer/Admin</th>
+      </tr>
+    <thead class="thead-dark">
       
     <%User.all.each do |u| %>
       <tr align = "middle" class="user_info">
@@ -60,12 +64,12 @@
       
   </table>
   
-  <button id = "TOC">Submit</button>
+  <button id = "TOC" class="btn btn-primary" style="background-color: #003366;">Submit</button>
 
   <!-- Display all trainers and their respective client lists -->
-  <p>
+  <h2>
     Trainers:
-  </p>
+  </h2>
   <div>
     <% @trainers.each do | trainer | %>
       <div class="trainer_card" id="<%= trainer.id %>">
@@ -78,7 +82,9 @@
           <% trainer.clients.each do | client | %>
             <div class="client_card" id="<%= client.id %>">
               <span> <%= client.name %> </span>
-              <button type="button" class="btn btn-primary btn-sm delete_client_button">
+
+              <button type="button" style="background-color: #003366;" class="btn btn-info btn-sm delete_client_button">
+
                 <span class="glyphicon glyphicon-trash"></span>
               </button>
             </div>
