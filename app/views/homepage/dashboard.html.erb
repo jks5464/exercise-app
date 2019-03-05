@@ -1,35 +1,39 @@
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <!--<script type="text/javascript" src="http://code.jquery.com/jquery-1.10.2.js"></script>-->
 
-<legend>Dashboard</legend>
-<p><%= current_effective_user.name %>'s progress</p>
+<legend><%= current_effective_user.name %>'s Progress</legend>
 
-<div class="content">
+<% if @goal_data.empty? %>
+    <%= "You don't have any goals entered yet." %>
+<% else %>
+  <% @goal_data.each_with_index do |g, i| %>
   
-  <% if @goal_data.empty? %>
-      <%= "You don't have any goals entered yet." %>
-  <% else %>
-    <% @goal_data.each_with_index do |g, i| %>
-    
-      <div class="group" style="float: left; padding-right: 3em; overflow: hidden;">
+    <div class="circle_and_graph" id="circle_and_graph">
+
+      <div class="progress_circle_layout">
+        
         <div class="circular-text"><%= @goals[i].name %></div>
-        <div class="circular-text">Goal: <%= @goals[i].value %> <%= @goals[i].unit.name %></div>
-          <% (1..100).each do |counter| %>
-            <% if @goal_progress[i].to_i > 100 %>
-              <div class='circular-progress100'></div>
-            <% elsif @goal_progress[i].to_i < 0 %>
-              <div class='circular-progress0'></div>
-            <% elsif @goal_progress[i].to_i == counter %>
-              <div class='circular-progress<%="#{counter}"%>'></div>
-            <% end %>
+        <div class="circular-text">Goal: <%= @goals[i].exercise.name %>, <%= @goals[i].value %> <%= @goals[i].unit.name %></div>
+        <% (1..100).each do |counter| %>
+          <% if @goal_progress[i].to_i > 100 %>
+            <div class='circular-progress100'></div>
+            <% break %>
+          <% elsif @goal_progress[i].to_i <= 0 %>
+            <div class='circular-progress0'></div>
+            <% break %>
+          <% elsif @goal_progress[i].to_i == counter %>
+            <div class='circular-progress<%="#{counter}"%>'></div>
+            <% break %>
           <% end %>
+        <% end %>
         
       </div>
-              
-      <div id='<%="chart#{i}"%>' style="width: 600px; height: 600px;"></div>
+      
+      <div class="divider" id="divider"></div>
+      <div class="hidden error_msg" id="<%="error_msg#{i}"%>"></div>
+      <div id='<%="chart#{i}"%>'></div>
       
       <%= javascript_tag do -%>
-        <% puts g.to_json.html_safe %>
         google.charts.load('current', {'packages':['corechart']});
         google.charts.setOnLoadCallback(drawChart);
       
@@ -53,17 +57,25 @@
               position:'none'
             }
           
-      };
-      
+          };
+          
+  
           var chart = new google.visualization.ComboChart(document.getElementById('<%="chart#{i}"%>'));
+          
+          google.visualization.events.addListener(chart, 'error', function (googleError) {
+            google.visualization.errors.removeError(googleError.id);
+            document.getElementById('<%="error_msg#{i}"%>').innerHTML = "No exercises logged for this goal yet.";
+            document.getElementById('<%="chart#{i}"%>').classList.add('hidden');
+            document.getElementById('<%="error_msg#{i}"%>').classList.remove('hidden');
+          });
+        
           chart.draw(data, options);
- 
         }
         
       <% end -%>
-    <% end %>
+      </div>
   <% end %>
-</div>
+<% end %>
 
 <% 
 =begin

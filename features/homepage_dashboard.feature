@@ -8,7 +8,7 @@ Feature: dashboard
 Scenario: I see my progress on dashboard 
   
   Given I login and am on the dashboard page
-  Then I should see "'s progress"
+  Then I should see "'s Progress"
 
 @omniauth_test    
 Scenario: I click on My Goals
