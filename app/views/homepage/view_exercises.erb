@@ -3,16 +3,21 @@
 <div class="exercises">
   <legend>View All Exercises</legend>
   
-  
-  
   <% if @exercises.empty? %>
     <%= "No exercises have been created yet." %>
   <% else %>
-    <table id= "exercises_table">
+    <table class="table" id= "exercises_table">
       <th>Name</th>
       <th>Category</th>
       <th>Description</th>
-      <th class="show_when_editing" hidden></th>
+      <th>
+        <span class="hide_when_editing" id="edit-exercises">
+          <button  class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-pencil"></span></button>
+        </span>
+        <span class="show_when_editing" id="done-editing" hidden>
+          <button class="btn btn-primary btn-sm" hidden><span class="glyphicon glyphicon-ok"></span></button>
+        </span>        
+      </th>
       <% @exercises.each_with_index do |e, i| %>
         <div>
           <tr class="exercise_row" id="<%= e.id %>">
@@ -57,24 +62,21 @@
               </span>
             </td>
             
-            <td class="show_when_editing" hidden>
-              <% if current_effective_user.can_delete_exercise?(e) %>
-              <button type="button" name="button1" class="delete_button btn btn-primary btn-sm" id="<%=e.id%>"value="delete">
-                <span class="glyphicon glyphicon-trash"></span>
-              </button>
-              <% end %>  
+            <td>
+              <span class="show_when_editing"> 
+                <% if current_effective_user.can_delete_exercise?(e) %>
+                <button type="button" name="button1" class="delete_button btn btn-primary btn-sm" id="<%=e.id%>"value="delete">
+                  <span class="glyphicon glyphicon-trash"></span>
+                </button>
+                <% end %>  
+              </span>
             </td>
           </tr>
         </div> 
       <% end %>  
     </table>
     
-    <span class="hide_when_editing" id="edit-exercises">
-      <button  class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-pencil"></span></button>
-    </span>
-    <span class="show_when_editing" id="done-editing" hidden>
-      <button class="btn btn-primary btn-sm" hidden><span class="glyphicon glyphicon-ok"></span></button>
-    </span>
+    
   <% end %>
 </div>
 

@@ -1,9 +1,9 @@
 $(function() {
-  // setup delte button for exercise
+  // setup delete button for exercise
   $(".delete_button").click(function() {
     var result = confirm("Are you sure?");
     if (result) {
-      $(this).parent().parent().remove();
+      $(this).parent().parent().parent().remove();
       var exercise_id = $(this).attr('id');
         $.ajax({
           type:"POST",
