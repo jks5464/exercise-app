@@ -107,7 +107,7 @@
         </div>
     
         <div class="form-group">
-            <form style="margin: 0; padding: 0;" action="/enter_goal" accept-charset="UTF-8" method="get"><input name="utf8" type="hidden" value="&#x2713;" />
+            <%= form_tag enter_goal_path, :method => :get, :class => "no_margin_form" do %>
               <input class="btn btn-primary" type="submit" name="commit" value="Add Goal">
         </div>
         
