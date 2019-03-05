@@ -554,10 +554,10 @@ body {
   margin: 0;
   padding: 0;
   list-style: none;
+  font-family: Arial, Verdana, Helvetica, sans-serif; 
 }
 
 .sidebar-nav li {
-  text-indent: 20px;
   line-height: 40px;
   padding: 0px;
   margin: 0px;
@@ -571,12 +571,28 @@ body {
   padding-right: 1em;
 }
 
+@font-face {
+    font-family: "Barcelony";
+    src: url("/assets/Barcelony.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "BebasNeue";
+  src: url("/assets/BebasNeue/BebasNeue-Light.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Nervous";
+  src: url("/assets/Nervous.ttf") format("truetype");
+}
+
 .sidebar-nav li a h1 {
   color: #ffffff;
   text-align: center;
   width: 250px;
   margin-bottom: 50px;
   padding: 0px;
+  font-family: "Barcelony", Verdana, Tahoma;
 }
 
 .sidebar-nav li a:hover {
@@ -593,6 +609,8 @@ body {
   height: 65px;
   font-size: 18px;
   line-height: 60px;
+  
+  
 }
 
 .sidebar-nav>.sidebar-brand a {

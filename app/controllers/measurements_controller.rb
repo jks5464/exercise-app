@@ -52,4 +52,33 @@ class MeasurementsController < AuthenticationController
     
     redirect_to my_measurements_path
   end 
+  
+  def process_update_measurements
+    new_measurements = params[:new_measurements]
+    status = 200
+    message = ""
+    # validate all measurements
+    new_measurements.each do | i, m |
+      if !valid_measurements?([m["weight"].to_i, m["body_fat"].to_i, m["height"].to_i]) then
+        status = 500
+        message = "Invalid measurements: #{m["weight"].to_i}, #{m["body_fat"].to_i}, #{m["height"].to_i}"
+      end
+    end
+    
+    # update valid measurements
+    new_measurements.each do | i, m |
+      Measurement.update_measurment(m["id"], m["weight"].to_i, m["body_fat"].to_i, m["height"].to_i)
+    end
+    
+    
+    render json: { status: status, message: message }
+  end
+  
+  def process_delete_measurement
+    measurement_id = params[:measurement_id]
+    
+    Measurement.delete_measurement(measurement_id)
+    
+    render json: { status: 200 }
+  end
 end

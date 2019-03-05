@@ -10,5 +10,10 @@ class Goal < ActiveRecord::Base
         end
         return values
     end
+    
+    def self.delete_goal(id)
+        goal = find(id)
+        goal.destroy
+    end
 
 end
