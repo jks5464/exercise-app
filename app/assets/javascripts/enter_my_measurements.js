@@ -1,9 +1,10 @@
 
 function validateMyForm() {
   // Declare pop up confirmation results
-  var result1;
-  var result2;
-  var result3;
+  // These are set to true by default in case a sanity check isn't triggered
+  var result1 = true;
+  var result2 = true;
+  var result3 = true;
   
   // Sanity check weight
   var weight_check_triggered = false;
@@ -50,7 +51,12 @@ function validateMyForm() {
     }
   }
   
-  if (result1 && result2 && result3 && !weight_check_triggered && !body_fat_check_triggered && !height_check_triggered) {
+  // Submits form if no sanity checks were triggered
+  if (!weight_check_triggered && !body_fat_check_triggered && !height_check_triggered) {
+    return true;
+  }
+  // Submits form if all sanity checks were approved by the user
+  else if (result1 && result2 && result3) {
     return true;
   }
 }
