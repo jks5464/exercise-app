@@ -31,14 +31,10 @@ class HomepageController < AuthenticationController
             task.exercise_set.each do | exercise_set |
               if exercise_set.rep_unit == g.unit.name then
                 goal_values.push(Array.new([exercise_set.created_at.strftime("%D %H:%M"), exercise_set.rep_value]))
+              
+              # future work -> convert this BS into a function
               elsif g.unit.category == "Cardio" then
               
-                # {"name": "meters", "category": "Cardio"},
-                # {"name": "miles", "category": "Cardio"},
-                # {"name": "minutes", "category": "Cardio"},
-                # {"name": "hours", "category": "Cardio"},
-                # {"name": "seconds", "category": "Cardio"}
-                
                 if g.unit.name == "meters" then
                   # 1 miles -> 1609.34 meters
                   if exercise_set.rep_unit == "miles" then
