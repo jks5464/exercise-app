@@ -170,11 +170,11 @@ Given /^A user with name "(.*?)" and UID "(.*?)" and auth provider "(.*?)"$/ do 
 end
 
 Given /^There exists a valid exercise with name "(.*?)"$/ do |name|
-  @exercise = FactoryBot.create(:exercise, :name => name)
+  @exercise = FactoryBot.create(:exercise, :name => name, :category => "Strength")
 end
 
 Given /^There exists a valid unit with name "(.*?)"$/ do |name|
-  @unit = FactoryBot.create(:unit, :name => name)
+  @unit = FactoryBot.create(:unit, :name => name, :category => "Strength")
 end
 
 When /^I login using "(.*?)" as the user$/ do |provider|
