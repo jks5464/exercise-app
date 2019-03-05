@@ -19,7 +19,19 @@
                         <th>Description</th>
                         <th>Exercise</th>
                         <th>Goal</th>
-                        <th class="show_when_editing" hidden></th>
+                        <th>
+                            <span class="hide_when_editing">
+                              <button type="button" class="btn btn-primary btn-sm edit_button">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                              </button>
+                            </span>
+                            
+                            <span class="show_when_editing" hidden>
+                              <button class="btn btn-primary btn-sm done_editing_button">
+                                <span class="glyphicon glyphicon-ok"></span>
+                              </button>
+                            </span>
+                        </th>
                     </tr>
                     <% @goals.each_with_index do |g, i| %>
                         <tr id="<%= g.id %>" class="goals_row">
@@ -73,34 +85,22 @@
                                     <select class="unit_name_edit">
                                         <% Unit.all.each do | u | %>
                                             <% if u.category == g.exercise.category %>
-                                                <option value="<%= u.id %>"><%= u.name %></option>
+                                                <option value="<%= u.id %>" <% if u.id == g.unit_id %> selected <% end %> ><%= u.name %></option>
                                             <% end %>
                                         <% end %>
                                     </select>
                                 </span>
                             </td>
-                            <td class="show_when_editing" hidden> 
-                              <button type="button" class="btn btn-info btn-sm delete_button">
-                                <span class="glyphicon glyphicon-trash"></span>
-                              </button>
+                            <td>
+                                <span class="show_when_editing">
+                                    <button type="button" class="btn btn-primary btn-sm delete_button">
+                                        <span class="glyphicon glyphicon-trash"></span>
+                                    </button>
+                                </span> 
                             </td>
                         </tr>
                     <% end %>    
                 </table>
-                
-                <div>
-                    <span class="hide_when_editing">
-                      <button type="button" class="btn btn-info btn-sm edit_button">
-                        <span class="glyphicon glyphicon-pencil"></span>
-                      </button>
-                    </span>
-                    
-                    <span class="show_when_editing" hidden>
-                      <button class="btn btn-info btn-sm done_editing_button">
-                        <span class="glyphicon glyphicon-ok"></span>
-                      </button>
-                    </span>
-                </div>
             <% end %>
         </div>
     

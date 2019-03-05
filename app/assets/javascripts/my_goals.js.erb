@@ -63,7 +63,7 @@ $(function() {
   $(".delete_button").click(function() {
     var result = confirm("Are you sure?");
     if (result) {
-      var goal_row = $(this).parent().parent();
+      var goal_row = $(this).parent().parent().parent();
       var goal_id = goal_row.attr("id");
       
       goal_row.remove();

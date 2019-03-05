@@ -59,7 +59,7 @@
             
             <td class="show_when_editing" hidden>
               <% if current_effective_user.can_delete_exercise?(e) %>
-              <button type="button" name="button1" class="delete_button btn btn-info btn-sm" id="<%=e.id%>"value="delete">
+              <button type="button" name="button1" class="delete_button btn btn-primary btn-sm" id="<%=e.id%>"value="delete">
                 <span class="glyphicon glyphicon-trash"></span>
               </button>
               <% end %>  
@@ -70,10 +70,10 @@
     </table>
     
     <span class="hide_when_editing" id="edit-exercises">
-      <button  class="btn btn-info btn-sm"><span class="glyphicon glyphicon-pencil"></span></button>
+      <button  class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-pencil"></span></button>
     </span>
     <span class="show_when_editing" id="done-editing" hidden>
-      <button class="btn btn-info btn-sm" hidden><span class="glyphicon glyphicon-ok"></span></button>
+      <button class="btn btn-primary btn-sm" hidden><span class="glyphicon glyphicon-ok"></span></button>
     </span>
   <% end %>
 </div>
