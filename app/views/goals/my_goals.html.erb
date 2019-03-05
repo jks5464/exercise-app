@@ -1,3 +1,6 @@
+<script src="/assets/my_goals.js.erb"></script>
+
+
 <div class="container-fluid">
     
     <div class="goals">
@@ -10,23 +13,91 @@
             <% if @goals.empty? %>
                 <%= "You don't have any goals entered yet." %>
             <% else %>
-                <table class="table">
+                <table id="goals_table" class="table">
                     <tr>
                         <th>Name</th>
                         <th>Description</th>
                         <th>Exercise</th>
                         <th>Goal</th>
-                        <th>Timeline</th>
-                        <th>Progress</th>
+                        <th>
+                            <span class="hide_when_editing">
+                              <button type="button" class="btn btn-primary btn-sm edit_button">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                              </button>
+                            </span>
+                            
+                            <span class="show_when_editing" hidden>
+                              <button class="btn btn-primary btn-sm done_editing_button">
+                                <span class="glyphicon glyphicon-ok"></span>
+                              </button>
+                            </span>
+                        </th>
                     </tr>
                     <% @goals.each_with_index do |g, i| %>
-                        <tr <%= 'id=last_row' if i == (@goals.size - 1) %> >
-                            <td><%= g.name %></td>
-                            <td><%= g.description %></td>
-                            <td><%= g.exercise.name %></td>
-                            <td><%= g.value %> <%= g.unit.name %></td>
-                            <td></td>
-                            <td></td>
+                        <tr id="<%= g.id %>" class="goals_row">
+                            <td>
+                                <span class="hide_when_editing name_info">
+                                    <%= g.name %>
+                                </span>
+                                
+                                <span class="show_when_editing" hidden>
+                                    <input name="name_edit" class="name_edit" type="text" value="<%= g.name %>"></input>
+                                </span>
+                            </td>
+                            <td>
+                                <span class="hide_when_editing description_info">
+                                    <%= g.description %>
+                                </span>
+                                
+                                <span class="show_when_editing" hidden>
+                                    <input name="description_edit" class="description_edit" type="text" value="<%= g.description %>"></input>
+                                </span>
+                            </td>
+                            <td>
+                                <span class="hide_when_editing exercise_name_info">
+                                    <%= g.exercise.name %>
+                                </span>
+                                
+                                <span class="show_when_editing" hidden>
+                                    <select class="exercise_name_edit">
+                                      <%= @exercises.each do |exercise| %>
+                                        <% if exercise.name == g.exercise.name %>
+                                            <option category="<%= exercise.category %>" value="<%= exercise.id %>" selected><%=exercise.name%></option>
+                                        <% else %>
+                                            <option category="<%= exercise.category %>" value="<%= exercise.id %>"><%=exercise.name%></option>
+                                        <% end %>
+                                      <% end %>
+                                    </select>
+                                </span>
+                            </td>
+                            <td>
+                                <span class="hide_when_editing">
+                                    <span class="value_info">
+                                        <%= g.value %>
+                                    </span>
+                                    <span class="unit_name_info">
+                                        <%= g.unit.name %>
+                                    </span>
+                                </span>
+                                
+                                <span class="show_when_editing" hidden>
+                                    <input name="value_edit" class="value_edit" type="number" value="<%= g.value %>"></input>
+                                    <select class="unit_name_edit">
+                                        <% Unit.all.each do | u | %>
+                                            <% if u.category == g.exercise.category %>
+                                                <option value="<%= u.id %>" <% if u.id == g.unit_id %> selected <% end %> ><%= u.name %></option>
+                                            <% end %>
+                                        <% end %>
+                                    </select>
+                                </span>
+                            </td>
+                            <td>
+                                <span class="show_when_editing">
+                                    <button type="button" class="btn btn-primary btn-sm delete_button">
+                                        <span class="glyphicon glyphicon-trash"></span>
+                                    </button>
+                                </span> 
+                            </td>
                         </tr>
                     <% end %>    
                 </table>
@@ -34,10 +105,11 @@
         </div>
     
         <div class="form-group">
-            <%= form_tag enter_goal_path, :method => :get do %>
+            <%= form_tag enter_goal_path, :method => :get, :class => "no_margin_form" do %>
               <input class="btn btn-primary" type="submit" name="commit" value="Add Goal">
             <% end %>
         </div>
+        
         
     </div>
  </div>

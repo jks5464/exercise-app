@@ -7,7 +7,7 @@
       
       <!-- Create Workout button section -->
       <div class="form-group">
-        <%= form_tag create_workout_path, :method => :get do %>
+        <%= form_tag create_workout_path, :method => :get, :class => "no_margin_form" do %>
           <input class="btn btn-primary" type="submit" name="commit" value="Create New Workout">
         <% end %>
       </div>
@@ -24,13 +24,13 @@
               <span>
                 <%= workout.name %>
                 <span class="show_form">
-                  <button type="button" class="btn btn-info btn-sm plan_workout_button">Plan</button>
-                  <button type="button" class="btn btn-info btn-sm edit_workout_button"><span class="glyphicon glyphicon-pencil"></span></button>
-                  <button type="button" class="btn btn-info btn-sm delete_workout_button"><span class="glyphicon glyphicon-trash"></span></button>
+                  <button type="button" class="btn btn-primary btn-sm plan_workout_button">Plan</button>
+                  <button type="button" class="btn btn-primary btn-sm edit_workout_button"><span class="glyphicon glyphicon-pencil"></span></button>
+                  <button type="button" class="btn btn-primary btn-sm delete_workout_button"><span class="glyphicon glyphicon-trash"></span></button>
                 </span>
                 
                 <span class="edit_form" hidden>
-                  <button type="button" class="btn btn-info btn-sm done_button"><span class="glyphicon glyphicon-ok"></span></button>
+                  <button type="button" class="btn btn-primary btn-sm done_button"><span class="glyphicon glyphicon-ok"></span></button>
                 </span>
                 
               </span>
@@ -77,13 +77,13 @@
                 <span>
                   <%= workout.name %>
                   <span class="show_form">
-                    <button type="button" class="btn btn-info btn-sm complete_workout_button">Complete</button>
-                    <button type="button" class="btn btn-info btn-sm edit_workout_button"><span class="glyphicon glyphicon-pencil"></span></button>
-                    <button type="button" class="btn btn-info btn-sm delete_workout_button"><span class="glyphicon glyphicon-trash"></span></button>
+                    <button type="button" class="btn btn-primary btn-sm complete_workout_button">Complete</button>
+                    <button type="button" class="btn btn-primary btn-sm edit_workout_button"><span class="glyphicon glyphicon-pencil"></span></button>
+                    <button type="button" class="btn btn-primary btn-sm delete_workout_button"><span class="glyphicon glyphicon-trash"></span></button>
                   </span>
                   
                   <span class="edit_form" hidden>
-                    <button type="button" class="btn btn-info btn-sm done_button"><span class="glyphicon glyphicon-ok"></span></button>
+                    <button type="button" class="btn btn-primary btn-sm done_button"><span class="glyphicon glyphicon-ok"></span></button>
                   </span>
                 </span>
                 

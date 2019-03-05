@@ -1,51 +1,84 @@
+<script src="/assets/my_measurements.js"></script>
+
 <div class="container-fluid">
   
-    <div class="measurements">
+  <div class="measurements">
     
-      <legend>My Measurements</legend>
+    <legend>My Measurements</legend>
     
-      <div class="row">
-      
-        <%= form_tag enter_my_measurements_path, :method => :get do %>
-      
-        <div class='form-group'>
-          <% if @measurements.empty? %>
-            <%= "You don't have any measurements entered yet." %><br>
-          <% else %>
-            <table class="table">
-              <tr>
-                <th>Weight</th>
-                <th>Body Fat</th> 
-                <th>Height</th>
-                <th>Date</th>
+    <div class="row">
+      <div class='form-group'>
+        <% if @measurements.empty? %>
+          <%= "You don't have any measurements entered yet." %><br>
+        <% else %>
+          <table class="table" id="measurements_table">
+            <tr>
+              <th>Weight</th>
+              <th>Body Fat</th> 
+              <th>Height</th>
+              <th>Date</th>
+              <th>
+                <span class="hide_when_editing">
+                  <button type="button" class="btn btn-primary btn-sm edit_button">
+                    <span class="glyphicon glyphicon-pencil"></span>
+                  </button>
+                </span>
+                
+                <span class="show_when_editing" hidden>
+                  <button class="btn btn-primary btn-sm done_editing_button">
+                    <span class="glyphicon glyphicon-ok"></span>
+                  </button>
+                </span>
+              </th>
+            </tr>
+              
+            <% @measurements.each_with_index do |m, i| %>
+              <tr id=<%= m.id %> class="measurements_row">
+                <td>
+                  <span class="hide_when_editing weight_info">
+                    <%= m.weight %>  
+                  </span>
+                  <span class="show_when_editing" hidden>
+                    <input name="weight_edit" class="weight_edit" type="number" value="<%= m.weight %>"></input>
+                  </span>
+                </td>
+                
+                <td> 
+                  <span class="hide_when_editing body_fat_info">
+                    <%= m.body_fat %> 
+                  </span>
+                  <span class="show_when_editing" hidden>
+                    <input name="body_fat_edit" class="body_fat_edit" type="number" value="<%= m.body_fat %>"></input>
+                  </span>
+                </td>
+                
+                <td> 
+                  <span class="hide_when_editing height_info">
+                    <%= m.height %> 
+                  </span>
+                  <span class="show_when_editing" hidden>
+                    <input name="height_edit" class="height_edit" type="number" value="<%= m.height %>"></input>
+                  </span>
+                </td>
+                
+                <td><%= m.updated_at.strftime("%B %d, %Y at %H:%M") %></td>
+                
+                <td> 
+                  <span class="show_when_editing">
+                    <button type="button" class="btn btn-primary btn-sm delete_button">
+                      <span class="glyphicon glyphicon-trash"></span>
+                    </button>
+                  </span>
+                </td>
               </tr>
-              <% @measurements.each_with_index do |m, i| %>
-                <tr <%= 'id=last_row' if i == (@measurements.size - 1) %> >
-                  <td><%= m.weight %></td>
-                  <td><%= m.body_fat %></td>
-                  <td><%= m.height %></td>
-                  <td><%= m.updated_at.strftime("%B %d, %Y at %H:%M") %></td>
-                </tr>
-              <% end %> 
-            </table>
-          <% end %>
-        </div>
-    
-        <div class='form-group'>
-          <input class="btn btn-primary" style="margin-top=2em;" type="submit" name="commit" value="Enter New Measurements">
-          <% end %>
-        </div>
-      
+            <% end %> 
+          </table>
+        <% end %>
       </div>
-      
-    </div>
     
+      <%= form_tag enter_my_measurements_path, :method => :get, :class => "no_margin_form" do %>
+        <input class="btn btn-primary" style="margin-top=2em;" type="submit" name="commit" value="Enter New Measurements">
+      <% end %>
+    </div>
+  </div>
 </div>
-
-
-<!-- charts -->
-<%= 
-=begin
-  area_chart [ { name: "Weight", data: Measurement.where(user_id: current_effective_user.id).count.group_by_day(:weight) }] 
-=end
-%>

@@ -1,40 +1,75 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     
-    <style src="/assets/progress.scss"></style>
-    
-    <%= stylesheet_link_tag    'application', media: 'all' %>
-    <%= csrf_meta_tags %>
+  <meta charset="UTF-8">
+  <meta name="description" content="CSCE 431 Project">
+  <meta name="keywords" content="HTML,CSS,JavaScript">
+  <meta name="author" content="N. Cluck, C. Hug, H. Shah, Z. Steer">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  
+  <style src="/assets/progress.scss"></style>
+  
+  <%= stylesheet_link_tag    'application', media: 'all' %>
+  <%= csrf_meta_tags %>
     
   </head>
 
-  <!-- Flash Error -->
-  <div>
-    <div id="flash_error">
-      <% if flash[:error] %>
-        <%= flash[:error] %>
-      <% end %>
+  <body>
+    
+  
+    <!-- Flash Error -->
+    <div>
+      <div id="flash_error">
+        <% if flash[:error] %>
+          <%= flash[:error] %>
+        <% end %>
+      </div>
     </div>
   </div>
+
+  
 
   <% unless current_page?(root_path) %>
-    <%= render :template => 'layouts/menu' %>
-  <% end %>
-  
-  <!-- Content Placeholder -->
-  <div id="page-content-wrapper">
-    <div class="container-fluid">
-    
-      <%= yield %>
-      <% unless current_page?(root_path) %>
-        <%= render :template => 'homepage/template' %>
-      <% end %>
+    <div id="wrapper">
+      <%= render :template => 'layouts/menu' %>
       
+      <div class="container" style="height: 100%; width: 100%; overflow-y: hidden; position: absolute;">
+        <button class="btn btn-primary" id="menu-toggle"></button>
+      </div>
+      
+      <div id="page-content-wrapper">
+        <div class="container-fluid">
+          <%= yield %>
+          <%= render :template => 'homepage/template' %>
+        </div>
+      </div>
     </div>
+  <% else %>
+    <!-- Content Placeholder -->
+    <%= yield %>
+  <% end %>
+    
+    <!-- Menu Toggle Script -->
+    <script>
+      $(document).ready(function () {
+        if ($(window).width() < 640) {
+          $("#wrapper").classList.remove("toggled");
+        }
+        else {
+          $("#wrapper").classList.add("toggled");
+        }
+      });
+    
+      $("#menu-toggle").click(function(e) {
+        //e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+      });
+    </script>
+  
   </div>
-
 </html>
