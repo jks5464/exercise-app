@@ -14,7 +14,8 @@
                 <%= "You don't have any goals entered yet." %>
             <% else %>
                 <table id="goals_table" class="table">
-                    <tr>
+                    <thead style="background-color: #003366; color: white;">
+                        <tr>
                         <th>Name</th>
                         <th>Description</th>
                         <th>Exercise</th>
@@ -32,7 +33,8 @@
                               </button>
                             </span>
                         </th>
-                    </tr>
+                        </tr>
+                    </thead>
                     <% @goals.each_with_index do |g, i| %>
                         <tr id="<%= g.id %>" class="goals_row">
                             <td>

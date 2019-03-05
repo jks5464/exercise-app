@@ -12,6 +12,7 @@
           <%= "You don't have any measurements entered yet." %><br>
         <% else %>
           <table class="table" id="measurements_table">
+            <thead style="background-color: #003366; color: white;">
             <tr>
               <th>Weight</th>
               <th>Body Fat</th> 
@@ -31,6 +32,7 @@
                 </span>
               </th>
             </tr>
+            </thead>
               
             <% @measurements.each_with_index do |m, i| %>
               <tr id=<%= m.id %> class="measurements_row">
