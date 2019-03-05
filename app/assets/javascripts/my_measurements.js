@@ -42,7 +42,7 @@ $(function() {
   $(".delete_button").click(function() {
     var result = confirm("Are you sure?");
     if (result) {
-      var measurement_row = $(this).parent().parent();
+      var measurement_row = $(this).parent().parent().parent();
       var measurement_id = measurement_row.attr("id");
       
       measurement_row.remove();
