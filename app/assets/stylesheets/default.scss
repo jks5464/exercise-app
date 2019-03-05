@@ -1,4 +1,11 @@
 /* @override http://localhost:9292/default.css */
+#flash_error {
+    text-align: center;
+    color: white;
+    font-size: 24px;
+    background: red;
+}
+
 .show_when_editing {
     display: none;
 }
