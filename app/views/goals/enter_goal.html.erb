@@ -53,10 +53,10 @@
           <div class="col-sm-1" style="padding: 0em;">
             <select class="form-control" name="unit" id="unit">
               <!-- blank options included to make tests work, might want to update this later -->
-              <option class="hidden" value=""></option>
-              <%= @units.each do |unit| %>
-                <option class="hidden" value="<%= unit.name %>"><%= unit.name %></option>
-                
+              <% @units.each do |unit| %>
+                <% if @exercises.size >= 1 and unit.category == @exercises[0].category %>
+                  <option value="<%= unit.name %>"><%= unit.name %></option>
+                <% end %>
               <% end %>
             </select>
           </div>
