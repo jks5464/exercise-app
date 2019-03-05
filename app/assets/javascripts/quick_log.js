@@ -79,20 +79,6 @@ $(function() {
     
     return markup;
   }
-  
-  function create_exercise_set() {
-    var valid = true;
-    allFields.removeClass( "ui-state-error" );
-  
-    var selectedExercise = document.getElementById("exercise-search-txt").value;
-      
-      $( "#task_card_list" ).append(make_task_card());
-      dialog.dialog( "close" );
-    
-    return valid;
-  } 
-  
-  
 
   $( "#add" ).button().on( "click", function() {
     dialog.dialog( "open" );
@@ -120,7 +106,7 @@ $(function() {
     
   form = dialog.find( "form" ).on( "submit", function( event ) {
     event.preventDefault();
-    create_exercise_set();
+    send_quick_log_data();
   });
   
   
