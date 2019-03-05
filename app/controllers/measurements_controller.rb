@@ -55,9 +55,11 @@ class MeasurementsController < AuthenticationController
   
   def process_update_measurements
     new_measurements = params[:new_measurements]
+    new_measurements = [] if (new_measurements.nil?)
     status = 200
     message = ""
     # validate all measurements
+    
     new_measurements.each do | i, m |
       if !valid_measurements?([m["weight"].to_i, m["body_fat"].to_i, m["height"].to_i]) then
         status = 500

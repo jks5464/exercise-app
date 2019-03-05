@@ -100,6 +100,7 @@ class GoalsController < AuthenticationController
   
   def process_update_goals
     new_goals = params[:new_goals]
+    new_goals = [] if (new_goals.nil?)
     
     # update valid measurements
     new_goals.each do | i, g |

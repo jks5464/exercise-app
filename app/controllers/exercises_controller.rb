@@ -38,6 +38,7 @@ class ExercisesController < ApplicationController
   
   def process_update_exercises
     new_exercises = params[:new_exercises]
+    new_exercises = [] if (new_exercises.nil?)
     
     new_exercises.each do | i, e |
       exercise = Exercise.find(e["exercise_id"])
