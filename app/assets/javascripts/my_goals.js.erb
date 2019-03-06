@@ -1,0 +1,85 @@
+$(function() {
+  var unit_lookup = {};
+  <% Unit.all.each do | u |%>
+    if ( !("<%= u.category %>" in unit_lookup) ) {
+      unit_lookup["<%= u.category %>"] = [];
+    }
+    unit_lookup["<%= u.category %>"].push({"name": "<%= u.name %>", "id" : "<%= u.id %>"});
+  <% end %>
+  
+  $(".exercise_name_edit").change(function() {
+    var goal_row = $(this).parent().parent().parent();
+    var selected_exercise_category = $(this).find(':selected').attr('category');
+    var category_units = unit_lookup[selected_exercise_category];
+    
+    
+    var unit_selector = goal_row.find(".unit_name_edit");
+    unit_selector.empty();
+    for (var i = 0; i < category_units.length; ++i) {
+      var unit = category_units[i];
+      var option = $('<option/>', { value : unit["id"] }).text(unit["name"]);
+      unit_selector.append(option);
+    }
+  });
+  
+  $(".edit_button").click(function() {
+    $(".show_when_editing").css("display", "inline-block");
+    $("table").each(function() {
+      $(this).find(".show_when_editing").css("display", "table-cell");
+    })
+    $(".hide_when_editing").css("display", "none");
+  });
+    
+  
+  $(".done_editing_button").click(function() {
+    // collect all measurment data from displayed table
+    var goals_table = $("#goals_table");
+    var new_goals = [];
+    goals_table.find(".goals_row").each(function() {
+       var goals_id = $(this).attr("id");
+       var new_data = {};
+       new_data["goal_id"]     = goals_id;
+       new_data["name"]        = $(this).find(".name_edit").val().trim();
+       new_data["description"] = $(this).find(".description_edit").val().trim();
+       new_data["exercise_id"] = $(this).find(".exercise_name_edit :selected").val().trim();
+       new_data["value"]       = $(this).find(".value_edit").val().trim();
+       new_data["unit_id"]     = $(this).find(".unit_name_edit :selected").val().trim();
+       new_goals.push(new_data);
+     });
+    
+     $.ajax({
+       type:"POST",
+       beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
+       url:"/process_update_goals",
+       data: {
+         "new_goals": new_goals,
+       }, 
+       complete: function(o) {
+         window.location.reload(true);  
+       }
+     });
+  });
+  
+  $(".delete_button").click(function() {
+    var result = confirm("Are you sure?");
+    if (result) {
+      var goal_row = $(this).parent().parent().parent();
+      var goal_id = goal_row.attr("id");
+      
+      goal_row.remove();
+        
+      $.ajax({
+        type:"POST",
+        beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
+        url:"/process_delete_goal",
+        data: {
+        "goal_id" : goal_id
+        }
+      });    
+    }
+  })
+});
+
+
+
+

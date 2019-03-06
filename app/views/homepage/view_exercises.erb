@@ -3,34 +3,87 @@
 <div class="exercises">
   <legend>View All Exercises</legend>
   
-  <span class="hide_when_editing" id="edit-exercises">
-    <button  class="btn btn-info btn-sm"><span class="glyphicon glyphicon-pencil"></span></button>
-  </span>
-  <span class="show_when_editing" id="done-editing" hidden>
-    <button class="btn btn-info btn-sm" hidden><span class="glyphicon glyphicon-ok"></span></button>
-  </span>
   <% if @exercises.empty? %>
-      <%= "No exercises have been created yet." %>
+    <%= "No exercises have been created yet." %>
   <% else %>
+    <table class="table" id= "exercises_table">
+      <thead style="background-color: #003366; color: white;">
+        <th>Name</th>
+        <th>Category</th>
+        <th>Description</th>
+        <th>
+          <span class="hide_when_editing" id="edit-exercises">
+            <button  class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-pencil"></span></button>
+          </span>
+          <span class="show_when_editing" id="done-editing" hidden>
+            <button class="btn btn-primary btn-sm" hidden><span class="glyphicon glyphicon-ok"></span></button>
+          </span>        
+        </th>
+      </thead>
       <% @exercises.each_with_index do |e, i| %>
-        <div <%= 'id=last_row' if i == (@exercises.size - 1) %> >
-           <table id= "table">
-              <tr>
-                <td><%= e.name%></td>
+        <div>
+          <tr class="exercise_row" id="<%= e.id %>">
+            <td>
+              <span class="hide_when_editing">
+                <%= e.name %>
+              </span>
+              
+              
+              <span class="show_when_editing">
+                <input name="name_edit" class="name_edit" type="text" value="<%= e.name %>"
+                  <% if !current_effective_user.can_delete_exercise?(e) %> disabled <% end %>>
+                </input>
+                
+              </span>
+            </td>
+            
+            <td>
+              <span class="hide_when_editing">
+                <%= e.category %>
+              </span>
+              
+              
+              <span class="show_when_editing">
+                  <select class="category_edit" <% if !current_effective_user.can_delete_exercise?(e) %> disabled <% end %>>
+                    <option val="Strength" <% if e.category == "Strength" %> selected <% end %> >Strength</option>
+                    <option val="Cardio" <% if e.category == "Cardio" %> selected <% end %> >Cardio</option>
+                  </select>
+              </span>
+              
+            </td>
+            
+            <td>
+              <span class="hide_when_editing">
+                <%= e.description %>
+              </span>
+              
+              
+              <span class="show_when_editing">
+                  <input name="description_edit" class="description_edit" type="text" value="<%= e.description %>"
+                  <% if !current_effective_user.can_delete_exercise?(e) %> disabled <% end %>></input>
+              </span>
+            </td>
+            
+            <td>
+              <span class="show_when_editing"> 
                 <% if current_effective_user.can_delete_exercise?(e) %>
-                    <td class="show_when_editing" hidden>
-                      <button type="button" name="button1" class="delete_button btn btn-info btn-sm" id="<%=e.id%>"value="delete">
-                        <span class="glyphicon glyphicon-trash"></span>
-                      </button>
-                    </td>
-                <% end %>
-              </tr>
-            </table>
-        <% end %>  
+                <button type="button" name="button1" class="delete_button btn btn-primary btn-sm" id="<%=e.id%>"value="delete">
+                  <span class="glyphicon glyphicon-trash"></span>
+                </button>
+                <% end %>  
+              </span>
+            </td>
+          </tr>
+        </div> 
+      <% end %>  
+    </table>
+    
+    
   <% end %>
 </div>
+
 <div class="form-group">
-  <%= form_tag create_exercise_path, :method => :get do %>
+  <%= form_tag create_exercise_path, :method => :get, :class => "no_margin_form" do %>
   Don't see the exercise you're looking for? Add one below<br>
   <input class="btn btn-primary" type="submit" name="commit" value="Click here to create an exercise">
 </div>

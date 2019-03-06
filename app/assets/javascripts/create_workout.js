@@ -103,14 +103,14 @@ $(function() {
     var weight_info = "<span class='weight_info'>" + weight + "</span>";
     var units_info = "<span class='units_info'>" + units + "</span>";
     var task_info = " - " + sets_info + " sets, " + reps_info + " reps, at " + weight_info + " " + units_info;
-    var edit_button = '<button type="button" class="btn btn-info btn-sm strength_edit_button"><span class="glyphicon glyphicon-pencil"></span></button>';
-    var delete_button = '<button type="button" class="btn btn-info btn-sm strength_delete_button"><span class="glyphicon glyphicon-trash"></span></button>';
+    var edit_button = '<button type="button" class="btn btn-primary btn-sm strength_edit_button"><span class="glyphicon glyphicon-pencil"></span></button>';
+    var delete_button = '<button type="button" class="btn btn-primary btn-sm strength_delete_button"><span class="glyphicon glyphicon-trash"></span></button>';
     var show_form =  "<span class='show_form'>" + task_info + " " + edit_button + " " + delete_button + "</span>";
     
     var sets_edit = '<label for="sets_edit">sets: </label><input name="sets_edit" class="sets_edit" type="number" value="' + sets + '"></input>';
     var reps_edit = '<label for="reps_edit">reps: </label><input name="reps_edit" class="reps_edit" type="number" value="' + reps + '"></input>';
     var weight_edit = '<label for="weight_edit">weight: </label><input name="weight_edit" class="weight_edit" type="number" value="' + weight + '"></input>';
-    var done_button = '<button type="button" class="btn btn-info btn-sm strength_done_button"><span class="glyphicon glyphicon-ok"></span></button>';
+    var done_button = '<button type="button" class="btn btn-primary btn-sm strength_done_button"><span class="glyphicon glyphicon-ok"></span></button>';
     var edit_form = '<span class="edit_form" hidden>' + 
                       sets_edit + 
                       reps_edit +
@@ -133,12 +133,12 @@ $(function() {
     var distance_time_info = "<span class='distance_time_info'>" + distance_time + "</span>";
     var units_info = "<span class='units_info'>" + units + "</span>";
     var task_info = " - " + distance_time_info + " " + units_info;
-    var edit_button = '<button type="button" class="btn btn-info btn-sm cardio_edit_button"><span class="glyphicon glyphicon-pencil"></span></button>';
-    var delete_button = '<button type="button" class="btn btn-info btn-sm cardio_delete_button"><span class="glyphicon glyphicon-trash"></span></button>';
+    var edit_button = '<button type="button" class="btn btn-primary btn-sm cardio_edit_button"><span class="glyphicon glyphicon-pencil"></span></button>';
+    var delete_button = '<button type="button" class="btn btn-primary btn-sm cardio_delete_button"><span class="glyphicon glyphicon-trash"></span></button>';
     var show_form =  "<span class='show_form'>" + task_info + " " + edit_button + " " + delete_button + "</span>";
     
     var distance_time_edit = '<label for="distance_time_edit"></label><input name="distance_time_edit" class="distance_time_edit" type="number" value="' + distance_time + '"></input>';
-    var done_button = '<button type="button" class="btn btn-info btn-sm cardio_done_button"><span class="glyphicon glyphicon-ok"></span></button>';
+    var done_button = '<button type="button" class="btn btn-primary btn-sm cardio_done_button"><span class="glyphicon glyphicon-ok"></span></button>';
     var edit_form = '<span class="edit_form" hidden>' + 
                       distance_time_edit + " " + 
                       done_button +

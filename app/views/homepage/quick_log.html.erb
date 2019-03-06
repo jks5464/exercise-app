@@ -9,20 +9,20 @@
       <legend>Logging History</legend>
       <% if @exercises.empty? %>
           <b><%= "No exercises have been created yet." %></b>
-          <%= form_tag create_exercise_path, :method => :get do %>
+          <%= form_tag create_exercise_path, :method => :get, :class => "no_margin_form" do %>
             <%= submit_tag 'Click here to create an exercise' %>
           <% end %>
       <% else %>
 
         <div class="form-group">
 
-          <%= form_tag create_exercise_path, :method => :get do %>
+          <%= form_tag create_exercise_path, :method => :get, :class => "no_margin_form" do %>
             <div class="form-group row" style="margin-left: auto; margin-right: auto;">
               <a class="btn btn-primary" id="add">Log a New Exercise</a>
             </div>
             
             <label for="commit">Don't see the exercise you're looking for?<br>
-            <input class="btn btn-secondary" type="submit" name="commit" value="Create a New Exercise">
+            <input class="btn btn-primary" type="submit" name="commit" value="Create a New Exercise">
         </div>
         <% end %>
       <% end %>
@@ -34,12 +34,14 @@
         The history of completed exercises/workouts will be here<br />
       <% else %>
         <table class="table">
+          <thead style="background-color: #003366; color: white;">
             <tr>
               <th>Exercise Name</th>
               <th>Set Count</th>
               <th>Rep Count</th>
               <th>Rep Value</th>
             </tr>
+          </thead>
             <% @workouts.reverse_each do |workout, i| %>
               <% if workout.state == State.complete %>
                 <% workout.task.each do | task | %>
